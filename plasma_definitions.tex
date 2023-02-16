@@ -1,0 +1,369 @@
+\section{Plasma Definitions}
+\subsection{Notation}
+Vectors will be denoted in bold i.e. $\textbf{a}$. Vector components will be denoted $a_x, a_y, a_z$. a will refer to the magnitude of the vector $\sqrt{{\textbf{a} \cdot \textbf{a}}}$. Second order tensors will be noted using double underscore e.g. $\uubar{T}$. When referring to particle density $n$ we mean the $\textit{number density}$ (particles per m$^{-3}$) not  $\textit{mass density}$ (kgm$^{-3}$).
+
+\subsubsection{Constants}
+\begin{itemize}
+	\item[] $\epsilon_0 = 8.854 \times 10^{-12} \text{F.m}^{-1}$ \quad(Permittivity of Free Space) 
+	\item[] $\mu_0 = 4\pi \times 10^{-7} \text{H.m}^{-1} $ \quad(Permeability of Free Space)
+	\item[] $c = \left(\epsilon_0 \mu_0\right)^{-0.5} = 2.998 \times 10^{8} \text{m.s}^{-1}$ \quad(Speed of Light)
+	\item[] $K = 1.381 \times 10^{-23} \text{J.K}^{-1}$ \quad(Boltzmann's Constant)
+	\item[] $e = 1.609 \times 10^{-19} \text{C}$ \quad(Charge of Electron)
+	\item[] $m_e = 9.109 \times 10^{-31} \text{kg} = 511 \text{keV / c}^2$ \quad(Rest Mass of Electron)
+	\item[] $m_p = 1.672 \times 10^{-27} \text{kg} = 1836.15m_e$ \quad(Rest Mass of Proton)
+\end{itemize}
+
+\subsubsection{Variables}
+\begin{itemize}
+	\item[] $\bm{E}$ = Electric Field (Vm$^{-1}$)
+	\item[] $\bm{B}$ = Magnetic Field (T)
+	\item[] $\bm{j}$ = Current (A)
+	\item[] $q$ = Particle Charge (C)
+	\item[] $m$ = Particle Mass (kg)
+	\item[] $\bm{v}$ = Particle Velocity (ms$^{-1}$)
+	\item[] $v_T$ = Particle Thermal Velocity (ms$^{-1}$)
+	\item[] $\beta$ = Normalised Particle Thermal Velocity
+	\item[] $\parallel$ = Component of variable parallel to Magnetic Field
+	\item[] $\perp$ = Component of variable perpendicular to Magnetic Field
+	\item[] $\omega$ = Angular Frequency ($2\pi \times$Hz)
+	\item[] $f$ = Frequency (Hz)
+	\item[] $k$ = Wavenumber (m$^{-1}$)
+	\item[] $\lambda$ = Wavelength (m)
+	\item[] $N$ = Refractive Index
+	\item[] $n_e$ = Electron Density (m$^{-3}$)
+	\item[] $n$ = Plasma Density (m$^{-3}$)
+	\item[] $T_e$ = Electron Temperature (eV)
+	\item[] $\lambda_D$ = Debye Radius (m)
+	\item[] $\rho$ = Larmor Radius (m)
+	\item[] $\omega_{ce}$ = Electron Cyclotron (Angular) Frequency ($2\pi \times$Hz)
+	\item[] $\omega_{ci}$ = Ion Cyclotron (Angular) Frequency ($2\pi \times$Hz)
+	\item[] $\omega_{pe}$ = Electron Plasma (Angular) Frequency ($2\pi \times$Hz)
+	\item[] $\omega_{pi}$ = Ion Plasma (Angular) Frequency ($2\pi \times$Hz)
+\end{itemize}
+
+\subsection{Equations}
+Plasmas are usually modelled as an electrically conducting fluid. In simple models we can use equations of fluid mechanics combined with the Maxwell equations. Beyond this we have to use kinetic theory and forms of the Boltzmann transport equation.
+
+\subsubsection{Electrostatic Equations}
+\begin{equation}\label{ohm}
+	\bm{E} = \uubar{\sigma} \cdot \bm{j}
+\end{equation}
+\begin{equation}\label{drift}
+	\bm{j} = \sum_{\text{species}} \bm{j_s} = \sum_{\text{species}} m_s q_s \bm{v_s}
+\end{equation}
+
+\begin{itemize}
+	\item [] \eqref{ohm} = Ohm's Law
+	\item [] \eqref{drift} = Current Drift Equation
+\end{itemize}
+
+\subsubsection{Maxwell Equations}
+In a vacuum, for an electric field $\bm{E}$, a magnetic field $\bm{B}$, a charge density $\rho$ and current $\bm{j}$
+\begin{equation}\label{gauss}
+	\nabla \bm{E} = \frac{\rho}{\epsilon_0}
+\end{equation}
+\begin{equation}\label{gauss_magnetism}
+	\nabla \cdot \bm{B} = 0
+\end{equation}
+\begin{equation}\label{faraday}
+	\nabla \times \bm{E} = -\frac{\partial \bm{B}}{\partial t}
+\end{equation}
+\begin{equation}\label{ampere}
+	\nabla \times \bm{B} = \mu_0 \bm{j} + \frac{1}{c^2}\frac{\partial \bm{E}}{\partial t}
+\end{equation}
+\begin{itemize}
+	\item[] \eqref{gauss} = Gauss's Law
+	\item[] \eqref{gauss_magnetism} = Gauss's Law for Magnetism
+	\item[] \eqref{faraday} = Faraday-Maxwell Law
+	\item[] \eqref{ampere} = Amp\`ere-Maxwell Law
+\end{itemize}
+Note these are the Heaviside form of the Maxwell equations. There are also Gaussian forms which have extra factors of $c$ and $\pi$.
+
+\subsubsection{Fluid Equations}
+\begin{equation}\label{continuity}
+	\frac{\partial n}{\partial t} + \nabla \cdot \left(n\bm{v}\right) = 0
+\end{equation}
+\begin{equation}\label{navier_stokes}
+	mn\frac{D\bm{v}}{dt} = n\left(\frac{\partial \bm{v}}{\partial t} + \left(\bm{v} \cdot \nabla\right) \bm{v}\right) = -\nabla \cdot \uubar{P} + \bm{F}
+\end{equation}
+\begin{equation}\label{navier_stokes2}
+	n\left(\frac{\partial \bm{v}}{\partial t} + \left(\bm{v} \cdot \nabla\right) \bm{v}\right) = -\nabla p + qn\left(\bm{E} + \bm{v} \times \bm{B}\right)
+\end{equation}
+where $p$ is Pressure (Pa), $\uubar{P}$ is the Stress Tensor and $\bm{F}$ are external forces (gravity, electromagnetic, etc.)
+
+\begin{itemize}
+	\item[] \eqref{continuity} = Continuity Equation
+	\item[] \eqref{navier_stokes} = Navier-Stokes Equation
+	\item[] \eqref{navier_stokes2} = Navier-Stokes for Maxwellian Plasma in Electromagnetic Field
+\end{itemize}
+
+\subsection{Cyclotron Motion}
+In an electromagnetic field $\textbf{E}$ and $\textbf{B}$ a particle with charge $q$ moving at velocity $\textbf{v}$ experiences the Lorentz force $q(\textbf{E}+\textbf{v}\times\textbf{B})$. Writing the equation of motion $\textbf{F}=m\textbf{a}=m\frac{d\textbf{v}}{dt}$:
+\begin{equation}
+	m\frac{d\textbf{v}}{dt}=q(\textbf{E}+\textbf{v}\times\textbf{B})
+\end{equation}
+Define a co-ordinate system where WLOG $\textbf{B}=B\bfhat{z}$ and consider components of the equation of motion.
+\begin{equation}\label{cyclotron_x}
+	\frac{dv_x}{dt}=\frac{q}{m}(E_x+v_yB)
+\end{equation}
+\begin{equation}\label{cyclotron_y}
+	\frac{dv_y}{dt}=\frac{q}{m}(E_y-v_xB)
+\end{equation}
+\begin{equation}
+	\frac{dv_z}{dt}=\frac{qE_z}{m}
+\end{equation}
+The component parallel to the magnetic field is simple acceleration in an electric field. The two components perpendicular to the magnetic field form a 2D system of coupled Ordinary Differential Equations (ODEs). Assume the fields are static and constant, i.e.
+\begin{equation}
+	\frac{d\textbf{E}}{dt}=\frac{d\textbf{B}}{dt}=0
+\end{equation}
+\begin{equation}
+	\frac{d\textbf{E}}{dx}=\frac{d\textbf{B}}{dx_i}=0  \quad i \in (1,2,3)
+\end{equation}
+
+Take the derivatives of \eqref{cyclotron_x} and \eqref{cyclotron_y} with respect to time
+\begin{equation}
+	\frac{d^2v_x}{dt^2}=\frac{d}{dt}\left(\frac{q}{m}(E_x+v_yB)\right)=\frac{qB}{m}\frac{dv_y}{dt}
+\end{equation}
+\begin{equation}
+	\frac{d^2v_y}{dt^2}=\frac{d}{dt}\left(\frac{q}{m}(E_y-v_xB)\right)=\frac{qB}{m}\frac{dv_x}{dt}
+\end{equation}
+
+Eliminate $\frac{dv_y}{dt}$ using \eqref{cyclotron_y} and $\frac{dv_x}{dt}$ using \eqref{cyclotron_x}
+\begin{equation}\label{cyclotron_x2}
+	\frac{d^2v_x}{dt^2}=\frac{q^2B}{m^2}(E_y-v_xB)=\frac{q^2BE_y}{m^2}-\left(\frac{qB}{m}\right)^2v_x^2=\left(\frac{qB}{m}\right)^2\left(\frac{E_y}{B}-v_x^2\right)
+\end{equation}
+\begin{equation}\label{cyclotron_y2}
+	\frac{d^2v_y}{dt^2}=-\frac{q^2B}{m^2}(E_x+v_yB)=\frac{-q^2BE_x}{m^2}-\left(\frac{qB}{m}\right)^2v_y^2=\left(\frac{qB}{m}\right)^2\left(\frac{-E_x}{B}-v_y^2\right)
+\end{equation}
+Equations \eqref{cyclotron_x2} and \eqref{cyclotron_y2} have very similar forms apart from the sign of the electric field. They resemble the well known ODE $\frac{d^2v}{dt^2}=-v^2$ which has solution $v(t)=\sin(t)$. We have an extra constant term so look for solutions of type $v_i(t)=\sin(\omega t)+v_{di}$ where $v_{di}$ is a constant we will call the drift velocity
+\begin{equation}
+	-\omega^2sin(\omega t)=\left(\frac{qB}{m}\right)^2\left(\frac{E_y}{B}-sin(\omega t)-v_{dx}\right)
+\end{equation}
+\begin{equation}
+	-\omega^2sin(\omega t)=\left(\frac{qB}{m}\right)^2\left(-\frac{E_x}{B}-sin(\omega t)-v_{dy}\right)
+\end{equation}
+By inspection we can find the angular frequency $\omega$
+\begin{equation}
+	\omega=\frac{|q|B}{m}:=\omega_c
+\end{equation}
+The frequency $\omega_c$ is the well known cyclotron frequency. Note this is an angular frequency. Also note for convenience we take the absolute value of the charge so the frequency is positive for both ions and electrons. We can do this so long as we remember ions and electrons gyrate in opposite directions.Commonly the electron and ion cyclotron frequencies are denoted using $\omega_{ce}$ and $\Omega_{ci}$ respectively, where $i$ is a subscript for ion species.
+
+A useful approximation for the electron cyclotron frequency is
+\begin{equation}
+	f_{ce}[GHz] = 27.95 \times B[T]
+\end{equation}
+
+We also can read off the components of the drift velocity $\bm{v_{d}}$
+\begin{equation}
+	v_{dx}=\frac{E_y}{B}\quad v_{dy}=-\frac{E_x}{B}
+\end{equation}
+These terms look similar to the terms we got from $\textbf{v}\times\textbf{B}$ in \eqref{cyclotron_x} and \eqref{cyclotron_y} except with $\textbf{E}$ instead of $\textbf{v}$:
+\begin{equation}
+	\textbf{E}\times\textbf{B}=E_yB\bfhat{x}-E_xB\bfhat{y}
+\end{equation}
+Dividing by $B^2$ we see the drift velocity $\bm{v_d}$ is the well known $E \times B$ drift
+\begin{equation}
+	\bm{v_d}=\frac{\bm{E} \times \bm{B}}{B^2}
+\end{equation}
+Therefore particles in an electromagnetic field experience ballistic motion along the magnetic field ($v \sim t^2$), circular motion (gyration) perpendicular to the magnetic field and a constant drift perpendicular to both the electric and magnetic field.
+
+There are additional drifts induced by gravity, gradients in magnetic field, etc.
+
+Perpendicular to the field particles gyrate at frequency $\omega_c$. Writing the magnitude of velocity perpendicular to the field as $v_{\perp}$ the radius of the gyration $\rho$ (Larmor radius) can be calculated.
+
+The angular frequency $\omega_c$ is related to the frequency $f$ by $\omega_c=2\pi f$. Travelling at velocity $v_{\perp}$ in one period of the orbit $T = \frac{1}{f}$, the particle travels a distance of $v_{\perp}T$. This is equal to the circumference of the orbit $2\pi\rho$. Therefore
+
+\begin{equation}
+	\rho = \frac{v_{\perp}T}{2\pi} = \frac{v_{\perp}}{2\pi f} = \frac{v_\perp}{\omega_c}= \frac{mv_{\perp}}{eB}
+\end{equation}
+
+\subsection{Concept of Temperature}
+Temperature tries to quantify the kinetic energy and hence velocity of a gas. A general way to describe the state of a gas is to give the density of particles in space and the distribution of the particle velocities, all in time.
+
+In 3D this gives the distribution function $f(\textbf{x}, \textbf{v}, t)$ taking 3 components of space $\textbf{x}$, 3 components of velocity $u\textbf{u}$ and time $t$. Together $\left(\textbf{x}, \textbf{u}, t\right)$ form a 7D space called 'phase space'.
+
+The distribution function has the property
+\begin{equation}\label{distribution_total_integral}
+	\idotsint f(\textbf{x}, \textbf{v}, t) d\textbf{x}d\textbf{u} = N
+\end{equation}
+where $d\textbf{x}$ refers to integration over all components $dxdydz$ from $-\infty$ to $\infty$ and $d\textbf{u}$ refers to integration over all components $du_xdu_ydu_z$ from $0$ to $\infty$. N is the total number of particles.
+
+In thermal equilibrium we get a special distribution of velocities, the Maxwellian distribution, allowing us to completely describe the distributions of velocity inside an infinitesimal element of 3D velocity space $d\textbf{u}$ by a single number, the thermodynamic temperature $T$.
+\begin{equation}
+	f(v)dv=4\pi A v^2 \exp\left(-\frac{mv^2}{2KT}\right)dv
+\end{equation}
+A is calculated by ensuring the integral of the Maxwellian over all velocity is 1. Using standard results for the Gaussian integral we get
+
+\begin{equation}
+	A=\left(\frac{m}{2\pi KT}\right)^{\frac{3}{2}}
+\end{equation}
+
+This distribution is symmetric for all components of $\textbf{u}$. However, it is possible for a plasma to be in different thermal equilibrium in different directions. For example, in a strongly magnetised plasma where collisions along the field lines occur freely, but collisions across the field are heavily restricted, there can be two different temperatures; $T_{\parallel}$ along the field and $T_{\perp}$ across it.
+
+The 'average' speed has different values depending on the definition. We have the mean speed $\langle v \rangle$, the most probable speed $v_p$ and the root mean square speed $v_{rms}$.
+
+The most probable speed is easiest to calculate as the maximum of $f(\textbf{u})$
+\begin{equation}
+	\frac{df(v)}{dv}=4\pi A v^2 \exp\left(-\frac{mv^2}{2KT}\right) = 4\pi A\exp\left(-\frac{mv^2}{2KT}\right)\left(2v-\frac{mv^3}{KT}\right)
+\end{equation}
+\begin{equation}
+	\implies v_p^2 = 0 \quad \text{or} \quad 1 = \frac{mv_p^2}{2KT} \quad \text{or} \quad v_p^2 \rightarrow \infty
+\end{equation}
+
+Discarding the minima at 0 and $\infty$ where $f \rightarrow 0$ we get
+\begin{equation}
+	v_p=\sqrt{\frac{2KT}{m}}
+\end{equation}
+A useful approximation is $v_p \approx 18.755 \times 10^6 \sqrt{T\text{[keV]}}$. The other two are calculated as more Gaussian integrals
+\begin{equation}
+	\langle v \rangle = \int_{0}^{\infty}uf(u)du=\sqrt{\frac{8KT}{\pi m}} = \frac{2}{\sqrt{\pi}}v_p
+\end{equation}
+
+\begin{equation}
+	v_{rms} = \sqrt{\langle v^2 \rangle} = \int_{0}^{\infty}u^2f(u)du = \sqrt{\frac{3KT}{m}} = \sqrt{\frac{3}{2}}v_p
+\end{equation}
+
+Ignoring time, we see from \eqref{distribution_total_integral} that we take the integral of $f$ over all velocity and integrate over all space we get the total number of particles. We also know if we integrate the density over all space we get the total number of particles. Therefore the integral of $f$ over velocity must be the density.
+\begin{equation}
+	n(\bm{x}) = \int f(\bm{x}, \bm{u}) d\bm{u}
+\end{equation}
+
+\subsection{Debye Shielding}
+A plasma is usually defined as a quasineutral gas of charged and neutral particles capable of collective motion. As electrons are free and highly conductive compared to the ions they have their own local density $n_e$ compared to the local ion density $n_i$. However, increases in $n_e$ generate electric fields which accelerate electrons from regions where $n_e > n_i$ towards regions where $n_e < n_i$.
+
+Gauss' Law describes the electric field $\textbf{E}$ generated by a charge density $\rho$. The local charge density in a region (assuming ions have charge $+1$) is $-e(n_e(\textbf{x})-n_i(\textbf{x}))$
+\begin{equation}\label{debye1}
+	\epsilon_0\nabla\cdot\bm{E}(\bm{x}) = \rho = -e(n_e(\bm{x})-n_i(\bm{x}))
+\end{equation}
+
+The electric field $\textbf{E}(\textbf{x})=-\nabla \phi(\textbf{x})$ where $\phi(\textbf{x})$ is electric potential. Substituting into \eqref{debye1} we get Poisson's equation
+\begin{equation}\label{debye2}
+	\epsilon_0 \nabla^2 \phi(\bm{x}) = -e(n_i(\bm{x})-n_e(\bm{x}))
+\end{equation}
+
+There is now a potential energy $q\phi$ which changes the Maxwellian distribution of the electron velocities
+
+\begin{equation}
+	f(u)=A\exp\left(\frac{-1}{KT_e}\left(\frac{1}{2}mu^2-e\phi\right)\right)=A\exp\left(\frac{e\phi}{KT_e}\right)\exp\left(\frac{-mu^2}{2KT_e}\right)
+\end{equation}
+
+This is just a scaled version of the density where $\phi=0$ i.e. far from this location. Let the density far from this local disturbance be $n_i$=$n$. Therefore the electron density is
+\begin{equation}
+	n_e = n\exp\left(\frac{e\phi}{KT_e}\right)
+\end{equation}
+
+Substituting into \eqref{debye2}
+\begin{equation}
+	\epsilon_0 \nabla^2 \phi(\bm{x}) = en\left(\exp\left(\frac{e\phi}{KT_e}\right) - 1\right)
+\end{equation}
+
+Assuming a small potential energy compared to the thermal energy $(e\phi \ll KT_e)$ we can Taylor expand the exponential to linear order $e^x=1+x+\dots$
+
+\begin{equation}
+	\epsilon_0 \nabla^2 \phi(\bm{x}) = en\left(\frac{e\phi(\bm{x})}{KT_e}\right)=\frac{e^2 n}{KT_e}\phi(\bm{x})
+\end{equation}
+
+\begin{equation}\label{debye3}
+	\implies \nabla^2 \phi = \left(\frac{e^2 n}{\epsilon_0 KT_e}\right)\phi := \frac{1}{\lambda_D^2}\phi \quad \lambda_D = \sqrt{\frac{\epsilon_0 KT_e}{e^2 n}}
+\end{equation}
+
+Here we introduce the Debye length $\lambda_D$. Now assume the charge density perturbation is a point charge. This means $\phi(\bm{x})$ is radially symmetric. Switching to spherical co-ordinates $(r, \theta, \Phi)$, as $\phi=\phi(r)$ only we can write out the Laplacian $\nabla^2$ and discard everything but the first term
+
+\begin{equation}
+	\nabla^2 \phi = \frac{1}{r^2}\frac{\partial}{\partial r}\left(r^2 \frac{\partial \phi}{\partial r}\right) + {\frac{1}{r^2 \sin \theta} \frac{\partial}{\partial \theta}\left(\sin \theta \underbrace{\frac{\partial \phi}{\partial \theta}}_{=0}\right)} + {\frac{1}{r^2\sin^2\theta} \underbrace{\frac{\partial^2 \phi}{\partial \Phi^2}}_{=0}}
+\end{equation}
+
+Therefore \eqref{debye3} becomes
+\begin{equation}
+	\frac{1}{r^2}\frac{\partial}{\partial r}\left(r^2 \frac{\partial \phi}{\partial r}\right) = \frac{\phi}{\lambda_D^2}
+\end{equation}
+
+The solution to this can be calculated using Green's functions, instead we will cheat and substitute in the correct answer to prove it's a solution
+
+\begin{equation}
+	\phi(r) = \frac{1}{r}\exp\left(\frac{-r}{\lambda_D}\right)
+\end{equation}
+
+\begin{equation}
+	\implies \frac{\partial \phi(r)}{\partial r} = \frac{-1}{r^2}\exp\left(\frac{-r}{\lambda_D}\right) - \frac{1}{r \lambda_D}\exp\left(\frac{-r}{\lambda_D}\right)
+\end{equation}
+
+\begin{equation}
+	\therefore \frac{1}{r^2}\frac{\partial}{\partial r}\left(r^2 \frac{\partial \phi(r)}{\partial r}\right) = \frac{1}{r^2}\frac{\partial}{\partial r}\left(-\exp\left(\frac{-r}{\lambda_D}\right) - \frac{r}{\lambda_D}\exp\left(\frac{-r}{\lambda_D}\right)\right)
+\end{equation}
+\begin{equation}
+	=\frac{1}{r^2}\left(\frac{1}{\lambda_D}\exp\left(\frac{-r}{\lambda_D}\right) - \frac{1}{\lambda_D}\exp\left(\frac{-r}{\lambda_D}\right) + \frac{r^2}{\lambda_D^2}\exp\left(\frac{-r}{\lambda_D}\right)\right)
+\end{equation}
+\begin{equation}
+	= \frac{1}{r \lambda_D^2}\exp\left(\frac{-r}{\lambda_D}\right)
+\end{equation}
+
+Therefore the potential from a perturbation in charge density is exponentially screened, known as Debye shielding. This means strong electric fields can only exist over a length scale $\lambda_D$. This also means the electron density must equal the ion density over scales larger than $\lambda_D$, called quasi-neutrality. 
+
+\subsection{Plasma Oscillations}
+If electrons in a plasma are displaced from a uniform background density of ions, electric fields are generated which restore the electrons to their original positions. As electrons have inertia, they overshoot their original positions. As this repeats you get a periodic motion called Plasma Oscillations at a characteristic frequency called the Plasma Frequency $\omega_p$.
+
+As the electrons are very mobile compared to the ions assume the ions form a uniform background with density $n$. To make things easy also assume no magnetic field, no thermal motion (cold plasma or $T$ = 0), infinite plasma and oscillations only occur in the $\bfhat{x}$ direction. This means
+\begin{equation}
+	\nabla = \bfhat{x}\frac{\partial}{\partial x} \quad \bm{E} = E\bfhat{x} \quad \nabla \times \bm{E} = 0 \quad \bm{E} = \nabla \phi
+\end{equation}
+
+We therefore have no oscillating magnetic field ($\nabla \times \bm{E} = 0$) i.e. this is electrostatic.
+
+From \eqref{navier_stokes2} and \eqref{continuity} give
+\begin{equation}
+	mn_e\left(\frac{\partial \bm{v_e}}{\partial t} + \left(\bm{v_e} \cdot \nabla\right) \bm{v_e}\right) = -en_e\bm{E}
+\end{equation} 
+\begin{equation}
+	\frac{\partial n_e}{\partial t} + \nabla \cdot \left(n_e\bm{v_e}\right) = 0
+\end{equation}
+
+We have a local deviation from quasi-neutrality so use \eqref{gauss} to find the $\bm{E}$
+\begin{equation}
+	\epsilon \nabla \cdot \bm{E} = \epsilon_0 \frac{\partial \bm{E}}{\partial x} = -e(n_e - n)
+\end{equation}
+
+To solve this we \textit{linearise}, assuming we have small deviations from equilibrium values, discarding all terms except those linear in the deviation and then solving. Write quantities which will change ($n_e$, $v_e$, $\bm{E}$) as sum of an equilibrium part $x_0$ and a deviation $x_1$
+\begin{equation}
+	n_e = n_{e0} + n_{e1} = n + n_{e1} \quad \bm{v_e} = \bm{v_{e0}} + \bm{v_{e1}} = \bm{v_{e1}} \quad \bm{E} = \bm{E_0} + \bm{E_1} = \bm{E_1}
+\end{equation}
+We simplify by knowing in equilibrium the electrons are stationary and there is no Electric field hence $v_{e0} = 0$ and $\bm{E_1} = 0$. Also we can write the equilibrium electron density $n_{e0}=n$ due to quasi-neutrality. As we have assumed static ions $n_i = n$. The time derivatives of all equilibrium components are also $0$. Finally as we have a uniform background density $\nabla n = 0$. Substituting in the linearised quantities
+\begin{equation}
+	m \left( \frac{\partial \bm{v_{e1}}}{\partial t} + \underbrace{\left(\bm{v_{e1}} \cdot \nabla\right) \bm{v_{e1}}}_{\text{quadratic}}\right) = -e\bm{E_1}
+\end{equation}
+\begin{equation}
+	\implies m\frac{\partial \bm{v_{e1}}}{\partial t} = -e\bm{E_1}
+\end{equation}
+\begin{equation}
+	\underbrace{\frac{\partial n_{e0}}{\partial t}}_{=0} + \frac{\partial n_{e1}}{\partial t} + n \nabla \cdot \bm{v_{e1}} + \bm{v_{e1}} \underbrace{\nabla \cdot n}_{=0} = 0
+\end{equation}
+\begin{equation}
+	\implies \frac{\partial n_{e1}}{\partial t} + n \nabla \cdot \bm{v_{e1}} = 0
+\end{equation}
+\begin{equation}
+	\frac{\partial \bm{E_1}}{\partial x} = \frac{-en_{e1}}{\epsilon_0}
+\end{equation}
+
+Now also assume all deviations are plane waves
+\begin{equation}
+	\bm{v_{e1}} = v_{e1}e^{i(kx - \omega t)} \bfhat{x} \quad n_{e1} = n_{e1}e^{i(kx - \omega t)} \quad \bm{E_1} = E_1 e^{i(kx - \omega t)} \bfhat{x}
+\end{equation}
+This allows us to replace $\frac{\partial}{\partial t}$ with $-iw$ and $\frac{\partial}{\partial x}$ with $-ik$. This is the same as taking the Fourier Transform
+\begin{equation}
+	-i \omega v_{e1} = -eE_1 \quad -i\omega n_{e1} = -iknv_{e1} \quad ik\epsilon_0 E_1 = -en_1
+\end{equation}
+
+We can eliminate $E_1$ and $n_{e1}$
+\begin{equation}
+	n_{e1} = \frac{nkv_{e1}}{\omega} \therefore ik\epsilon_0 E_1 = -e \frac{nkv_{e1}}{\omega} \therefore E_1 = \frac{-e}{ik\epsilon}\left(\frac{nkv_{e1}}{\omega}\right)=\frac{ienv_{e1}}{\epsilon_0 \omega}
+\end{equation}
+\begin{equation}
+	im\omega v_{e1} = \frac{ie^2nv_{e1}}{\epsilon_0 \omega} \implies \omega^2 = \frac{ne^2}{m\epsilon_0} := \omega_{pe}^2
+\end{equation}
+
+$\omega_{pe}$ is the electron plasma frequency. A useful approximation is
+\begin{equation}
+	\omega_{pe} \approx 18\pi\sqrt{n[\text{m}^-3]}
+\end{equation}
+
+As the group velocity is zero this wave cannot propagate. It can propagate when $T_e>0$.

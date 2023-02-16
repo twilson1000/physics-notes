@@ -1,0 +1,494 @@
+\section{High Frequency Linear Waves in a Hot Uniform Plasma}
+This follows Section 2 from the thesis of Decker, referencing heavily Fundamentals of Plasma Physics by Paul Bellan \cite{bellan2008fundamentals}.
+
+\subsection{Maxwell Equations}
+The Maxwell equations are (in Heaviside Form)
+\begin{equation}\label{Maxwell 1}
+	\nabla \cdot \E = \frac{\rho}{\epsilon_0}
+\end{equation}
+\begin{equation}\label{Maxwell 2}
+	\nabla \cdot \B = 0
+\end{equation}
+\begin{equation}\label{Maxwell 3}
+	\nabla \times \E = -\frac{\partial \B}{\partial t}
+\end{equation}
+\begin{equation}\label{Maxwell 4}
+	\nabla \times \B = \mu_0 \j - \epsilon_0 \mu_0 \frac{\partial \E}{\partial t}
+\end{equation}
+
+When considering waves its more convenient to Fourier transform the equations. The Fourier transformed Maxwell equations are
+
+\begin{equation}\label{Maxwell 1 FT}
+	i\k \cdot \E_k = \frac{\rho_k}{\epsilon_0}
+\end{equation}
+\begin{equation}\label{Maxwell 2 FT}
+	i\k \cdot \B_k = 0
+\end{equation}
+\begin{equation}\label{Maxwell 3 FT}
+	i\k \times \E_k = i \omega \B_k
+\end{equation}
+\begin{equation}\label{Maxwell 4 FT}
+	i\k \times \B_k = \mu_0 \j - \epsilon_0 \mu_0 i \omega \E_k
+\end{equation}
+
+\subsection{Wave Equation}
+The wave equation for a linear wave in a weakly inhomogeneous medium, using the WKB approximation, is
+\begin{equation}\label{linear_wave_equation}
+	\uu{\mathcal{D}} \cdot \E = 0
+\end{equation}
+\begin{equation} \label{linear wave equation operator}
+	\uu{\mathcal{D}} := \textbf{N} \otimes \textbf{N} - N^2 \uu{I} + \ditensor
+\end{equation}
+
+where $\textbf{N}$ is the refractive index, $\otimes$ is the Tensor/Outer Product, $\uu{I}$ is the Identity Tensor, $\ditensor$ is the Dielectric Tensor, $\E$ is the wave electric field and $\uu{\mathcal{D}}$ is the Dispersion Tensor. The Dielectric Tensor is related to the Susceptibility Tensor $\sustensor$ and the Conductivity Tensor $\contensor$ by
+
+\begin{equation}\label{dielectric tensor def}
+	\ditensor = \uu{I} + \sustensor = \uu{I} + \frac{i}{\omega \epsilon_0} \contensor
+\end{equation}
+
+The conductivity tensor also appears in linear Ohm's law to relate $\E$ and $\j$
+
+\begin{equation}\label{Ohm's Law}
+	\j = \contensor \cdot \E
+\end{equation}
+
+The condition \eqref{linear_wave_equation} can be left multiplied by $\E$ to get a quadratic form
+
+\begin{equation}\label{linear wave equation quad form}
+	\mathcal{D} = \E^{*} \cdot \uu{\mathcal{D}} \cdot \E = 0
+\end{equation}
+
+When there is weak absorption, $\ditensor$ and hence $\uu{\mathcal{D}}$ are Hermitian. We define the Hermitian part $\uu{\mathcal{D}}^H := \frac{1}{2} \left( \uu{\mathcal{D}} + \uu{\mathcal{D}}^{\dagger} \right)$ and anti-Hermitian part $\uu{\mathcal{D}}^A := \frac{1}{2} \left( \uu{\mathcal{D}} - \uu{\mathcal{D}}^{\dagger} \right)$ such that $\uu{\mathcal{D}} = \uu{\mathcal{D}}^H + \uu{\mathcal{D}}^A$. We can then define the condition \eqref{linear_wave_equation} as
+
+\begin{equation}
+	\mathcal{D} = \E^{*} \cdot \uu{\mathcal{D}}^H \cdot \E + \E^{*} \cdot i\uu{\mathcal{D}}^A \cdot \E = 0
+\end{equation}
+
+\subsection{Energy Equation for Linear Waves}
+From the continuity equation we can define the conservation of energy for a weakly inhomogeneous, weakly dissipative plasma for the linear mode $\E_k$
+
+\begin{equation} \label{Energy Equation Linear Waves}
+	\frac{\partial \omega_k}{\partial t} + \nabla \cdot \textbf{s}_k = - P_k^{lin}
+\end{equation}
+
+where $\omega_k$ is the time averaged energy density, $\textbf{s}_k$ is the time averaged energy flow and $P_k^{lin}$ is the density of power dissipated. This equation is a function of the real parts of $\omega$ and $\textbf{k}$.
+
+\subsubsection{Poynting's Theorem}
+Poynting's Theorem describes the energy flow of electromagnetic waves. It is derived by first considering the work done by an electromagnetic field on a charged particle $dw_i$ travelling at velocity $\textbf{v}$ in a time $dt$
+
+\begin{equation}
+	d w_i = \textbf{F} \cdot d\textbf{l} = q\left( \E + \textbf{v} \times \B \right) \cdot \textbf{v} dt = q \E \cdot \textbf{v} dt
+\end{equation}
+
+We get the total work done $dw$ by summing over all particles and recognising $\j = \sum_{i}q \textbf{v}$, where $\j$ is the current density.
+
+\begin{equation}
+	dw = \sum_{i} \E \cdot q \textbf{v} dt = \E \cdot \j dt
+\end{equation}
+
+Re-arranging we get an expression for the rate of transfer of energy density from the electromagnetic field to the particles $w_{P}$, i.e. the kinetic energy associated with particles coherent motion in the electromagnetic field.
+
+\begin{equation}
+	\frac{dw_{P}}{dt} = \E \cdot \j
+\end{equation}
+
+We see this term is related to kinetic energy as
+\begin{equation}
+	\textbf{F} \cdot \textbf{v} = m\frac{d \textbf{v}}{dt} \cdot \textbf{v} = \frac{m}{2} \frac{d v^2}{dt} = \frac{d}{dt} \left( \frac{1}{2} m v^2  \right)
+\end{equation}
+
+$\E \cdot \j$ can be expressed using \eqref{Maxwell 4}, re-arranged for $\j$, and dotting with $\E$
+
+\begin{equation*}
+	\j = \frac{1}{\mu_0} \nabla \times \B - \epsilon_0 \frac{\partial \E}{\partial t}
+\end{equation*}
+\begin{equation}
+	\E \cdot \j = \frac{1}{\mu_0} \E \cdot \left(\nabla \times \B \right) - \epsilon_0 \E \cdot \frac{\partial \E}{\partial t}
+\end{equation}
+
+Now use the vector expression $\nabla \cdot \left( \textbf{A} \times \B \right) = \left( \nabla \times \textbf{A} \right) \cdot \B - \left( \nabla \times \B \right) \cdot \textbf{A}$ allowing us to replace $\E \cdot \left( \nabla \times \B \right)$ with $- \nabla \cdot \left( \E \times \B \right) + \left( \nabla \times \E \right) \cdot \B$
+
+\begin{equation}
+	\E \cdot \j = - \frac{1}{\mu_0} \nabla \cdot \left( \E \times \B \right) + \left( \nabla \times \E \right) \cdot \B - \epsilon_0 \E \cdot \frac{\partial \E}{\partial t}
+\end{equation}
+
+Use \eqref{Maxwell 3} to replace $\nabla \times \E$
+
+\begin{equation}
+	\E \cdot \j = - \frac{1}{\mu_0} \nabla \cdot \left( \E \times \B \right) - \frac{1}{\mu_0} \frac{\partial \B}{\partial t} \cdot \B - \epsilon_0 \E \cdot \frac{\partial \E}{\partial t}
+\end{equation}
+
+Rearranging we get
+
+\begin{equation}\label{Poynting's Theorem Long}
+	\E \cdot \j + \epsilon_0 \E \cdot \frac{\partial \E}{\partial t} + \frac{1}{\mu_0} \frac{\partial \B}{\partial t} \cdot \B + \frac{1}{\mu_0} \nabla \cdot \left( \E \times \B \right) = 0
+\end{equation}
+
+This is Poynting's Theorem, which is really just a statement of the continuity equation for electromagnetic waves. We define the Poynting Vector $\textbf{S}$
+
+\begin{equation}
+	\textbf{S} := \frac{1}{\mu_0} \E \times \B
+\end{equation}
+
+which is the energy flux carried by the electromagnetic wave. Defining the total energy of the wave $\mathcal{U}$, we can rewrite Poynting's Theorem as
+
+\begin{equation} \label{Poynting's Theorem Short}
+	\frac{\partial \mathcal{U}}{\partial t} + \nabla \cdot \textbf{S} = 0
+\end{equation}
+
+where
+
+\begin{equation}\label{Poynting's Theorem Energy Derivative}
+	\frac{\partial \mathcal{U}}{\partial t} = \j \cdot \E + \epsilon_0 \E \cdot \frac{\partial \E}{\partial t} + \frac{1}{\mu_0} \frac{\partial \B}{\partial t} \cdot \B
+\end{equation}
+
+The total energy $\mathcal{U} = \mathcal{U}_{P} + \mathcal{U}_{EM} $, where $\mathcal{U}_{P}$ is the energy associated with coherent motion of charged particles within the field and $\mathcal{U}_{EM}$ is the energy associated with the electromagnetic field. Earlier we associated $\E \cdot \j$ with $\mathcal{U}_{P}$ so we can write
+
+\begin{equation}
+	\frac{\partial \mathcal{U}_{P}}{\partial t} = \E \cdot \j
+\end{equation}
+
+\begin{equation}
+	\frac{\partial \mathcal{U}_{EM}}{\partial t} = \epsilon_0 \E \cdot \frac{\partial \E}{\partial t} + \frac{1}{\mu_0} \frac{\partial \B}{\partial t} \cdot \B
+\end{equation}
+
+We can also write the energy of the wave $\mathcal{U} \left( t \right)$ using \eqref{Poynting's Theorem Energy Derivative}
+
+\begin{equation} \label{Poynting's Theorem Wave Energy}
+	\mathcal{U} \left( t \right) = \mathcal{U} \left( - \infty \right) + \int_{-\infty}^{t} \left\langle  \j \cdot \E + \epsilon_0 \E \cdot \frac{\partial \E}{\partial t} + \frac{1}{\mu_0} \frac{\partial \B}{\partial t} \cdot \B \right\rangle dt'
+\end{equation}
+
+where $\langle ... \rangle$ represents time averaging over a wave period. Time averaging will remove the rapidly varying component from the oscillation of the fields and keep the slowly varying component from the evolution of the wave, which is what we are interested in. Likewise we would need to take a time average of the Poynting Flux $\S$ to see evolution of the wave energy flow.
+
+Also note the background energy term $\mathcal{U} \left( -\infty \right)$, indicating the integral term is the difference in energy between when the wave is present and when it is absent. This implies the existence of 'negative energy waves', i.e. the plasma is unstable to the creation of electromagnetic waves.
+
+\subsubsection{Time Averaged Poynting's Theorem}
+In order to make progress we need to take the time average of the terms in Poynting's Theorem over a wave period. This is complicated as some of the terms are the product of two complex oscillating fields, e.g. $\E \cdot \j$. As only the real parts correspond to physical quantities we need to be careful, this is covered in \ref{complex exp time averaging}, to summarise we need to use \eqref{Complex Exponential Product Time Averaged} to correctly calculate time averages for products of complex oscillating fields.
+
+We will let $\omega = \omega_R + i \omega_I$ and $\k = \k_R + i \k_I$, essentially allowing for wave dissipation in space and time. We only consider weak dissipation i.e. small $\omega_I$ and $\omega_I$. We will define our time averaged energy density as $w$ and the time averaged energy flow as $\s$. We also define their Fourier Transforms as $w_k$ and $\s_k$, giving the respective energy density and energy flow for each mode $\k$.
+
+The first thing to note is \eqref{Complex Exponential Product Time Averaged} implies all our time averaged quantities will be proportional to the factor $e^{2 \left( \omega_I t - \k_I \cdot \x \right)}$. Therefore our time averaged Poynting's Theorem will look like
+
+\begin{equation*}
+	\frac{\partial}{\partial t} \left( w e^{2 \left( \omega_I t - \k_I \cdot \x \right)} \right) + \nabla \cdot \left( \s e^{2 \left( \omega_I t - \k_I \cdot \x \right)} \right) = 0
+\end{equation*}
+\begin{equation}
+	2 \omega_I w e^{2 \left( \omega_I t - \k_I \cdot \x \right)} - 2 \k_I \cdot \s e^{2 \left( \omega_I t - \k_I \cdot \x \right)} = 0
+\end{equation}
+
+We will get rid of $e^{2 \left( \omega_I t - \k_I \cdot \x \right)}$ factors in final results by assuming $\omega_I$ and $\k_I$ are so small $e^{2 \left( \omega_I t - \k_I \cdot \x \right)} \approx 1$. However they are important as through the time derivative and divergence they introduce factors of $2 \omega_I$ and $2 \k_I$ we need to divide by to get the time averaged energy density and energy flow.
+
+Fourier Transforming and letting  $e^{2 \left( \omega_I t - \k_I \cdot \x \right)} \approx 1$ we get a generalised form of Poynting's Theorem
+
+\begin{equation} \label{Poynting's Theorem Generalised}
+	2 \omega_I w_k - 2 \k_I \cdot \s_k = 0
+\end{equation}
+
+Now we will calculate the time averaged quantities. To start with Fourier Transform \eqref{Poynting's Theorem Long}
+
+\begin{equation} \label{Poynting's Theorem FT}
+	\E_k \cdot \j_k + \epsilon_0 \E_k \cdot \left( -i \omega \E_k \right) + \frac{1}{\mu_0} \B_k \cdot \left( -i \omega \B_k \right) + \frac{1}{\mu_0} i\k \cdot \left( \E_k \times \B_k \right) = 0
+\end{equation}
+
+It's convenient to split this calculation into 3 parts. To start with we will calculate $\left \langle \E_k \cdot \j_k + \epsilon_0 \E_k \cdot \left( -i \omega \E_k \right) \right \rangle$. Firstly we note using the definition of the dielectric tensor \eqref{dielectric tensor def} and Ohm's Law \eqref{Ohm's Law}
+
+\begin{equation*}
+	\E_k \cdot \j_k + \epsilon_0 \E_k \cdot \left( -i \omega \E_k \right) = \E_k \cdot \left( \contensor - i \omega \epsilon_0 \uu{I} \right) \cdot \E_k
+\end{equation*}
+\begin{equation*}
+	= \E_k \cdot \left( - i \omega \epsilon_0 \right) \left( \frac{i}{\omega \epsilon_0} \contensor + \uu{I} \right) \cdot \E_k = \E_k \cdot \left( - i \omega \epsilon_0 \ditensor \right) \cdot \E_k
+\end{equation*}
+\begin{equation}
+	\implies \left \langle \E_k \cdot \j_k + \epsilon_0 \E_k \cdot \left( -i \omega \E_k \right) \right \rangle = \left \langle \E_k \cdot \left( - i \omega \epsilon_0 \ditensor \right) \cdot \E_k \right \rangle
+\end{equation}
+
+Using \eqref{Complex Exponential Product Time Averaged} and substituting in $i \omega^* = i \omega_R + \omega_I$ and $-i \omega = -i \omega_R + \omega_I$
+
+\begin{equation*}
+	\left \langle \E_k \cdot \left( - i \omega \epsilon_0 \ditensor \right) \cdot \E_k \right \rangle = \frac{1}{4} \left[ \E_k^* \cdot \left( - i \omega \epsilon_0 \ditensor \right) \cdot \E_k + \E_k \cdot \left( i \omega^* \epsilon_0 \ditensor^* \right) \cdot \E_k^* \right] e^{2 \left( \omega_I t - \k_I \cdot \x \right)}
+\end{equation*}
+\begin{equation*}
+	= \frac{\epsilon_0}{4} \left[ \E_k^* \cdot \left( -i \omega_R + \omega_I \right) \ditensor \cdot \E_k + \E_k \cdot \left( i \omega_R + \omega_I \right) \ditensor^* \cdot \E_k^* \right] e^{2 \left( \omega_I t - \k_I \cdot \x \right)}
+\end{equation*}
+\begin{equation}
+	= \frac{\epsilon_0}{4} \left[ i \omega_R \left( \E_k \cdot \ditensor^* \cdot \E_k^* - \E_k^* \cdot \ditensor \cdot \E_k \right) + \omega_I \left( \E_k \cdot \ditensor^* \cdot \E_k^* + \E_k^* \cdot \ditensor \cdot \E_k \right) \right] e^{2 \left( \omega_I t - \k_I \cdot \x \right)}
+\end{equation}
+
+We can now use a quadratic form identity to replace $\E_k \cdot \ditensor^{*} \cdot \E_k^{*}$ with $\E_k^{*} \cdot \ditensor^{\dagger} \cdot \E_k$, where $\dagger$ is the conjugate transpose. 
+
+\begin{equation}
+	\E \cdot \ditensor^{*} \cdot \E^{*} = \sum_{p,q} E_p \epsilon_{pq}^{*} E_q^{*} = \sum_{p,q} E_p \epsilon_{qp}^{\dagger} E_q^{*} = \E^{*} \cdot \ditensor^{\dagger} \cdot \E
+\end{equation}
+
+Applying this identity above we get, also taking the opportunity to assume $e^{2 \left( \omega_I t - \k_I \cdot \x \right)} \approx 1$
+\begin{equation}
+	\left \langle \dots \right \rangle = \frac{\epsilon_0}{4} \left[ i \omega_R \left( \E_k^* \cdot \left( \ditensor^{\dagger} - \ditensor \right) \cdot \E_k \right) + \omega_I \left( \E_k^* \cdot \left( \ditensor^{\dagger} + \ditensor \right) \cdot \E_k \right) \right]
+\end{equation}
+
+Now we use the fact $\omega_I$ and $\k_I$ are small to Taylor expand $\ditensor$ about $\omega_R$ and $\k_R$
+\begin{equation}
+	\ditensor \left( \omega_R + i \omega_I, \k_R + \k_I \right) \approx \ditensor \left( \omega_R, \k_R \right) + i \omega_I \left. \frac{\partial \ditensor}{\partial \omega} \right|_{\omega_R, \k_R} + i \k_I \cdot \left. \frac{\partial \ditensor}{\partial \k} \right|_{\omega_R, \k_R}
+\end{equation}
+\begin{equation}
+	\left[ \ditensor \left( \omega_R + i \omega_I, \k_R + \k_I \right) \right]^{\dagger} \approx \ditensor \left( \omega_R, \k_R \right) - i \omega_I \left. \frac{\partial \ditensor}{\partial \omega} \right|_{\omega_R, \k_R} - i \k_I \cdot \left. \frac{\partial \ditensor}{\partial \k} \right|_{\omega_R, \k_R}
+\end{equation}
+
+Recognising that $\ditensor \left( \omega_R, \omega_I \right) = \ditensor^H$ as it is the small imaginary components of $\omega$ and $\k$ which make $\ditensor$ non-hermitian, we have
+\begin{equation}
+	\ditensor^H = \frac{1}{2} \left( \ditensor + \ditensor^{\dagger} \right) = \ditensor \left( \omega_R, \k_R \right)
+\end{equation}
+\begin{equation}
+	\ditensor^A = \frac{1}{2} \left( \ditensor - \ditensor^{\dagger} \right) = i \left[ \omega_I \frac{\partial \ditensor}{\partial \omega} + \k_I \cdot \frac{\partial \ditensor}{\partial \k} \right]_{\omega_R, k_R}
+\end{equation}
+
+Substituting in these expressions and cancelling $-i^2$ we get
+
+\begin{equation}
+	\left \langle \dots \right \rangle = \frac{\epsilon_0}{2} \left. \left[ \omega_R \left( \E_k^* \cdot \left( \omega_I \frac{\partial \ditensor}{\partial \omega} + \k_I \cdot \frac{\partial \ditensor}{\partial \k} \right) \cdot \E_k \right) + \omega_I \left( \E_k^* \cdot \ditensor \cdot \E_k \right) \right] \right|_{\omega_R, \k_R}
+\end{equation}
+
+Gathering terms containing $\omega_I$ and terms containing $\k_I$
+\begin{equation}
+	\left \langle \dots \right \rangle = \frac{\epsilon_0}{2} \left. \left[ \omega_I \E^* \cdot \left( \omega_R \frac{\partial \ditensor}{\partial \omega} + \ditensor \right) \cdot \E + \omega_R \E^* \cdot \left( \k_I \cdot \frac{\partial \ditensor}{\partial \k} \right) \cdot \E \right] \right|_{\omega_R, \k_R}
+\end{equation}
+
+Using the product rule and the fact we are evaluating all terms at $\omega_R, \k_R$ we can replace $\omega_R$ with $\omega$ and write
+\begin{equation}
+	\omega_R \frac{\partial \ditensor}{\partial \omega} + \ditensor = \frac{\partial \left( \omega \ditensor 	\right)}{\partial \omega}
+\end{equation}
+
+Applying this substitution, we also rewrite to make comparison with \eqref{Poynting's Theorem Generalised}
+
+\begin{equation} \label{Poynting's Theorem Time Averaged E}
+	\left \langle \dots \right \rangle = 2 \omega_I \left( \frac{\epsilon_0}{4} \E^* \cdot \frac{\partial \left( \omega \ditensor \right)}{\partial \omega} \cdot \E \right) - 2 \k_I \cdot \left( - \frac{\omega \epsilon_0}{4} \E^* \cdot \frac{\partial \ditensor}{\partial \k} \cdot \E \right)
+\end{equation}
+
+Notice we've picked up an energy flow term despite time averaging terms we've associated with energy density. This flow is associated with particle motion due to the wave.
+
+Now time average the third term in \eqref{Poynting's Theorem FT}
+
+\begin{equation}
+	\left \langle \frac{1}{\mu_0} \B_k \cdot \left( -i \omega \B_k \right) \right \rangle = \frac{1}{4 \mu_0} \left[ \B_k \cdot \left( i \omega^* \right) \cdot \B^* - \B_k^* \cdot \left( i \omega \right) \cdot \B \right] e^{2 \left( \omega_I t - \k_I \cdot \x \right)}
+\end{equation}
+
+Again assuming $e^{2 \left( \omega_I t - \k_I \cdot \x \right)} \approx 1$ and noting $\B^* \cdot \B = \norm{\B}^2$
+
+\begin{equation} \label{Poynting's Theorem Time Averaged B}
+	\left \langle \frac{1}{\mu_0} \B_k \cdot \left( -i \omega \B_k \right) \right \rangle = \frac{i \norm{\B}^2}{4 \mu_0} \left( \omega^* - \omega \right) = 2 \omega_I \frac{\norm{\B_k}^2}{4 \mu_0}
+\end{equation}
+
+Now we will time average the Poynting Flux term $\frac{1}{\mu_0} \nabla \cdot \left \langle \left( \E \times \B \right) \right \rangle$. We can use the standard method to write
+
+\begin{equation*}
+	\frac{1}{\mu_0} \nabla \cdot \left \langle \E \times \B  \right \rangle = \frac{1}{\mu_0} \nabla \cdot \frac{1}{2} \mathcal{R} \left[ \E^* \times \B \right] e^{2 \left( \omega_I t - \k_I \cdot \x \right)}
+\end{equation*}
+\begin{equation}
+	= -2 \k_I \cdot \frac{1}{2 \mu_0} \mathcal{R} \left[ \E^* \times \B \right] e^{2 \left( \omega_I t - \k_I \cdot \x \right)}
+\end{equation}
+
+Using the assumption $e^{2 \left( \omega_I t - \k_I \cdot \x \right)} \approx 1$ and rewriting we get
+
+\begin{equation} \label{Poynting's Theorem Time Averaged S}
+	\frac{1}{\mu_0} \nabla \cdot \left \langle \E \times \B  \right \rangle = -2 \k_I \cdot \frac{1}{2 \mu_0} \mathcal{R} \left[ \E^* \times \B \right]
+\end{equation}
+
+Combining \eqref{Poynting's Theorem Time Averaged E}, \eqref{Poynting's Theorem Time Averaged B} and \eqref{Poynting's Theorem Time Averaged S} we get
+
+\begin{equation}
+	2 \omega_I \left( \frac{\epsilon_0}{4} \E^* \cdot \frac{\partial \left( \omega \ditensor \right)}{\partial \omega} \cdot \E + \frac{\norm{\B_k}^2}{4 \mu_0} \right) - 2 \k_I \cdot \left( - \frac{\omega \epsilon_0}{4} \E^* \cdot \frac{\partial \ditensor}{\partial \k} \cdot \E + \frac{1}{2 \mu_0} \mathcal{R} \left[ \E^* \times \B \right] \right) = 0
+\end{equation}
+
+Comparing with \eqref{Poynting's Theorem Generalised} we see immediately
+
+\begin{equation} \label{Time Averaged Energy Density}
+	w_k = \frac{\epsilon_0}{4} \E^* \cdot \frac{\partial \left( \omega \ditensor \right)}{\partial \omega} \cdot \E + \frac{\norm{\B_k}^2}{4 \mu_0}
+\end{equation}
+\begin{equation} \label{Time Averaged Energy Flow}
+	\s_k = - \frac{\omega \epsilon_0}{4} \E^* \cdot \frac{\partial \ditensor}{\partial \k} \cdot \E + \frac{1}{2 \mu_0} \mathcal{R} \left[ \E^* \times \B \right]
+\end{equation}
+
+\subsubsection{Normalised Energy Density and Energy Flow}
+We define the normalised time averaged energy density $\Sigma_k$ and the normalised time averaged energy flow $\Phi_k$ for mode $\k$ as
+
+\begin{equation} \label{Normalised Time Averaged Energy Density Def}
+	w_k = \frac{\epsilon_0}{2} \norm{\E_k}^2 \Sigma_k
+\end{equation}
+\begin{equation} \label{Normalised Time Averaged Energy Flow Def}
+	\s_k = \frac{\epsilon_0 c}{2} \norm{\E_k}^2 \Phi_k
+\end{equation}
+
+Define the Polarisation vector $\e_k$
+
+\begin{equation}
+	\e_k = \frac{\E_k}{\norm{\E_k}}
+\end{equation}
+
+Starting with $\Sigma_k$, using \eqref{Time Averaged Energy Density} and \eqref{Normalised Time Averaged Energy Density Def} we can write
+
+\begin{equation}
+	\Sigma_k = \frac{1}{2} \e_k \cdot \frac{\partial \left( \omega \ditensor \right)}{\partial \omega} \cdot \e_k + \frac{c^2}{2} \frac{\norm{B_k}^2}{\norm{\E_k}^2}
+\end{equation}
+
+Taking the norm of \eqref{Maxwell 3 FT} we get
+
+\begin{equation*}
+	\norm{i \k \times \E} = i \omega \norm{\B_k}
+\end{equation*}
+\begin{equation}
+	\implies \frac{\norm{\B_k}}{\norm{\E_k}} = \frac{\norm{\frac{\k}{\omega} \times \E_k}}{\norm{E_k}} = \frac{1}{c} \norm{\N \times \e_k}
+\end{equation}
+
+Substituting in we get
+
+\begin{equation}
+	\Sigma_k = \frac{1}{2} \e_k \cdot \frac{\partial \left( \omega \ditensor \right)}{\partial \omega} \cdot \e_k + \frac{1}{2} \norm{\N \times \e_k}^2
+\end{equation}
+
+Using the vector identity $\norm{\N \times \e_k}^2 = \e_k^* \cdot \left( N^2 \uu{I} - \N \otimes \N \right) \cdot \e_k$ (see \ref{vector identity 1}) we get
+
+\begin{equation}
+	\Sigma_k = \frac{1}{2} \e_k^* \cdot \left( \frac{\partial \left( \omega \ditensor \right)}{\partial \omega} + N^2 \uu{I} - \N \otimes \N \right) \cdot \e_k
+\end{equation}
+
+We want to move the last 2 terms inside the $\omega$ derivative. We can do this by seeing
+
+\begin{equation*}
+	\N = \frac{c \k}{\omega} \implies \frac{\partial}{\partial \omega} \left( \omega^2 \N^2 \right) = 0
+\end{equation*}
+\begin{equation}
+	\implies \frac{\partial}{\partial \omega} \left[ \omega^2 \left( \N \otimes \N - N^2 \uu{I} \right) \right] = 0
+\end{equation}
+
+Splitting this term into $\omega \times \omega \left( \N \otimes \N - N^2 \uu{I} \right)$ and using the Product rule we get
+
+\begin{equation*}
+	\omega \left( \N \otimes \N - N^2 \uu{I} \right) + \omega \frac{\partial}{\partial \omega} \left[ \omega \left( \N \otimes \N - N^2 \uu{I} \right) \right] = 0
+\end{equation*}
+\begin{equation}
+	\implies \left( N^2 \uu{I} - \N \otimes \N \right) = \frac{\partial}{\partial \omega} \left[ \omega \left( \N \otimes \N - N^2 \uu{I} \right) \right]
+\end{equation}
+
+Substituting in we get, using the definition of $\mathcal{D}$ \eqref{linear wave equation operator}
+
+\begin{equation*}
+	\Sigma_k = \frac{1}{2} \e_k^* \cdot \frac{\partial}{\partial \omega} \left[ \omega \left( \ditensor + \N \otimes \N - N^2 \uu{I} \right) \right] \cdot \e_k
+\end{equation*}
+\begin{equation}
+	= \frac{1}{2} \e_k^* \cdot \frac{\partial}{\partial \omega} \left( \omega \mathcal{D} \right) \cdot \e_k
+\end{equation}
+
+Expanding the derivative we get
+
+\begin{equation}
+	\Sigma_k = \frac{1}{2} \e_k^* \cdot \mathcal{D} \cdot \e_k + \frac{\omega}{2} \e_k^* \cdot \frac{\partial \mathcal{D}}{\partial \omega} \cdot \e_k
+\end{equation}
+
+Using $\e_k^* \cdot \mathcal{D} \cdot \e_k = 0$ in the limit of weak dissipation we get the final expression
+
+\begin{equation} \label{Normalised Wave Energy Density}
+	\Sigma_k = \frac{\omega}{2} \e_k^* \cdot \frac{\partial \mathcal{D}}{\partial \omega} \cdot \e_k
+\end{equation}
+
+Now we move on to $\Phi_k$. Using \eqref{Time Averaged Energy Flow} and \eqref{Normalised Time Averaged Energy} we can write
+
+\begin{equation*}
+	\Phi_k = -\frac{\omega}{2c} \e_k^* \cdot \frac{\partial \ditensor}{\partial \k} \cdot \e_k + \frac{1}{\norm{\E_k}^2} \mathcal{R} \left[ \E_k^* \times \B_k \right]
+\end{equation*}
+\begin{equation}
+	= - \frac{1}{2} \e_k^* \cdot \frac{\partial \ditensor}{\partial \N} \cdot \e_k + \frac{1}{\norm{\E_k}^2} \mathcal{R} \left[ \E_k^* \times \B_k \right]
+\end{equation}
+
+Taking $\E_k^* \times$ \eqref{Maxwell 3 FT} we get
+\begin{equation*}
+	\E_k^* \times \left( i\k \times \E_k \right) = i \omega \E_k^* \times \B_k
+\end{equation*}
+\begin{equation}
+	\implies \norm{\E_k^* \times \left( \frac{\k}{\omega} \times \E_k \right)} = \norm{\E_k^* \times \B_k}
+\end{equation}
+
+Dividing through by $\norm{\E_k}^2$ and using the definition of $\N$ we get
+
+\begin{equation}
+	\frac{1}{\norm{\E_k}^2} \mathcal{R} \left[ \E_k^* \times \B_k \right] = \frac{1}{c} \mathcal{R} \left[ \e_k^* \times \left( \N \times \e_k \right) \right]
+\end{equation}
+
+We can expand the double cross product as
+
+\begin{equation}
+	\e_k^* \times \left( \N \times \e_k \right) = \left( \e_k^* \cdot \e_k \right) \N - \left( \e_k^* \cdot \N \right) \e_k
+\end{equation}
+
+Using the vector identity $\N - \mathcal{R} \left[ \left( \e_k^* \cdot \N \right) \e_k \right] = - \frac{1}{2} \e_k^* \cdot \frac{\partial \left( \N \otimes \N - N^2 \uu{I} \right)}{\partial \N} \cdot \e_k$ (see \ref{vector identity 2}) we can rewrite the expression for $\Phi_k$
+
+\begin{equation*}
+	\Phi_k = - \frac{1}{2} \e_k^* \cdot \frac{\partial \ditensor}{\partial \N} \cdot \e_k - \frac{1}{2} \e_k^* \cdot \frac{\partial \left( \N \otimes \N - N^2 \uu{I} \right)}{\partial \N} \cdot \e_k
+\end{equation*}
+\begin{equation}
+	= - \frac{1}{2} \e_k^* \cdot \left( \ditensor + \N \otimes \N - N^2 \uu{I} \right) \cdot \e_k
+\end{equation}
+
+Again using the definition for $\mathcal{D}$ \eqref{linear wave equation operator} we get
+
+\begin{equation} \label{Normalised Wave Energy Flow}
+	\Phi_k = - \frac{1}{2} \e_k^* \cdot \frac{\partial \mathcal{D}}{\partial \N} \cdot \e_k
+\end{equation}
+
+\subsubsection{Group Velocity}
+We can get a short definition of the group velocity in terms of our normalised energy flows. Using the standard definition of group velocity
+
+\begin{equation}
+	\v_g = \frac{\partial \k}{\partial \omega} = \frac{\frac{\partial \mathcal{D}}{\partial \omega}}{\frac{\partial \mathcal{D}}{\partial \k}} = \frac{c \Phi_k}{\Sigma_k}
+\end{equation}
+
+\subsection{Absorption Coefficient}
+Poynting's Theorem covers the energy density and flow in both the wave and the charged particles. However, energy flow from the wave fields to the particles is the definition of wave absorption. This term appeared from the $\E \cdot \j$ term. If we were to rearrange Poynting's Theorem to isolate this term we get
+
+\begin{equation}
+	\epsilon_0 \E \cdot \frac{\partial \E}{\partial t} + \frac{1}{\mu_0} \B \cdot \frac{\partial \B}{\partial t} + \frac{1}{\mu_0} \nabla \cdot \S = - \E \cdot \j
+\end{equation}
+
+Writing the time average $\left \langle \E \cdot \j \right \rangle$, we can use Ohm's Law \eqref{Ohm's Law} and the standard method for time averaging
+
+\begin{equation*}
+	\left \langle \E \cdot \contensor \cdot \E \right \rangle = \frac{1}{4} \left[ \E^* \cdot \contensor \cdot \E + \E \cdot \contensor^* \cdot \E^* \right] e^{2 \left( \omega_I t - \k_I \cdot \x \right)}
+\end{equation*}
+\begin{equation}
+	= \frac{1}{4} \left[\E^* \cdot \left( \contensor^{\dagger} + \contensor \right) \cdot \E \right] e^{2 \left( \omega_I t - \k_I \cdot \x \right)}
+\end{equation}
+
+Assuming $e^{2 \left( \omega_I t - \k_I \cdot \x \right)} \approx 1$ and recognising $\contensor^{\dagger} + \contensor = 2 \contensor^H$ we get
+
+\begin{equation}
+	\left \langle \E \cdot \contensor \cdot \E \right \rangle = \frac{1}{2} \E^* \cdot \contensor^H \cdot \E
+\end{equation}
+
+We can associate this with the power dissipation. Taking the Fourier transform we get the power dissipation $P_k^{lin}$ associated with mode $k$
+
+\begin{equation}
+	P_k^{lin} = \frac{1}{2} \E_k^* \cdot \contensor^H \cdot \E_k
+\end{equation}
+
+Consider the anti-hermitian part of the susceptibility tensor $\sustensor$
+\begin{equation*}
+	\sustensor^A = \frac{1}{2} \left( \sustensor - \sustensor^{\dagger} \right) = \frac{i}{\omega \epsilon_0} \frac{1}{2} \left( \contensor + \contensor^{\dagger} \right) = \frac{i}{\omega \epsilon_0} \contensor^H
+\end{equation*}
+\begin{equation}
+	\implies \contensor^H = -i \omega \epsilon_0 \sustensor^A
+\end{equation}
+
+Substituting in, we can rewrite $P_k^{lin}$
+\begin{equation}
+	P_k^{lin} = - \frac{i \omega \epsilon_0}{2} \norm{\E_k}^2 \e_k^* \cdot \sustensor^A \cdot \e_k
+\end{equation}
+
+We almost have the normalisation constant between $\s_k$ and $\Phi_k$ from \eqref{Normalised Time Averaged Energy Flow Def}. Substituting in we get
+
+\begin{equation}
+	P_k^{lin} = - \frac{i \omega}{c} \frac{\norm{\s_k}}{\norm{\Phi_k}} \e_k^* \cdot \sustensor^A \cdot \e_k
+\end{equation}
+
+Defining the absorption coefficient $\alpha_k^{lin}$
+
+\begin{equation}
+	\alpha_k^{lin} = \frac{P_k^{lin}}{\norm{\s_k}} = -\frac{i \omega}{c} \frac{1}{\norm{\Phi_k}} \e_k^* \cdot \sustensor^A \cdot \e_k
+\end{equation}

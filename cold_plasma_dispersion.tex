@@ -1,0 +1,609 @@
+\section{Cold Plasma Dispersion}
+Discussing EBWs requires discussing electromagnetic waves propagating in a plasma. This is most easily done in a collision free data ($T=0$).
+\subsection{Eikonal Ansatz and WKB Approximation}
+In a space and time varying medium the displacement vector is related to the electric field by $\bm{D} = \uubar{\epsilon} \cdot \bf{E}$. $\uubar{\epsilon}$ is the dielectric tensor which captures the effect of the medium. As the plasma in a tokamak or stellerator is stationary over a microwave period, we can ignore any special relativistic effects and retarded potentials
+
+To start, take the curl of the Faraday-Maxwell equation \eqref{faraday}
+\begin{equation}
+	\nabla \times \left( \nabla \times \bm{E} \right) = -\nabla \times \frac{\partial \bm{B}}{\partial t} \underset{B \in C^2}{=} \frac{- \left( \nabla \times \bm{B} \right)}{\partial t}
+\end{equation}
+
+We can exchange curl and partial time derivatives as all partial derivatives of $\bm{B}$ are continuous ($\bm{B} \in C^2$). Eliminate $\nabla \times \bm{B}$ using \eqref{ampere}
+\begin{equation}
+	\nabla \times \left( \nabla \times \bm{E} \right) = - mu_0 \frac{\partial \bm{j}}{\partial t} - \frac{1}{c^2} \frac{\partial^2 \bm{E}}{\partial t^2}
+\end{equation}
+
+Now take the Fourier Transform with respect to time. We saw when calculating plasma oscillations this is equivalent to exchanging $\frac{\partial}{\partial t} \rightarrow-i \omega$. As we only transform with respect to time we leave all space derivatives
+\begin{equation*}
+	\mathcal{F}\left[ \nabla \times \left( \nabla \times \bm{E} \right) \right] = - \left(-i \omega\right) mu_0 \bm{j} - \frac{\left(-i \omega\right)^2}{c^2} \bm{E} = i mu_0 \omega \bm{j} + \frac{\omega^2 \bm{E}}{c^2}
+\end{equation*}
+\begin{equation} \label{cold_plasma_wave_equation}
+	\implies \nabla \times \left( \nabla \times \bm{E}\left( \bm{x}, \omega \right) \right) = i mu_0 \omega \bm{j} \left( \bm{x}, \omega \right) + \frac{\omega^2 \bm{E} \left( \bm{x}, \omega \right)}{c^2}
+\end{equation}
+
+We can write $\bm{E}$ as a phasor using the Eikonal representation. This is completely general and is just a re-arrangement
+\begin{equation}\label{eikonal}
+	\bm{E} \left( \bm{x}, \omega \right) = \bm{a} \left( \bm{x}, \omega \right) e^{iS \left( \bm{x}, \omega \right)} \quad \bm{k} := \nabla S
+\end{equation}
+
+To substitute into \eqref{cold_plasma_wave_equation} we need to calculate $\nabla \times \left( \nabla \times \bm{E} \right)$. We need a vector identity and the gradient of $e^{iS}$
+\begin{equation} \label{cold_plasma_vector_identity}
+	\nabla \times \left( \Psi \bm{A} \right) = \Psi \left( \nabla \times \bm{A} \right) + \left( \nabla \Psi \right) \times \bm{A}
+\end{equation}
+\begin{equation}
+	\nabla e^{iS} = i \nabla S e^{iS} = i \bm{k} e^{iS}
+\end{equation}
+Substitute \eqref{eikonal} into \eqref{cold_plasma_vector_identity}
+\begin{equation*}
+	\nabla \times \left( \bm{a} e^{iS} \right) = e^{iS} \left( \nabla \times \bm{a} \right) + \nabla e^{iS} \times \bm{a}
+\end{equation*}
+\begin{equation}
+	\implies e^{iS} \left( \nabla \times \bm{a} \right) + i \bm{k} e^{iS} = \left( \nabla + i \bm{k} \right) \times \bm{a} e^{iS}
+\end{equation}
+To calculate the curl of this we can use \eqref{cold_plasma_vector_identity} again
+\begin{equation*}
+	\nabla \times \left[ \left( \nabla + i \bm{k} \right) \times \bm{a} \right] e^{iS} = \nabla \times \left[ \left( \nabla + i \bm{k} \right) \times \bm{a} \right] e^{iS} + \nabla e^{iS} \times \left[ \left( \nabla + i \bm{k} \right) \times \bm{a} \right]
+\end{equation*}
+\begin{equation*}
+	= \nabla \times \left[ \left( \nabla + i \bm{k} \right) \times \bm{a} \right] e^{iS} + i \bm{k} e^{iS} \times \left[ \left( \nabla + i \bm{k} \right) \times \bm{a} \right]
+\end{equation*}
+\begin{equation}
+	= \left[ \left( \nabla + i \bm{k} \right) \times \left(\left( \nabla + i \bm{k} \right) \times \bm{a} \right)\right]
+\end{equation}
+
+We can now substitute into \eqref{cold_plasma_vector_identity}
+\begin{equation}
+	\left[ \left( \nabla + i \bm{k} \right) \times \left(\left( \nabla + i \bm{k} \right) \times \bm{a} \right)\right]e^{iS} = \frac{\omega^2}{c^2} \bm{a} e^{iS} + i \mu_0 \omega \bm{j}
+\end{equation}
+Dividing by $e^{iS}$ we get our final amplitude equation
+\begin{equation}\label{cold_plasma_amplitude}
+	\left( \nabla + i \bm{k} \right) \times \left( \left( \nabla + i \bm{k} \right) \times \bm{a} \right) = \frac{\omega^2}{c^2} \bm{a} + i \mu_0 \omega e^{-iS} \bm{j}
+\end{equation}
+In a weakly inhomogeneous medium with inhomogeneity scale $L \gg \lambda$, we can look for solutions which deviate slightly from a plane wave. We can therefore assume the magnitude of the gradient of plasma quantities (density, temperature, magnetic field, etc.) $|\nabla \bm{x}| \sim \frac{\bm{x}}{L}$.
+
+Using this we can make some assumptions which simplify \eqref{cold_plasma_amplitude}
+\begin{equation}
+	\frac{|\nabla \times \bm{a}|}{|i \bm{k} \times \bm{a}|} \sim \frac{|\bm{a}|}{L |\bm{a}| |\bm{k}|} = \frac{1}{L |\bm{k}|} = \frac{\lambda}{2 \pi L} \approx 0 \implies \nabla + i \bm{k} \approx i \bm{k}
+\end{equation}
+
+$\nabla$ captures the medium dependence while $i \bm{k}$ captures the wave dependence. As we assume the medium is weakly inhomogeneous we are saying we can ignore medium dependence compared to wave dependence. This is called the Wentzel-Kramer-Brillouin (WKB) approximation.
+
+If we apply this approximation to \eqref{cold_plasma_amplitude}, to be consistent we must use a Local Ohm's law for the RHS (i.e. keeping zeroeth order in $\frac{\nabla}{i \bm{k}}$)
+\begin{equation}
+	\bm{j}(\bm{x}) = \uubar{\sigma} \cdot \bm{E} + \bm{j}_{\text{ext}} = \uubar{\sigma} \cdot \bm{a} e^{iS} + \bm{j}_{\text{ext}}
+\end{equation}
+
+Here $\uubar{\sigma}$ is the conductivity tensor. This Ohm's law applies only for small electric field amplitudes so $\bm{j}$ is proportional to $\bm{E}$. $\bm{j}_{\text{ext}}$ is not a response of the medium to $\bm{E}$ but accounts for spontaneous emission or absorption. Substituting into \eqref{cold_plasma_amplitude}
+\begin{equation*}
+	i \bm{k} \times \left( i \bm{k} \times \bm{a} \right) = \frac{\omega^2}{c^2} \bm{a} + i \mu_0 \omega e^{-iS} \left( \uubar{\sigma} \cdot \bm{a} e^{iS} + \bm{j}_{\text{ext}} \right)
+\end{equation*}
+\begin{equation}
+	= \left( \frac{\omega^2}{c^2} \uubar{I} + i \mu_0 \omega \uubar{\sigma} \right) \bm{a} + i \mu_0 \omega e^{-iS} \bm{j}_{\text{ext}} = \frac{\omega^2}{c^2} \uubar{\epsilon} \cdot \bm{a} + i \mu_0 \omega e^{-iS} \bm{j}_{\text{ext}}
+\end{equation}
+where $\uubar{I}$ is the identity. Here we introduce $\uubar{\epsilon}$ the \textit{local} dielectric tensor
+
+\begin{equation}\label{cold_plasma_dielectric_tensor}
+	\uubar{\epsilon} := \uubar{I} + \frac{i \mu_0 c^2}{\omega} \uubar{\sigma} = \uubar{I} + \frac{i}{\epsilon_0 \omega} \uubar{\sigma} \quad \text{or} \quad \epsilon_{ij} = \delta_{ij} + \frac{i}{\epsilon_0 \omega} \sigma_{ij}
+\end{equation}
+
+where $\delta_{ij}$ is the Kronecker delta. Dividing through by $\frac{\omega^2}{c^2}$ we can redefine in terms of the refractive index $\bm{N} = \frac{c \bm{k}}{\omega}$ (multiplying the $i^2$ as $-1$ on the LHS)
+\begin{equation}
+	-\bm{N} \times \left( \bm{N} \times \bm{a} \right) = \uubar{\epsilon} \cdot \bm{a} + \frac{i \mu_0 c^2}{\omega} e^{iS} \bm{j}_{\text{ext}}
+\end{equation}
+
+We can evaluate $\bm{N} \times \left( \bm{N} \times \bm{a} \right)$
+\begin{equation*}
+	\begin{pmatrix}
+		N_x \\ N_y \\ N_z
+	\end{pmatrix} \times
+	\begin{pmatrix}
+		N_x \\ N_y \\ N_z
+	\end{pmatrix} \times
+	\begin{pmatrix}
+		a_x \\ a_y \\ a_z
+	\end{pmatrix} \times = 
+	\begin{pmatrix}
+		N_x \\ N_y \\ N_z
+	\end{pmatrix} \times
+	\begin{pmatrix}
+		N_y a_z - a_y N_z \\ N_z a_x - a_z N_x \\ N_x a_y - a_x N_y
+	\end{pmatrix}
+\end{equation*}
+\begin{equation*}
+	\begin{pmatrix}
+		N_x N_y a_z - N_y^2 a_x - N_z^2 a_x + N_x N_z a_z \\
+		N_y N_z a_y - N_z^2 a_y - N_x^2 a_y + N_x N_y a_y \\
+		N_x N_z a_x - N_x^2 a_z - N_y^2 a_z + N_y N_z a_y
+	\end{pmatrix} = 
+	\begin{pmatrix}
+		-N_y^2 - N_z^2 & N_x N_y & N_x N_z \\
+		N_x N_y & -N_x^2 - N_z^2 & N_y N_z \\
+		N_x N_z & N_y N_z & -N_x^2 -N_y^2
+	\end{pmatrix} \cdot
+	\begin{pmatrix}
+		a_x \\ a_y \\ a_z
+	\end{pmatrix}
+\end{equation*}
+\begin{equation*}
+	\begin{pmatrix}
+		N_x^2 - N^2 & N_x N_y & N_x N_z \\
+		N_x N_y & N_y^2 - N^2 & N_y N_z \\
+		N_x N_z & N_y N_z & N_z^2 -N^2
+	\end{pmatrix} \cdot
+	\begin{pmatrix}
+		a_x \\ a_y \\ a_z
+	\end{pmatrix}
+\end{equation*}
+\begin{equation}
+	\left( N^2 \uubar{I} - \bm{N} \otimes \bm{N} \right) \cdot \bm{a}
+\end{equation}
+where $\otimes$ is the outer product. Therefore $-\bm{N} \times \left( \bm{N} \times \bm{a} \right) = \bm{N} \otimes \bm{N} - N^2 \uubar{I}$. Substituting in
+\begin{equation*}
+	0 = \left( \uubar{\epsilon} - \bm{N} \otimes \bm{N} + N^2 \uubar{I} \right) \cdot \bm{a} + \frac{i \mu_0 c^2}{\omega} e^{iS} \bm{j}_{\text{ext}}
+\end{equation*}
+\begin{equation}\label{cold_plasma_lambda}
+	\implies \uubar{\Lambda} \cdot \bm{a} = - \frac{i \mu_0 c^2}{\omega} e^{iS} \bm{j}_{\text{ext}} \quad \uubar{\Lambda} := \uubar{\epsilon} - \bm{N} \otimes \bm{N} + N^2 \uubar{I}
+\end{equation}
+
+We can split $\Lambda$ into Hermititan and Anti-Hermitian parts $\uubar{\Lambda} = \uubar{\Lambda}^h + i \uubar{\Lambda}^a$ where $\uubar{\Lambda}^h = \frac{1}{2} \left( \uubar{\Lambda} + \uubar{\Lambda}^{\dagger} \right)$ and $\uubar{\Lambda}^a = \frac{1}{2i} \left( \uubar{\Lambda} - \uubar{\Lambda}^{\dagger} \right)$. Substituting into \eqref{cold_plasma_amplitude}
+\begin{equation}
+	\uubar{\Lambda}^h \cdot \bm{a} = -i \uubar{\Lambda}^a \cdot \bm{a} - \frac{i \mu_0 c^2}{\omega} e^{iS} \bm{j}_{\text{ext}}
+\end{equation}
+The first time on the RHS describes absorption and stimulated emission while the second term is spontaneous emission. Far from emitting and absorbing locations this reduces to
+\begin{equation}\label{cold_plasma_wave_propagation}
+	\uubar{\Lambda}^h \cdot \bm{a} = 0
+\end{equation}
+which describes non-dissipative wave propagation. It's solvability condition is
+\begin{equation}
+	\text{Det}\uubar{\Lambda} = \mathcal{D} \left( \bm{k}, \omega \left( \bm{k}, \bm{x}, t \right), \bm{x}, t \right) = 0
+\end{equation}
+
+\subsection{Deriving the Conductivity Tensor}
+In order to evaluate \eqref{cold_plasma_wave_propagation} we need to calculate $\uubar{\epsilon}$ which involves calculating $\uubar{\sigma}$. We will use the Navier Stokes equations \eqref{navier_stokes} to calculate the velocity of each species $s$, calculate current using the Drift Equation \eqref{drift} then use Ohm's law \eqref{ohm} to find the components of $\uubar{\sigma}$. We already linearised the Navier Stokes equations for a cold plasma when calculating plasma oscillations. We need to add in a static background magnetic field $\bm{B} = B\bfhat{z}$
+\begin{equation}
+	\frac{\partial \bm{v}_s}{\partial t} = \frac{q}{m_s} \left( \bm{E} + \bm{v} \times \bm{B} \right)
+\end{equation}
+
+We can Fourier transform in time and write out the components
+\begin{equation}
+	-i \omega v_{sx} = \frac{q}{m_s} \left(E_x + v_{sy} B \right) \implies v_{sx} = \frac{iq}{\omega m_s} \left(E_x + v_{sy} B \right)
+\end{equation}
+\begin{equation}
+	-i \omega v_{sy} = \frac{q}{m_s} \left(E_y - v_{sx} B \right) \implies v_{sy} = \frac{iq}{\omega m_s} \left(E_y - v_{sx} B \right)
+\end{equation}
+\begin{equation}
+	-i \omega v_{sz} = \frac{q}{m_s} E_z \implies v_{sz} = \frac{iq}{\omega m_s} E_z
+\end{equation}
+
+Eliminate $v_{sx}$ and $v_{sy}$
+\begin{equation}
+	v_{sx} = \frac{iqE_x}{\omega m_s} + \frac{iqBv_{sy}}{\omega m_s} = \frac{iqE_x}{\omega m_s} + \frac{iqB}{\omega m_s}\left( \frac{iqE_y}{\omega m_s} - \frac{iqB v_{sx}}{\omega m_s} \right)
+\end{equation}
+\begin{equation}
+	= \frac{iq}{m_s}\frac{E_x}{\omega} - \frac{q}{m_s} \frac{qB}{m_s} \frac{E_y}{\omega^2} + \frac{q^2 B^2}{m_s^2} \frac{v_{sx}^2}{\omega}
+\end{equation}
+\begin{equation}
+	v_{sy} = \frac{iqE_y}{\omega m_s} - \frac{iqB v_{sx}}{\omega m_s} = \frac{iqE_y}{\omega m_s} - \frac{iqB}{\omega m_s}\left( \frac{iqE_x}{\omega m_s} + \frac{iqBv_{sy}}{\omega m_s} \right)
+\end{equation}
+\begin{equation}
+	= \frac{iqE_y}{\omega m_s} + \frac{q}{m_s} \frac{qB}{m_s} \frac{E_x}{\omega^2} + \frac{q^2 B^2}{m_s^2} \frac{v_{sy}^2}{\omega}
+\end{equation}
+
+We recognise the species cyclotron frequency $\omega_{cs}=\frac{qB}{m_s}$. Gather like terms to write
+\begin{equation}
+	\left( 1 - \frac{\omega_{cs}^2}{\omega^2} \right)v_{sx} = \frac{iqE_x}{\omega m_s} - \frac{q}{m_s \omega} \frac{\omega_{cs}}{\omega} E_y
+\end{equation}
+\begin{equation}
+	\left( 1 - \frac{\omega_{cs}^2}{\omega^2} \right)v_{sy} = \frac{iqE_y}{\omega m_s} + \frac{q}{m_s \omega} \frac{\omega_{cs}}{\omega} E_x
+\end{equation}
+
+We can use the drift equation to write out the components of the current $j_{si} = nqv_{si}$
+\begin{equation}
+	j_{sx} = nqv_{sx} = \left( 1 - \frac{\omega_{cs}^2}{\omega^2} \right)^{-1} \left( \frac{inq^2E_x}{\omega m_s^2} - \frac{nq^2}{m_s^2 \omega} \frac{\omega_{cs}}{\omega} E_y \right)
+\end{equation}
+\begin{equation}
+	j_{sy} = nqv_{sy} = \left( 1 - \frac{\omega_{cs}^2}{\omega^2} \right)^{-1} \left( \frac{inq^2E_y}{\omega m_s^2} -+ \frac{nq^2}{m_s^2 \omega} \frac{\omega_{cs}}{\omega} E_x \right)
+\end{equation}
+\begin{equation}
+	j_{sz} = \frac{inq^2 E_z}{\omega m_s^2}
+\end{equation}
+
+We recognise we almost have the species plasma frequency $\omega_{ps}^2 = \frac{nq^2}{\epsilon_0 m_s^2}$. Substituting in $\frac{nq^2}{m_s^2} = \epsilon_0 \omega_{ps}^2$
+\begin{equation}
+	j_{sx} = \left( 1 - \frac{\omega_{cs}^2}{\omega^2} \right)^{-1} \left( \frac{\epsilon_0 \omega_{ps}^2}{\omega} E_x - \frac{\epsilon_0 \omega_{ps}^2}{\omega} \frac{\omega_{cs}}{\omega} E_y \right)
+\end{equation}
+\begin{equation}
+	j_{sy} = \left( 1 - \frac{\omega_{cs}^2}{\omega^2} \right)^{-1} \left( \frac{\epsilon_0 \omega_{ps}^2}{\omega} E_y + \frac{\epsilon_0 \omega_{ps}^2}{\omega} \frac{\omega_{cs}}{\omega} E_x \right)
+\end{equation}
+\begin{equation}
+	j_{sz} = \frac{\epsilon_0 \omega_{ps}^2}{\omega} E_z
+\end{equation}
+
+Now we have the current $\bm{j}$ in terms of components of the Electric field $\bm{E}$. We can read off the components of the conductivity tensor $\uubar{\sigma}$ using \eqref{ohm}
+\begin{equation}
+	\bm{j} = \uubar{\sigma} \cdot \bm{E} = 
+	\begin{pmatrix}
+		\sigma_{xx} & \sigma_{xy} & \sigma_{xz} \\
+		\sigma_{yx} & \sigma_{yy} & \sigma_{yz} \\
+		\sigma_{zx} & \sigma_{zy} & \sigma_{zz}
+	\end{pmatrix} \cdot 
+	\begin{pmatrix}
+		j_x \\ j_y \\ j_z
+	\end{pmatrix} = 
+	\begin{pmatrix}
+		\sigma_{xx} j_x + \sigma_{xy} j_y + \sigma_{xz} j_z \\
+		\sigma_{yx} j_x + \sigma_{yy} j_y + \sigma_{yz} j_z \\
+		\sigma_{zx} j_x + \sigma_{zy} j_y + \sigma_{zz} j_z
+	\end{pmatrix}
+\end{equation}
+\begin{equation}
+	= \sum_s
+	\begin{pmatrix}
+		\sigma_{xx} j_{sx} + \sigma_{xy} j_{sy} + \sigma_{xz} j_{sz} \\
+		\sigma_{yx} j_{sx} + \sigma_{yy} j_{sy} + \sigma_{yz} j_{sz} \\
+		\sigma_{zx} j_{sx} + \sigma_{zy} j_{sy} + \sigma_{zz} j_{sz}
+	\end{pmatrix}
+\end{equation}
+We'll cheat a bit and take a factor of $\epsilon_0 \omega$ out the from
+\begin{equation}
+	\sigma_{xx} = \sigma{yy} = \epsilon_0 \omega \sum_s \frac{\omega_{ps}^2}{\omega^2} \frac{1}{1 - \frac{\omega_{cs}^2}{\omega^2}}
+\end{equation}
+\begin{equation}
+	\sigma_{zz} = \epsilon_0 \omega \sum_s \frac{\omega_{ps}^2}{\omega^2}
+\end{equation}
+\begin{equation}
+	\sigma_{xy} = -\sigma_{yx} = -i \epsilon_0 \omega \sum_s \frac{\omega_{ps}^2}{\omega^2} \frac{\omega_{cs}}{\omega}
+\end{equation}
+\begin{equation}
+	\sigma_{xz} = \sigma_{yz} = \sigma_{zx} = \sigma_{zy} = 0
+\end{equation}
+
+We can now write out the cold plasma dielectric tensor using \eqref{cold_plasma_dielectric_tensor}. Fortunately we can cancel $\epsilon_0 \omega$
+\begin{equation}
+	\uubar{\epsilon} =
+	\begin{pmatrix}
+		1 - \displaystyle{\sum_s} \frac{\omega_{ps}^2}{\omega^2} \frac{1}{1 - \frac{\omega_{cs}^2}{\omega^2}} & -i \displaystyle{\sum_s} \frac{\omega_{ps}^2}{\omega^2} \frac{\omega_{cs}}{\omega} & 0 \\
+		i \displaystyle{\sum_s} \frac{\omega_{ps}^2}{\omega^2} \frac{\omega_{cs}}{\omega} & 1 - \displaystyle{\sum_s} \frac{\omega_{ps}^2}{\omega^2} \frac{1}{1 - \frac{\omega_{cs}^2}{\omega^2}} & 0 \\
+		0 & 0 & 1 - \displaystyle{\sum_s} \frac{\omega_{ps}^2}{\omega^2}
+	\end{pmatrix}
+\end{equation}
+
+This is rather cumbersome so we'll introduce some useful Stix Parameters $X$ and $Y$
+\begin{equation}
+	X_s = \frac{\omega_{ps}^2}{\omega^2} \quad Y_s = \frac{\omega_{cs}}{\omega}
+\end{equation}
+Note at constant frequency $\omega$ $X \propto n$ and $Y \propto B$, so changing $X$ and $Y$ represents changes in density and magnetic field.
+
+\begin{equation}
+		\uubar{\epsilon} =
+	\begin{pmatrix}
+		1 - \displaystyle{\sum_s} \frac{X_s}{1 - Y_s^2} & -i \displaystyle{\sum_s} \frac{X_s Y_s}{1 - Y_s^2} & 0 \\
+		-i \displaystyle{\sum_s} \frac{X_s Y_s}{1 - Y_s^2} & 1 - \displaystyle{\sum_s} \frac{X_s}{1 - Y_s^2} & 0 \\
+		0 & 0 & 1 - \displaystyle{\sum_s} X_s
+	\end{pmatrix} = 
+	\begin{pmatrix}
+		S & -iD & 0 \\
+		iD & S & 0 \\
+		0 & 0 & P
+	\end{pmatrix}
+\end{equation}
+We simplify again by introducing some more Stix Parameters $S$, $D$ and $P$
+\begin{equation}
+	S = 1 - \sum_s \frac{X_s}{1 - Y_s^2} = 1 - \sum_s \frac{\omega_{ps}}{\omega^2 - \omega_{ce}^2}
+\end{equation}
+\begin{equation}
+	D = \sum_s \frac{X_s Y_s}{1 - Y_s^2} = \sum_s \frac{\omega_{ce}}{\omega} \frac{\omega_{ps}^2}{\omega^2 - \omega_{ce}^2}
+\end{equation}
+\begin{equation}
+	P = 1 - \sum_s X_s = 1 - \sum_s \frac{\omega_{ps}^2}{\omega^2}
+\end{equation}
+
+There are 2 more Stix Parameters we'll introduce as they'll be useful: $R = S + D$ and $L = S - D$
+\begin{equation*}
+	R = 1 - \sum_s \frac{X_s}{1 - Y_s^2} + \sum_s \frac{X_s Y_s}{1 - Y_s^2} = 1 - \sum_s \frac{X_s \left( 1 - Y_s \right)}{1 - Y_s^2}
+\end{equation*}
+\begin{equation}
+	 = 1 - \sum_s \frac{X_s}{1 + Y_s} = 1 - \sum_s \frac{\omega_{ps}^2}{\omega \left( \omega - \omega_{cs} \right)}
+\end{equation}
+\begin{equation*}
+	L = 1 - \sum_s \frac{X_s}{1 - Y_s^2} - \sum_s \frac{X_s Y_s}{1 - Y_s^2} = 1 - \sum_s \frac{X_s \left( 1 + Y_s \right)}{1 - Y_s^2}
+\end{equation*}
+\begin{equation}
+	 = 1 - \sum_s \frac{X_s}{1 - Y_s} = 1 - \sum_s \frac{\omega_{ps}^2}{\omega \left( \omega + \omega_{cs} \right)}
+\end{equation}
+
+\subsection{Appleton Hartree Equation}
+To find the dispersion relation we substitute the expression for $\uubar{\epsilon}$ into \eqref{cold_plasma_wave_propagation}. Without loss of generality we define a co-ordinate system with $\bfhat{z}$ parallel to $\bm{B}$. As we have cylindrical symmetry we can set $N_y = 0$ so $N^2 = N_x^2 - N_z^2$. In the general case for oblique propagation (neither parallel nor perpendicular to $\bm{B}$), defining $\theta$ to be the angle between $\bm{k}$ and $\bm{B}$ we can write $N_x = N \sin \theta$ and $N_z = N \cos \theta$. We will end up with an equation for $N^2$ as a function of $X$, $Y$, $\omega$ and $\theta$ called the Appleton-Hartree Equation.
+
+Here we assume electrons as the only species (i.e. ions form uniform background) so we drop subscripts on $X$ and $Y$. Using the definition of $\uubar{\Lambda}$ from \eqref{cold_plasma_lambda}
+\begin{equation*}
+	\mathcal{D} = \begin{vmatrix}
+		S - N_z^2 & -iD & N_x N_z \\
+		iD & S - N^2 & 0 \\
+		N_x N_z & 0 & P - N_x^2
+	\end{vmatrix}
+\end{equation*}
+\begin{equation}
+	= \begin{vmatrix}
+		S - N^2 \cos^2 \theta & -iD & N^2 \cos \theta \sin \theta \\
+		iD & S - N^2 & 0 \\
+		N^2 \cos \theta \sin \theta & 0 & P - N^2 \sin^2 \theta
+	\end{vmatrix}
+\end{equation}
+Solving the determinant of a 3D matrix is well known, we'll use the bottom row as the leading coefficients
+\begin{equation*}
+	\mathcal{D} = N^2 \cos \theta \sin \theta
+	\begin{vmatrix}
+		-iD & N^2 \cos \theta \sin \theta \\
+		s - N^2 & 0
+	\end{vmatrix}
+\end{equation*}
+\begin{equation*}
++ \left(P - N^2 \sin^2 \theta\right)
+\begin{vmatrix}
+	S - N^2 \cos^2 \theta & -iD \\
+	iD & S - N^2
+\end{vmatrix}
+\end{equation*}
+\begin{equation*}
+	= N^2 \cos \theta \sin \theta \left[ - \left( S - N^2 \right) N^2 \cos \theta \sin \theta \right]
+\end{equation*}
+\begin{equation*}
+	+ \left(P - N^2 \sin^2 \theta\right) \left[ \left( S - N^2 \cos^2 \theta \right) \left( S - N^2 \right) - D^2 \right]
+\end{equation*}
+\begin{equation*}
+	= N^4 \sin^2 \theta \cos^2 \theta \left(N^2 - S\right)
+\end{equation*}
+\begin{equation*}
+	+ \left(P - N^2 \sin^2 \theta \right) \left( S^2 - N^2 \cos^2 \theta \sin^2 \theta - S N^2 + N^4 \cos^2 \theta - D^2 \right)
+\end{equation*}
+\begin{equation*}
+	= N^6 \sin^2 \theta \cos^2 \theta - SN^4 \cos^2 \theta \sin^2 \theta + PS^2 - PSN^2 \cos^2 \theta - PSN^2
+\end{equation*}
+\begin{equation*}
+	 + PN^4 \cos^2 \theta - D^2P - N^2S^2 \sin^2 \theta + N^4S \sin^2 \theta \cos^2 \theta + N^4 S \sin^2 \theta - N^6 \sin^2 \theta \cos^2 \theta + N^2 D^2 \sin^2 \theta
+\end{equation*}
+\begin{equation*}
+	= \left( S \sin^2 \theta + P \cos^2 \theta \right)N^4
+\end{equation*}
+\begin{equation*}
+	+ \left( D^2 \sin^2 \theta - S^2 \sin^2 \theta - PS \cos^2 \theta - PS \right)N^2 + PS^2 - PD^2
+\end{equation*}
+
+This is a quadratic equation of the form $AN^4 - B^2 + C$ with coefficients
+\begin{equation}
+	A = S \sin^2 \theta + P \cos^2 \theta
+\end{equation}
+\begin{equation}
+	B = \left(S^2 - D^2\right) \sin^2 \theta + PS \left(1 + \cos^2 \theta\right)
+\end{equation}
+\begin{equation}
+	C = P \left( S^2 - D^2 \right)
+\end{equation}
+We can simplify $S^2 - D^2$
+\begin{equation*}
+	S^2 - D^2 = \frac{1}{4} \left( R + L \right)^2 - \frac{1}{4} \left( R - L \right)^2
+\end{equation*}
+\begin{equation}
+	\frac{1}{4} \left( R^2 + 2RL + L^2 - R^2 + 2RL - L^2 \right) = RL
+\end{equation}
+
+So we get the a simpler form of $AN^4 - B^2 + C$ with coefficients
+\begin{equation}
+	A = S \sin^2 \theta + P \cos^2 \theta
+\end{equation}
+\begin{equation}
+	B = RL \sin^2 \theta + PS \left(1 + \cos^2 \theta\right)
+\end{equation}
+\begin{equation}
+	C = PRL
+\end{equation}
+
+This is a quadratic in $N^2$ so we can solve using the quadratic formula. We need to evaluate the discriminant
+\begin{equation*}
+	F^2 = B^2 - 4AC = \left( RL \sin^2 \theta + PS \left(1 + \cos^2 \theta\right) \right)^2 - 4PRL \left( S \sin^2 \theta + P \cos^2 \theta \right)
+\end{equation*}
+\begin{equation*}
+	= R^2 L^2 \sin^4 \theta + P^2 S^2 \left( 1 + 2\cos^2 \theta + \cos^4 \theta \right) + 2 PSRL \sin^2 \theta \left( 1 + \cos^2 \theta \right)
+\end{equation*}
+\begin{equation*}
+	 - 4PSRL \sin^2 \theta - 4 P^2 RL \cos^2 \theta
+\end{equation*}
+\begin{equation*}
+	= R^2 L^2 \sin^4 \theta + P^2 S^2 \left( 1 + 2 \cos^2 \theta + \cos^4 \theta \right) - 2 PSRL \underbrace{\sin^2 \theta \left( 1 - \cos^2 \theta \right)}_{- \sin^4 \theta} - 4P^2 \underbrace{RL}_{S^2 - D^2} \cos^2 \theta
+\end{equation*}
+\begin{equation*}
+	= R^2 L^2 \sin^4 \theta + P^2 S^2 \underbrace{\left( 1 + 2 \cos^2 \theta + \cos^4 \theta \right)}_{4 \cos^2 \theta + \sin^4 \theta} + 2 PSRL \sin^4 \theta - 4P^2S^2 \cos^2 \theta + 4P^2 D^2 \cos^2 \theta
+\end{equation*}
+\begin{equation*}
+	= R^2 L^2 \sin^4 \theta + P^2 S^2 \left( 4 \cos^2 \theta + \sin^4 \theta \right) + 2PSRL \sin^4 \theta -4 P^2 S^2 \cos^2 \theta + 4 P^2 D^2 \cos^2 \theta
+\end{equation*}
+\begin{equation*}
+	= R^2 L^2 \sin^4 \theta + P^2 S^2 \sin^4 \theta + 2PSRL \sin^4 + 4P^2 D^2 \cos^2 \theta
+\end{equation*}
+\begin{equation*}
+	= \left( RL - PS \right)^2 \sin^4 \theta + 4P^2 D^2 \cos^2 \theta
+\end{equation*}
+
+Traditionally this has a solution $N^2 = \frac{1}{2A} \left( B \pm F \right)$, however will use some different forms. Firstly we can divide the $AN^2 - BN^2 + C$ by $\cos^2 \theta$
+\begin{equation*}
+	\left( S \tan^2 \theta + P \right)N^4 - \left( RL \tan^2 \theta + PS \left( 1 + \frac{1}{\cos^2 \theta} \right) \right) N^2 + \frac{PRL}{\cos^2 \theta}
+\end{equation*}
+
+Use the vector identity
+\begin{equation}
+	\frac{1}{\cos^2 \theta} = \frac{\sin^2 \theta + \cos^2 \theta}{\cos^2 \theta} = 1 + \tan^2 \theta
+\end{equation}
+
+\begin{equation*}
+	\left( S \tan^2 \theta + P \right)N^4 - \left( RL \tan^2 \theta + PS \left( 2 + \tan^2 \theta \right) \right) N^2 + PRL \left( 1 + \tan^2 \theta \right)
+\end{equation*}
+\begin{equation*}
+	= \left( SN^4 - RLN^2 - PSN^2 + PRL \right) \tan^2 \theta + PN^4 - 2PSN^2 + PRL
+\end{equation*}
+\begin{equation*}
+	= \left( SN^2 - RL \right) \left( N^2 - P \right) \tan^2 \theta + P \left( N^4 - \underbrace{2S}_{R + L} N^2 + RL \right)
+\end{equation*}
+\begin{equation*}
+	= \left( SN^2 - RL \right) \left( N^2 - P \right) \tan^2 \theta + P \left( N^2 - R \right) \left( N^2 - L \right)
+\end{equation*}
+\begin{equation}
+	\implies \tan^2 \theta = \frac{P \left( N^2 - R \right) \left( N^2 - L \right)}{\left( SN^2 - RL \right) \left( N^2 - P \right)}
+\end{equation}
+
+We can look at this in 2 limits: $\theta = 0$ and $\theta = \frac{\pi}{2}$.
+
+For $\theta = 0$ (Parallel to $\bm{B}$), $\tan \theta = 0$ giving 3 solutions $P = 0$, $N^2 = R$ and $N^2 = L$. $P=0$ is simply electrostatic plasma oscillations. The other two solutions correspond to electromagnetic waves.
+
+For $\theta = \frac{\pi}{2}$ (Perpendicular to $\bm{B}$), $\tan \theta \rightarrow \infty$ giving 2 solutions $N^2 = \frac{RL}{S}$ and $N^2 = P$. The first is the extraordinary wave (X Mode) while the second is the ordinary wave (O Mode).
+
+Returning to the dispersion relation $AN^4 - BN^2 + C$ we can look for solutions $N^2 = 1 - x$
+\begin{equation*}
+	A\left( 1 - x \right)^2 - B\left(1 - x \right) + C = A \left( 1 - 2x + x^2 \right) - B + Bx + C
+\end{equation*}
+\begin{equation*}
+	= Ax^2 + \left( B - 2A \right) x + A - B + C
+\end{equation*}
+This is also a quadratic, calculate the discriminant
+\begin{equation*}
+	\tilde{F}^2 = \left( B - 2A \right)^2 - 4A \left( A - B + C\right)
+\end{equation*}
+\begin{equation*}
+	= 4A^2 - 4AB + B^2 - 4A^2 + 4AB - 4AC
+\end{equation*}
+\begin{equation*}
+	= B^2 - 4AC = F^2
+\end{equation*}
+
+Now use the alternate form of the quadratic formula. Dividing $ax^2 + bx + c$ by $x^2$
+\begin{equation*}
+	a + \frac{b}{x} + \frac{c}{x^2} = 0
+\end{equation*}
+\begin{equation*}
+	\frac{1}{x} = \frac{-b \pm \sqrt{b^2 - 4ac}}{2c} \implies x = \frac{2c}{-b \pm \sqrt{b^2 - 4ac}}
+\end{equation*}
+
+Combining this all together
+\begin{equation} \label{ap_raw}
+	N^2 = 1 - \frac{2(A - B + C)}{2A - B \pm F} \quad F^2 = B^2 - 4AC
+\end{equation}
+
+Now we need to evaluate the terms on the RHS in terms of the Stix Parameters. Start with the numerator
+\begin{equation*}
+	A - B + C = S \sin^2 \theta + P \cos^2 \theta - RL \sin^2 \theta - PS \left( 1 + \cos^2 \theta \right) + PRL
+\end{equation*}
+\begin{equation}
+	= \left( S - RL \right) \sin^2 \theta + P \left( 1 - S \right) \cos^2 \theta + P \left( RL - S \right)
+\end{equation}
+
+Evaluate the coefficients
+\begin{equation}
+	P \left( 1 - S \right) = \left( 1 - X \right)  \left( \frac{X}{1 - Y^2} \right)
+\end{equation}
+\begin{equation*}
+	RL = S^2 - D^2 = \left( 1 - \frac{X}{1 - Y^2} \right)^2 - \left( \frac{XY}{1 - Y^2} \right)^2
+\end{equation*}
+\begin{equation*}
+	= 1 - \frac{2X}{1 - Y^2} + \frac{X^2}{\left( 1 - Y^2 \right)^2} - \frac{ X^2 Y^2 }{ 1 - Y^2 }
+\end{equation*}
+\begin{equation}
+	= 1 - \frac{2X}{1 - Y^2} + \frac{X^2 \left( 1 - Y^2 \right)}{\left( 1 - Y^2 \right)^2} = 1 + \left( X - 2 \right) \frac{X}{1 - Y^2}
+\end{equation}
+\begin{equation}
+	S - RL = 1 - \frac{X}{1 - Y^2} - 1 - \left( X - 2 \right) \frac{X}{1 - Y^2} = \left( 1 - X \right) \frac{X}{1 - Y^2}
+\end{equation}
+
+Combining it all together
+\begin{equation*}
+	A - B + C = \left( 1 - X \right) \frac{X \sin^2 \theta }{1 - Y^2} + \left( 1 - X \right) \frac{X \cos^2 \theta }{1 - Y^2} - \left( 1 - X \right)^2 \frac{X}{1 - Y^2}
+\end{equation*}
+\begin{equation*}
+	= \left( 1 - X \right) \frac{X}{1 - Y^2} \left[ \sin^2 \theta + \cos^2 \theta - 1 + X \right]
+\end{equation*}
+\begin{equation}
+	= X \left( 1 - X \right) \frac{X}{1 - Y^2}
+\end{equation}
+
+The first term on the denominator
+\begin{equation*}
+	2A - B = 2P\cos^2 \theta + 2S \sin^2 \theta - RL \sin^2 \theta - PS \left( 1 + \cos^2 \theta \right)
+\end{equation*}
+\begin{equation}\label{ah_denominator}
+	= \left( 2S - RL \right) \sin^2 \theta + P \left( 2 - S \right) \cos^2 \theta - PS
+\end{equation}
+
+Evaluate the coefficients
+\begin{equation*}
+	2S - RL = 2 \left(1 - \frac{X}{1 - Y^2}\right) - 1 - \left( X - 2 \right)\frac{X}{1 - Y^2}
+\end{equation*}
+\begin{equation}
+	= 2 - \frac{2X}{1 - Y^2} - 1 - \frac{X^2}{1 - Y^2} + \frac{2X}{1 - Y^2} = 1 - \frac{X^2}{1 - Y^2}
+\end{equation}
+\begin{equation*}
+	P \left( 2 - S \right) = \left( 1 - X \right)\left( 1 + \frac{X}{1 - Y^2} \right)
+\end{equation*}
+\begin{equation}
+	= 1 - X + \frac{X}{1 - Y^2} - \frac{X^2}{1 - Y^2}
+\end{equation}
+\begin{equation*}
+	PS = \left( 1 - X \right)\left( 1 - \frac{X}{1 - Y^2} \right)
+\end{equation*}
+\begin{equation}
+	= 1 - X - \frac{X}{1 - Y^2} + \frac{X^2}{1 - Y^2}
+\end{equation}
+
+Substituting into \eqref{ah_denominator}
+\begin{equation*}
+	2A - B = \left( 1 - \frac{X^2}{1 - Y^2} \right) \sin^2 \theta + \left( 1 - X + \frac{X}{1 - Y^2} - \frac{X^2}{1 - Y^2} \right) \cos^2 \theta
+\end{equation*}
+\begin{equation*}
+	 - 1 + X + \frac{X}{1 - Y^2} - \frac{X^2}{1 - Y^2}
+\end{equation*}
+\begin{equation*}
+	= \sin^2 \theta - \frac{X^2 \sin^2 \theta}{1 - Y^2} + \cos^2 \theta - X \cos^2 \theta + \frac{X \cos^2 \theta}{1 - Y^2} - \frac{X^2 \cos^2 \theta}{1 - Y^2} - 1 + X + \frac{X}{1 - Y^2} - \frac{X^2}{1 - Y^2}
+\end{equation*}
+\begin{equation*}
+	= \left( \sin^2 \theta + \cos^2 \theta - 1 \right) + X \left( 1 - \cos^2 \theta \right) + \frac{X}{1 - Y^2} \left( -X \sin^2 \theta + \cos^2 \theta - X \cos^2 \theta + 1 - X \right)
+\end{equation*}
+\begin{equation*}
+	= \frac{X \sin^2 \theta }{1 - Y^2} \left( 1 - Y^2 \right) + \frac{X}{1 - Y^2} \left( 1 - 2X + \cos^2 \theta \right)
+\end{equation*}
+\begin{equation*}
+	= \frac{X}{1 - Y^2} \left( \sin^2 \theta - Y^2\sin^2 \theta + 1 - 2X + \cos^2 \theta \right)
+\end{equation*}
+\begin{equation}
+	= \frac{X}{1 - Y^2} \left( 2 - 2X - Y^2 \sin^2 \theta \right) = \frac{X}{1 - Y^2} \left( 2 \left( 1 - X \right) - Y^2 \sin^2 \theta \right)
+\end{equation}
+
+Finally the discriminant
+\begin{equation*}
+	F^2 = B^2 - 4AC = \left( RL - PS \right)^2 \sin^4 \theta + 4 P^2 D^2 \cos^2 \theta
+\end{equation*}
+Expand the coefficient
+\begin{equation*}
+	RL - PS = 1 + \left( X - 2 \right) \frac{X}{1 - Y^2} - \left( 1 - X - \frac{X}{1 - Y^2} + \frac{X^2}{1 - Y^2} \right)
+\end{equation*}
+\begin{equation*}
+	= \frac{X}{1 - Y^2} \left( X - 2 \right) - \frac{X}{1 - Y^2} \left( 1 - Y^2 + 1 - X\right) = \frac{-XY^2}{1 - Y^2}
+\end{equation*}
+\begin{equation}
+	= -X \left( 1 + X \right) \frac{Y^2}{1 - Y^2}
+\end{equation}
+
+Substituting in
+\begin{equation*}
+	F^2 = \frac{X^2 Y^4}{\left( 1 - Y^2 \right)^2} \sin^4 \theta + 4 \left( 1 - X \right)^2 \left( \frac{X^2 Y^2}{1 - Y^2} \right) \cos^2 \theta
+\end{equation*}
+\begin{equation}
+	= \left( \frac{X}{1 - Y^2} \right)^2 \left( Y^4 \sin^4 \theta + 4 \left( 1 - X \right)^2 Y^2 \cos^2 \theta \right)
+\end{equation}
+
+Now substitute all terms into \eqref{ap_raw}
+\begin{equation}
+	N^2 = 1 - \frac{2X \left( 1 - X \right) \frac{X}{1 - Y^2} }{\left( 2 \left(1 - X\right) - Y^2 \sin^2 \theta \right) \frac{X}{1 - Y^2} \pm \sqrt{ \left( \frac{X}{1 - Y^2} \right)^2 \left( Y^4 \sin^4 \theta + 4 \left( 1 - X \right)^2 Y^2 \cos^2 \theta \right) }}
+\end{equation}
+
+We can cancel a factor of $\frac{X}{1 - Y^2}$ on the top and bottom to arrive at the final result called the Appleton-Hartree equation
+\begin{equation}\label{appleton_hartree}
+	N^2 = 1 - \frac{2X \left(1 - X\right)}{2 \left(1 - X\right) - Y^2 \sin^2 \theta \pm \sqrt{Y^4 \sin^4 \theta + 4 \left(1 - X \right)^2 Y^2 \cos^2 \theta}}
+\end{equation}

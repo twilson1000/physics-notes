@@ -1,0 +1,30 @@
+\documentclass[12pt, twoside]{article}
+
+% Packages
+\usepackage[backend=biber, style=phys]{biblatex}
+\usepackage{amsmath}
+
+% Bibliography
+\addbibresource{ebw.bib}
+
+% Command definitions
+\include{definitions.tex}
+
+% Change equation numbering to use subsections
+\numberwithin{equation}{subsection}
+
+\begin{document}
+	\include{high_frequency_waves.tex}
+	
+	\include{hot_plasma_dielectric_tensor.tex}
+	
+	\section{Application to EBWs}
+	The previous section was completely general. Now we'll apply these formulas to EBWs.
+	
+	\subsubsection{Electrostatic Approximation}
+	We can break down the wave electric field $\E_k$ into a transverse component $\E_{kT}$ and a longitudinal component $\E_{kL}$
+	
+	\include{appendix.tex}
+	
+	\printbibliography
+\end{document}

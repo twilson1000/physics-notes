@@ -1,0 +1,179 @@
+\documentclass[options]{report}
+
+% Packages.
+\usepackage{amsmath}
+
+% Functions.
+\def \u{\vec{u}}
+\def \v{\vec{v}}
+\def \w{\vec{w}}
+\def \xhat{\hat{x}}
+\def \yhat{\hat{y}}
+\def \zhat{\hat{z}}
+
+\title{Geometric Algebra}
+\author{Thomas Wilson}
+
+\begin{document}
+\maketitle
+
+\chapter{Introduction}
+Geometrical Algebra (GA) is a branch of mathematics that extends operations on numbers such as addition and multiplication to geometric shapes. Similarly to how algebra allows computation of operations on arbitrary numbers, GA allows computation of operations on arbitrary geometrical shapes.
+
+This allows you to transform geometric problems into simpler algebraic problems. This has many applications in many fields such as:
+\begin{itemize}
+\item[-] Physics
+\item[-] Engineering
+\item[-] Mathematics
+\item[-] Robotics
+\item[-] Computer Graphics
+\end{itemize}
+
+GA is a fairly recent development. In the 1800s many algebraic systems to describe geometric systems were developed, such as
+\begin{itemize}
+	\item[-] Gauss' interpretation of complex numbers
+	\item[-] Hamilton's quaternions
+	\item[-] Grassmann's exterior algebra
+	\item[-] Clifford's geometric algebra
+	\item[-] Gibbs' and Heaviside's vector algebra
+\end{itemize}
+
+Vector algebra eventually came to dominate in the early 1900s, but it's shortcomings meant many extra ideas had to be tacked on to deal with new scenarios e.g. tensors, spinors, Dirac algebra, Pauli algebra, differential forms. In 1966 Hestenes first applied GA to physics using the Spacetime Algebra, and ir slowly began to be applied to existing fields over the latter half of the 20th century. GA is a single framework to encompass many ideas of the described above but in many cases simplifies problems.
+
+There are many flavours of GA such as
+\begin{itemize}
+	\item[-] Vanilla / Vector Space Geometric Algebra (VGA)
+	\item[-] Spacetime Algebra (STA)
+	\item[-] Projective / Plane-Based Geometric Algebra (PGA)
+	\item[-] Conformal Geometric Algebra (CGA)
+\end{itemize}
+
+Each of these flavours has subtle differences in notation and definition yet has almost identical governing equations. The GA to apply depends on the problem being described. The 'standard' GA is VGA, which treats vectors as oriented line segments.
+
+\chapter{Vanilla / Vector Space Geometric Algebra (VGA)}
+\section{Vectors}
+\subsection{What is a vector?}
+Geometric algebra describes algebra on geometric objects, so the first question is what is the simplest geometric object we can do algebra with?
+
+The simplest geometric object is a point, however it is not clear how you can do algebra with these i.e. add and multiply. We could try defining addition by adding the co-ordinates, so:
+\begin{equation}
+	(0.0, 2.0) + (1.0, 0.0) := (1.0, 2.0)
+\end{equation}
+
+However if we keep the points at the same position relative to each other and move the axes our addition moves relative to the points. To get around this we need to fix our axes in space, so we need a geometrical object which includes the idea of the origin. This object is the vector. There are many other ways to think about vectors we will discuss later.
+
+\subsection{Length and Orientation}
+A vector is uniquely defined by a length and orientation. The length, magnitude or norm of the vector is given by a positive number, and changing the length of the vector is a scaling. The orientation of a vector is the direction it points, and changing the orientation of the vector is a rotation. Translating a vector in space does not change it as it preserves length and orientation. A vector can be defined in arbitrary dimensions.
+
+There are two special lengths a vector can have: 0 and 1. The zero vector $\vec{0}$ behaves similarly to the number zero in number systems i.e. it is the addition identity element. The zero vector has length 1 and has no orientation. A unit vector $\hat{v}$ has length $|\hat{v}| = 1$.
+
+\subsection{Scaling a vector}
+If we scale a vector $\v$ by a factor $\alpha$ we get on object $\alpha \v$ with length $|\alpha \v| = \alpha |\v|$. This defines multiplication between vectors and scalars, which takes a vector and a scalar and returns a vector. Contrast this to normal multiplication between scalars, which takes 2 scalars and returns another scalar.
+
+This definition also shows multiplication is associative ($\alpha (\beta \v) = \beta (\alpha \v) = \alpha \beta \v$) and commutative ($ \alpha \v = \v \alpha$). We can find these expressions without a basis by considering the length of vectors when we scale them. Note technically this is not associativity but compatibility as we mix scalar and vector multiplication.
+
+The identity element is scaling by 1. The inverse element is scaling the inverse of the scalar. Scaling by 0 gives the zero vector $\vec{0}$ while scaling the zero vector always gives the zero vector.
+
+\subsection{Adding vectors}
+We want to define addition between 2 vectors to be analogous to addition of scalars. We can do this by applying the rules of scalar addition along each orthogonal component of the vector. In an orthonormal basis we define addition as
+\begin{equation}
+	\u + \v = [u_1, u_2] + [v_1, v_2] = [u_1 + v_1, u_2 + v_2]
+\end{equation}
+
+This also allows us to define subtraction using the scalar multiplication from above, as $\u + \v = \u + (-\v)$. We also see from this definition vector addition is associative ($(\u + \v) + \w = \u + (\v + \w)$) and commutative ($\u + \v = \v + \w$).
+
+We can also figure out these expressions without a basis by defining addition as the vector produced going from the origin to the end of the first vector when placed at the end of the first. By drawing parallelograms we similarly derive commutativity and associativity.
+
+The identity element is addition by the zero vector $\vec{0}$. The inverse element is addition by the same vector scaled by -1.
+
+We get the distributivity of multiplication with addition $\alpha (\u + \v) = \alpha \u + \alpha \v$ by drawing similar triangles. We get the other distributivity $\v (\alpha + \beta) = \v \alpha + \v \beta$
+as these vectors have the same orientation so we just compare the lengths.
+
+\subsection{Space, Span and Basis}
+The algebraic definition of a Space of vectors $V$ for a field $K$ is a set of vectors such that $\forall \u, \v \in V, \alpha, \beta \in K, \alpha \u + \beta \v \in \mathcal{R}$. One implication of this is that every Space contains the zero vector $0$. If a Space $V$ is contained inside another Space $W$ then $V$ is a Subspace of $W$. \{$\vec{0}$\} is always a Subspace.
+
+The Span of a set of vectors is the set of all linear combinations of these vectors. By definition the Span is always a Space. Therefore the space of all n-dimensional vectors is the Span of any n vectors which are linearly independent. A set of vectors \{$\vec{v_1}, \dots, \vec{v_n} $\} is linearly independent if $a_1 \vec{v_1} + \dots + a_n \vec{v_n} = \vec{0}$ only when $a_1 = \dots = a_n$.
+
+A linearly independent set of vectors which spans a Space is called a basis of that Space. Every vector in a Space can be written as a unique linear combination of the basis vectors, hence we can describe any vector in a purely algebraic way. However, vectors are not just lists of numbers as these coefficients depend on the basis!
+
+A good basis contains orthogonal vectors where the length of each vector is 1, called an orthonormal basis. There is only 1 basis which also has the basis vectors aligned with the co-ordinate vectors, called the standard basis. The vectors in the standard basis in n-dimensions are denoted \{$e_1, e_2, \dots, e_n$\}, where we dropped the vector arrow notation as later we will extend this basis to things which aren't vectors!
+
+\subsection{Linear Spaces}
+A Linear Space $V$ on a field $K$ satisfies $\forall \u, \v, \w \in V$ and $ a, b \in K$
+
+\begin{equation}
+	\begin{gathered}
+	\u + (\v + \w) = (\u + \v) + \w \\
+	\u + \v = \v + \u \\
+	\v + \vec{0} = \v \\
+	\v + (-\v) = \vec{0} \\
+	a(b\v) = (ab)\v \\
+	1\v = \v \\
+	a(\u + v) = a\u + a\v \\
+	(a + b)\v = a\v + b\v
+	\end{gathered}
+\end{equation}
+
+This is also known as a Vector Space, but is renamed to avoid confusion with vectors as the space of scalars and multivectors is also a Linear Space.
+
+\subsection{Multivectors}
+Now we want to define multiplication between 2 vectors. It is somewhat unclear how we can do this so lets consider the case in 2 dimensions. Much as we thought of a vector as a oriented line segment, we could also construct an oriented area out of 2 vectors by constructing the parallelogram created by the vectors, called a bivector.
+
+The magnitude of the bivector is the area of the parallelogram, while its orientation is defined by if the vectors defining the parameter are right handed or left handed. Similarly to vectors, any bivectors with the same magnitude and orientation are the same bivector. We can also define multiplication by scaling the area of the bivector.
+
+This bivector object appears to act like a scalar, as in 2D there is only 2 orientations. This is analagous to a vector in 1D, where only the magnitude really matters. Therefore bivectors only get interesting when you go to 3 or more dimensions. For a bivector in 3D, we can decompose it using an orthogonal basis of bivectors similar to a vector. We could also construct an oriented volume out of 2 bivectors, which we will call a trivector. In general we can construct a k-vector in k dimensions. Note there is a distinction between objects called k-vectors and k-blades which is important for 4 or more dimensions.
+
+\subsection{Exterior Product}
+While the geometrical interpretation of these objects is rather abstract, the algebraic properties are simpler. Lets construct the multiplication for 2 vectors in 2D. To start with we know the inner product or dot product
+\begin{equation}
+	\u \cdot \v = ||\u|| ||\v|| \cos \theta
+\end{equation}
+
+The inner product of 2 vectors is a scalar and is commutative, associative and distributive
+\begin{equation}
+	\begin{gathered}
+		\u \cdot \v = \u \cdot \v \\
+		\u \cdot (\v + \w) = \u \cdot \v + \u \cdot \w \\
+		(a \u) \cdot (b \v) = ab (\u \cdot \v) \\
+	\end{gathered}
+\end{equation}
+
+One issue with the inner product is we cannot reconstruct the original vectors from the inner product. For the inner product we mapped down a dimension to scalars, so lets try to map up a dimension to bivectors using a new operation we will call the \textit{exterior product}
+\begin{equation}
+	\u \wedge \v = \u\v
+\end{equation}
+
+formed from the oriented area of the parallelogram constructed by these 2 vectors. From geometry we therefore get the magnitude $||\u \wedge \v|| = ||\u|| ||\v|| \sin \theta$. The magnitude is also clearly linear and reversing the order of the vectors reverses the handedness of the perimeter so the exterior product is anti-commutative, hence
+
+\begin{equation}
+	\begin{gathered}
+		a\u \wedge b\v = b\u \wedge a\v = ab(\u \wedge \v)
+		\u \wedge \v = - \v \wedge \u
+	\end{gathered}
+\end{equation}
+
+The parallelogram constructed from 2 parallel vectors has no area, so also $\u \wedge \u = 0$. Similarly in 3D the exterior product of a bivector and a vector will be a trivector. We can construct the bivector basis in 3D using exterior products of the unit basis vectors \{$\xhat \wedge \yhat$, $\xhat \wedge \zhat$, $\yhat \wedge \zhat$\}. 
+
+We still have the issue that the exterior product doesn't give enough information to reconstruct the original vectors. Lets try combining the inner and exterior product in some way. We could try adding them, though adding a scalar to a bivector seems unclear. However, in complex numbers we happily add imaginary to reals so lets proceed and define the \textit{geometric product}
+
+\begin{equation}
+	\u\v = \u \cdot \v + \u \wedge \v
+\end{equation}
+
+Consider the geometric product of $\u$ with itself, giving $\u\u = ||\u||^2$. It is interesting to note this allows definition of a multiplicative inverse as
+
+\begin{equation}
+	\u \frac{\u}{||\u||^2} = 1 \implies \u^{-1} = \frac{\u}{||\u||^2}
+\end{equation}
+
+As the exterior product anti-commutes we can write the inner and exterior product in terms of the geometric product
+\begin{equation}
+	\begin{gathered}
+		\u \cdot \v = \frac{\u\v + \v\u}{2} \\
+		\u \wedge \v = \frac{\u\v - \v\u}{2}
+	\end{gathered}
+\end{equation}
+
+If we define how the geometric product affects basis vectors we can then write the geometric product of any vector via linearity. As $||e_i||^2 = 1$ then $e_i e_i = 1$. As $e_i \cdot e_j = 0$ for $i \ne j$ then $e_i e_j = e_i \wedge e_j = -e_j \wedge e_i = - e_j e_i$. We can therefore write the basis vectors of the bivectors using geometric products as \{$\xhat\yhat$, $\xhat\zhat$, $\yhat\zhat$\}.
+
+\end{document}

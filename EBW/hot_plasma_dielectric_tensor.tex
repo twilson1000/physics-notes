@@ -1,0 +1,313 @@
+\section{Hot Plasma Dielectric Tensor}
+This follows Richard Fitzpatrick's explanation \cite{fitzpatrick2014plasma} except I've filled in some of the gaps. The aim is to derive a non-relativistic form of the dielectric tensor accounting for finite temperature and hence finite Larmor radius.
+
+Start by considering small amplitude waves propagating through a plasma in a uniform magnetic field $\B = B\hat{z}$. Consider the collisionless Vlasov equation
+\begin{equation}\label{vlasov}
+	\frac{\partial f}{\partial t} + \v \cdot \nabla f + \frac{e}{m} \left( \E + \v \times \B \right) \cdot \frac{\partial f}{\partial \v} = 0
+\end{equation}
+
+We linearise by defining $\E = \E_1$, $\B = \B_0 + \B_1$ and $f\left(\x, \v, t\right) = f_0 \left(\v\right) + f_1 \left(\x, \v, t\right)$. As $f_0$ is a solution of \eqref{vlasov} but the time and space derivatives vanish we get
+
+\begin{equation}\label{vlasov_f0}
+	\left(\v \times \B_0\right) \cdot \frac{\partial f_0}{\partial \v} = 0
+\end{equation}
+
+The cross product expands as $\vper B_0 \sin \theta \hat{\x} - \vper B_0 \sin \theta \hat{\y}$. We want to transform to polar co-ordinates $\left(r, \theta, z\right)$, so use $\hat{\textbf{r}}=\cos\theta\hat{\x} + \sin\theta\hat{\y}$ and $\hat{\theta}=-\sin\theta\hat{\x} + \cos\theta\hat{\y}$. Under this transformation the cross product becomes $\vper B_0 \hat{\theta}$ so \eqref{vlasov_f0} implies
+\begin{equation}
+	\frac{\partial f_0}{\partial \theta} = 0
+\end{equation}
+i.e. $f_0 = f_0 \left(\vper, \vpar \right)$ only.
+
+Linearising \eqref{vlasov} and re-arranging we get
+
+\begin{equation}\label{vlasov_linearised}
+	\frac{\partial f_1}{\partial t} + \v \cdot \nabla f_1 + \frac{e}{m} \left(\v \times \B_0\right) \cdot \frac{\partial f_1}{\partial \v} = -\frac{e}{m} \left(\E_1 + \v \times \B_1\right) \cdot \frac{\partial f_0}{\partial \v}
+\end{equation}
+
+We can recognise the LHS as the total rate of change of $f_1$ following the unperturbed particle trajectories. Therefore
+\begin{equation}
+	\frac{D f_1}{D t} = -\frac{e}{m} \left(\E_1 + \v \times \B_1\right) \cdot \frac{\partial f_0}{\partial \v}
+\end{equation}
+
+Assuming $f_1$ vanishes at $t=-\infty$ we can write (dropping the 1 subscript as all vacuum fields are now on the LHS)
+\begin{equation}
+	f_1 \left(\r, \v, t\right) = -\frac{e}{m} \int_{-\infty}^t \left[\E \left(\r', t'\right) + \v \times \B\left(\r', t'\right) \right] \cdot \frac{\partial f_0 \left(\v'\right)}{\partial \v} dt'
+\end{equation}
+
+where $\left(\r', \v'\right)$ is the unperturbed trajectory that passes through $\left(\r, \v\right)$ when $t'=t$. We know the dielectric tensor $\ditensor$ is defined as
+
+\begin{equation}\label{dielectric_tensor_def_kinetic_theory}
+	\ditensor\cdot\E = \E + \frac{i}{\omega \epsilon_0}\j = \E + \frac{i}{\omega \epsilon_0} \sum_s e_s \int \v f_{1s} d^3 \v
+\end{equation}
+
+relating the current $\j$ to the moments of $f_1$. Here $s$ refers to a sum over species we will drop for now to keep things simpler. So we need to do some work to evaluate $f_1$, and then calculate the time and velocity integrals to get the dielectric tensor elements.
+
+The Cartesian components of the velocity are
+\begin{equation}
+	\v = \left(\vper\cos\theta, \vper\sin\theta, \vpar\right)
+\end{equation}
+which implies ($\Omega$ is the gyrofrequency)
+\begin{equation}
+	\v = \left(\vper\cos\left[\Omega\left(t-t'\right)+\theta\right], \vper\sin\left[\Omega\left(t-t'\right)+\theta\right], \vpar\right)
+\end{equation}
+This expression is a bit long so define $\chi =\Omega\left(t-t'\right)+\theta$ so
+\begin{equation}
+	\v = \left(\vper\cos\chi, \vper\sin\chi, \vpar\right)
+\end{equation}
+
+We can integrate in time to get the electron position
+\begin{equation}\label{electron_xposition}
+	x'-x = -\frac{\vper}{\Omega}\left( \sin\chi - \sin\theta\right)
+\end{equation}
+\begin{equation}\label{electron_yposition}
+	y'-y = \frac{\vper}{\Omega}\left( \cos\chi - \cos\theta\right)
+\end{equation}
+\begin{equation}\label{electron_zposition}
+	z'-z=\vpar \left(t' - t\right)
+\end{equation}
+
+Both $\vper$ and $\vpar$ are constants of the motion, implying $f_0\left(\v'\right) = f_0\left(\v\right)$. Using $\vper = \sqrt{v_x^2+v_y^2}$ we get
+\begin{equation}\label{f0_vx_derivative}
+	\frac{\partial f_0}{\partial v_x'}=\frac{\partial \vper}{\partial v_x '}\dfdvper = \frac{v_x'}{\partial \vper}\dfdvper = \cos\chi \dfdvper
+\end{equation}
+\begin{equation}\label{f0_vy_derivative}
+	\frac{\partial f_0}{\partial v_y'}=\frac{\partial \vper}{\partial v_y '}\dfdvper = \frac{v_y'}{\partial \vper}\dfdvper = \sin\chi \dfdvper
+\end{equation}
+\begin{equation}\label{f0_vz_derivative}
+	\frac{\partial f_0}{\partial v_z '} = \dfdvpar
+\end{equation}
+
+If we expand the integrand in \eqref{vlasov_linearised} we get
+\begin{equation*}
+	\left[ \E \left(\r', t'\right) + \v \times \B\left(\r', t'\right) \right] \cdot \frac{\partial f_0 \left(\v'\right)}{\partial \v} = \left(E_x+v_y'B_z-v_z'B_y\right) \frac{\partial f_0}{\partial v_x'}
+\end{equation*}
+\begin{equation}
+	+ \left(E_xy+v_z'B_x-v_x'B_z\right) \frac{\partial f_0}{\partial v_y'} + \left(E_z+v_x'B_y-v_y'B_x\right) \frac{\partial f_0}{\partial v_y'}
+\end{equation}
+Using \eqref{f0_vx_derivative}, \eqref{f0_vy_derivative} and \eqref{f0_vz_derivative}
+\begin{equation*}
+	= \left(E_x-\vpar B_y\right) \cos\chi\dfdvper + \left(E_y+\vpar B_x\right) \sin\chi\dfdvper + 
+\end{equation*}
+\begin{equation}
+	+ \left(v_y'\cos\chi - v_x' \sin\chi\right)B_z \dfdvper + \left(E_z + \vper \cos\chi B_y - \vper \sin\chi B_x\right)\dfdvpar
+\end{equation}
+Using $v_y'\cos\chi - v_x' \sin\chi = \vper \cos \chi \sin \chi - \vper \cos \chi \sin \chi = 0$ the third term vanishes. Now assuming all linearised terms have a $e^{i\left(\k\cdot\x-\omega t\right)}$ dependence the integrand becomes
+\begin{equation*}
+	= \left[\left(E_x-\vpar B_y\right) \cos\chi\frac{\partial f_0}{\partial \vper} + \left(E_y+\vpar B_x\right) \sin\chi\frac{\partial f_0}{\partial \vper} + \right.
+\end{equation*}
+\begin{equation}\label{vlasov_linearised2}
+	\left. + \left(E_z + \vper \cos\chi B_y - \vper \sin\chi B_x\right)\frac{\partial f_0}{\partial \vpar}\right] e^{i\left(\k\cdot\x'-\omega t'\right)} e^{i\left(\k\cdot\x-\omega t\right)}
+\end{equation}
+
+where the first complex exponential is from the perturbed electric and magnetic field and the second is from the perturbed $f_1$. We can combine these to get a term like
+\begin{equation}
+	\exp \left[i\k\cdot \left(\x' -\x \right)\right] \exp \left[-i\omega \left(t' - t\right)\right]
+\end{equation}
+
+Taking $\k$ to lie in the $x-z$ plane we can use \eqref{electron_xposition} and \eqref{electron_zposition} to get
+
+\begin{equation*}
+	\exp \left[i\frac{\kper \vper}{\Omega} \left(\sin\chi- \sin\theta\right) +i\kpar \vpar \left(t' - t\right)\right] \exp \left[-i\omega \left(t' - t\right)\right]
+\end{equation*}
+\begin{equation}
+	= \exp \left[i\mu \sin\chi \right] \exp \left[-i\mu \sin\theta \right] \exp \left[i\left(\kpar \vpar - \omega\right) \left(t' - t\right)\right]
+\end{equation}
+where we define $\mu = \frac{\kper \vper}{\Omega}$. We can use the complex exponential dependence of $\E$ and $\B$ to eliminate $\B$ using the \eqref{Maxwell 3 FT}
+\begin{equation}
+	\k \times \E = \omega \B \implies \B = \frac{\k \times \E}{\omega}
+\end{equation}
+Again using the fact $\k$ lies in the $x-z$ plane to get
+\begin{equation}
+	B_x = -\frac{\kpar E_y}{\omega}
+\end{equation}
+\begin{equation}
+	B_y = \frac{\kpar E_x - \kper E_z}{\omega}
+\end{equation}
+Using these expressions we can write
+\begin{equation}
+	E_x - \vpar B_y = \frac{\omega - \vpar\kpar}{\omega}E_x + \frac{\kper\vpar}{\omega}E_z
+\end{equation}
+\begin{equation}
+	E_y + \vpar B_x = \frac{\omega - \kpar\vpar}{\omega}E_y
+\end{equation}
+
+Substituting into \eqref{vlasov_linearised2} we get
+\begin{equation*}
+	\frac{1}{\omega} \left( \left[ \left(\omega-\kpar\vpar\right)E_x + \kper\vpar E_z \right]\cos\chi \dfdvper + \left(\omega-\kpar\vpar\right)\sin\chi \dfdvper E_y \right.
+\end{equation*}
+\begin{equation*}
+	\left. + \left[ \omega E_z + \kpar\vper\cos\chi E_c - \kper\vper\cos\chi E_z + \kpar\vper\sin\chi E_y \right] \dfdvpar \right) \times
+\end{equation*}
+\begin{equation}
+	\exp \left[i\mu \sin\chi \right] \exp \left[-i\mu \sin\theta \right] \exp \left[i\left(\kpar \vpar - \omega\right) \left(t' - t\right)\right]
+\end{equation}
+
+In a little bit we will use moments of this to find the elements of the dielectric tensor, i.e. the coefficients of $E_x$, $E_y$ and $E_z$ so it is convenient to group these coefficients now. Doing this we obtain
+\begin{equation*}
+	\frac{1}{\omega} \left( \left[ \left(\omega-\kpar\vpar\right)\dfdvper + \kpar\vper\dfdvpar \right]\cos\chi E_x + \left[ \left(\omega-\kpar\vpar\right)\dfdvper + \kpar\vper\dfdvpar \right]\sin\chi E_y \right.
+\end{equation*}
+\begin{equation*}
+	\left. + \left[ \omega\dfdvpar + \left(\kper\vpar\dfdvper - \kper\vper\dfdvpar\right)\cos\chi \right] E_z \right) \times
+\end{equation*}
+\begin{equation}
+	\exp \left[i\mu \sin\chi \right] \exp \left[-i\mu \sin\theta \right] \exp \left[i\left(\kpar \vpar - \omega\right) \left(t' - t\right)\right]
+\end{equation}
+
+This expression is quite cumbersome so we will introduce some new variables $P$ and $Q$
+\begin{equation}
+	P = \left(\omega-\kpar\vpar\right)\dfdvper + \kpar\vper\dfdvpar
+\end{equation}
+\begin{equation}
+	Q = \kper\vpar\dfdvper - \kper\vper\dfdvpar
+\end{equation}
+
+Making these substitutions we can write our expression for $f_1$ with our rearranged integrand
+\begin{equation*}
+	f_1 = \frac{-e}{m \omega} \int_{-\infty}^t \left(P\cos\chi E_x + P\sin\chi E_y + \left[\omega\dfdvpar +Q\cos\chi\right]E_z \right) \times
+\end{equation*}
+\begin{equation}
+	\exp \left[i\mu \sin\chi \right] \exp \left[-i\mu \sin\theta \right] \exp \left[i\left(\kpar \vpar - \omega\right) \left(t' - t\right)\right] dt'
+\end{equation}
+
+To perform this time integration we can expand these terms using the Jacobi-Anger expansion
+\begin{equation}\label{jacobi_anger}
+	e^{iz\sin\theta} = \sum_{n=-\infty}^\infty J_n\left(z\right) e^{in\theta}
+\end{equation}
+where $J_n$ is the Bessel function of the first kind. We can do some manipulation to get 2 more useful identities
+\begin{equation}\label{jacobi_anger_cos}
+	\cos\theta e^{iz\sin\theta} = \frac{1}{iz}\frac{\partial}{\partial\theta}e^{iz\sin\theta} = \sum_{n=-\infty}^\infty \frac{nJ_n\left(z\right)}{z}e^{in\theta}
+\end{equation}
+\begin{equation}\label{jacobi_anger_sin}
+	\sin\theta e^{iz\sin\theta} = \frac{1}{i}\frac{\partial}{\partial z}e^{iz\sin\theta} = -i\sum_{n=-\infty}^\infty J_n' \left(z\right)e^{in\theta}
+\end{equation}
+
+Using these identities we can replace $\cos\chi e^{i\mu\sin\chi}$, $\sin\chi e^{i\mu\sin\chi}$, and $e^{i\mu\sin\chi}$ terms
+
+\begin{equation*}
+	f_1 = \frac{-e}{m \omega} \int_{-\infty}^t \sum_{n=-\infty}^\infty \left(\frac{nJ_n\left(\mu\right)}{\mu} P E_x - i J_n' \left(\mu\right) P E_y + \left[\omega \dfdvpar J_n\left(\mu\right) + \frac{nJ_n\left(\mu\right)}{\mu} Q\right]E_z \right) \times
+\end{equation*}
+\begin{equation}
+	\exp \left[-i\mu \sin\theta \right] \exp \left[in \theta \right] \exp \left[i\left(n\Omega + \kpar \vpar - \omega\right) \left(t' - t\right)\right] dt'
+\end{equation}
+where we have split $\exp \left[in\chi\right] = \exp \left[in\theta \right] \exp \left[in\Omega \left(t' - t\right)\right]$ and combined some terms. From now on we'll drop the argument of the Bessel functions for brevity. We can rewrite the coefficient for $E_z$ as
+\begin{equation*}
+	\omega \dfdvpar J_n + \frac{nJ_n}{\mu} \left( \kper\vpar\dfdvper - \kper\vper\dfdvpar \right)
+\end{equation*}
+\begin{equation}
+	 = \left[ \frac{n\Omega \vpar}{\vper} \dfdvper + \left(\omega - n\Omega\right) \dfdvpar \right] J_n
+\end{equation}
+We can define a new simpler variable $R$ to replace $Q$
+\begin{equation}
+	R = \frac{n\Omega \vpar}{\vper} \dfdvper + \left(\omega - n\Omega\right) \dfdvpar
+\end{equation}
+allowing us to write
+\begin{equation*}
+	f_1 = \frac{-e}{m \omega} \int_{-\infty}^t \sum_{n=-\infty}^\infty \left(\frac{nJ_n}{\mu} P E_x - i J_n' P E_y + J_n R E_z \right) \times
+\end{equation*}
+\begin{equation}
+	\exp \left[-i\mu \sin\theta \right] \exp \left[in \theta \right] \exp \left[i\left(n\Omega + \kpar \vpar - \omega\right) \left(t' - t\right)\right] dt'
+\end{equation}
+
+We now the only time dependence in our integrand comes from the final complex exponential term, so we can write
+
+\begin{equation*}
+	f_1 = \frac{-e}{m \omega} \sum_{n=-\infty}^\infty \left(\frac{nJ_n}{\mu} P E_x - i J_n' P E_y + J_n R E_z \right) \times
+\end{equation*}
+\begin{equation}
+	\exp \left[-i\mu \sin\theta \right] \int_{-\infty}^t \exp \left[in \theta \right] \exp \left[i\left(n\Omega + \kpar \vpar - \omega\right) \left(t' - t\right)\right] dt'
+\end{equation}
+
+This is an easy integral
+\begin{equation}
+	\int_{-\infty}^t \exp \left[i\left(n\Omega + \kpar \vpar - \omega\right) \left(t' - t\right)\right] dt' = \frac{i}{\omega-n\Omega-\kpar \vpar}
+\end{equation}
+
+where we make some arguments using delta functions about how the complex exponential evaluates to 0 at $-\infty$. So we get our simplest form for $f_1$
+\begin{equation*}
+	f_1 = \frac{-e}{m \omega} \sum_{n=-\infty}^\infty \left(\frac{nJ_n}{\mu} P E_x - i J_n' P E_y + J_n R E_z \right) \times
+\end{equation*}
+\begin{equation}
+	\exp \left[-i\mu \sin\theta \right] \exp \left[in \theta \right] \frac{i}{\omega-n\Omega-\kpar \vpar}
+\end{equation}
+
+Now we need to take the first velocity moment $f_1$ to get our currents
+\begin{equation}
+	j_i = e \int v_i f_1 d^3 \v
+\end{equation}
+
+We already saw $v_x = \vper \cos\theta$, $v_y = \vpar \sin\theta$ and $v_z = \vpar$ so we get these expressions for the currents
+\begin{equation*}
+	j_x = \frac{-e^2\vper}{m \omega} \sum_{n=-\infty}^\infty \left(\frac{nJ_n}{\mu} P E_x - i J_n' P E_y + J_n R E_z \right) \times
+\end{equation*}
+\begin{equation}
+	\cos\theta \exp \left[-i\mu \sin\theta \right] \exp \left[in \theta \right] \frac{i}{\omega-n\Omega-\kpar \vpar}
+\end{equation}
+\begin{equation*}
+	j_y = \frac{-e^2\vper}{m \omega} \sum_{n=-\infty}^\infty \left(\frac{nJ_n}{\mu} P E_x - i J_n' P E_y + J_n R E_z \right) \times
+\end{equation*}
+\begin{equation}
+	\sin\theta \exp \left[-i\mu \sin\theta \right] \exp \left[in \theta \right] \frac{i}{\omega-n\Omega-\kpar \vpar}
+\end{equation}
+\begin{equation*}
+	j_z = \frac{-e^2\vpar}{m \omega} \sum_{n=-\infty}^\infty \left(\frac{nJ_n}{\mu} P E_x - i J_n' P E_y + J_n R E_z \right) \times
+\end{equation*}
+\begin{equation}
+	\exp \left[-i\mu \sin\theta \right] \exp \left[in \theta \right] \frac{i}{\omega-n\Omega-\kpar \vpar}
+\end{equation}
+which are all very similar apart from factors of $\vper$ or $\vpar$ and more expressions $\propto \exp \left[-i\mu \sin\theta \right]$ we can replace using \eqref{jacobi_anger}, \eqref{jacobi_anger_cos} and \eqref{jacobi_anger_sin} where we use the expression $e^{-i\mu\sin\theta} = e^{i\mu\sin\left(-\theta\right)}$. Doing these replacements we get
+\begin{equation*}
+	j_x = \frac{-e^2\vper}{m \omega} \sum_{n=-\infty}^\infty \left(\frac{nJ_n}{\mu} P E_x - i J_n' P E_y + J_n R E_z \right) \times
+\end{equation*}
+\begin{equation}
+	\sum_{m=-\infty}^\infty \frac{mJ_m}{\mu} \exp \left[i\left(n - m\right) \theta \right] \frac{i}{\omega-n\Omega-\kpar \vpar}
+\end{equation}
+\begin{equation*}
+	j_y = \frac{-e^2\vper}{m \omega} \sum_{n=-\infty}^\infty \left(\frac{nJ_n}{\mu} P E_x - i J_n' P E_y + J_n R E_z \right) \times
+\end{equation*}
+\begin{equation}
+	\sum_{m=-\infty}^\infty -iJ_m' \exp \left[i\left(n - m\right) \theta \right] \frac{i}{\omega-n\Omega-\kpar \vpar}
+\end{equation}
+\begin{equation*}
+	j_z = \frac{-e^2\vpar}{m \omega} \sum_{n=-\infty}^\infty \left(\frac{nJ_n}{\mu} P E_x - i J_n' P E_y + J_n R E_z \right) \times
+\end{equation*}
+\begin{equation}
+	\sum_{m=-\infty}^\infty J_m \exp \left[i\left(n - m\right) \theta \right] \frac{i}{\omega-n\Omega-\kpar \vpar}
+\end{equation}
+
+We can replace $\exp \left[i\left(n - m\right) \theta \right] = 2\pi\delta\left(n-m\right)$ where $\delta$ is the Dirac delta. To get rid of these terms we'll just integrate over gyrophase $\theta$ now which just sets $n=m$ and we pick up a factor of $2pi$. This collapses the double sum to a single sum, allowing us to write an expression which almost fits on a single line!
+
+\begin{equation}
+	\int_0^{2\pi} j_x d\theta = \frac{-2\pi ie^2\vper}{m \omega} \sum_{n=-\infty}^\infty \frac{\left(\frac{nJ_n}{\mu}\right)^2 P E_x - i \frac{nJ_n J_n'}{\mu} P E_y + \frac{nJ_n^2}{\mu} R E_z}{\omega-n\Omega-\kpar \vpar}
+\end{equation}
+\begin{equation}
+	\int_0^{2\pi} j_y d\theta = \frac{2\pi e^2\vper}{m \omega} \sum_{n=-\infty}^\infty \frac{\frac{nJ_nJ_n'}{\mu} P E_x - i \left(J_n'\right)^2 P E_y + J_n J_n' R E_z}{\omega-n\Omega-\kpar \vpar}
+\end{equation}
+\begin{equation}
+	\int_0^{2\pi} j_z d\theta = \frac{-2i\pi e^2\vpar}{m \omega} \sum_{n=-\infty}^\infty \frac{\frac{nJ_n^2}{\mu} P E_x - i J_n J_n' P E_y + J_n^2 R E_z}{\omega-n\Omega-\kpar \vpar}
+\end{equation}
+
+We can now use the definition of the dielectric tensor \eqref{dielectric_tensor_def_kinetic_theory} to write
+\begin{equation}
+	\epsilon_{ij} = \delta_{ij} + \sum_s \frac{e_s^2}{\omega^2 \epsilon_0 m_s} \sum_{n=-\infty}^\infty \int_0^\infty \int_0^\infty \frac{2\pi S_{ij}}{\omega-n\Omega-\kpar \vpar} d\vper d\vper
+\end{equation}
+
+where
+\begin{equation}
+	S_{ij} =
+	\begin{bmatrix}
+		\vper \left(\frac{nJ_n}{\mu}\right)^2 P & i\vper \frac{nJ_nJ_n'}{\mu} P & \vper \frac{nJ_n^2}{\mu} R\\
+		- i\vper \frac{nJ_nJ_n'}{\mu} P & \vper \left(J_n'\right)^2 P & -i \vper J_n J_n' R\\
+		\vpar \frac{nJ_n^2}{\mu} P & i \vper J_n J_n' P & \vper J_n^2 R\\
+	\end{bmatrix}
+\end{equation}
+\begin{equation*}
+	P = \left(\omega-\kpar\vpar\right)\dfsdvper + \kpar\vper\dfdvpar
+\end{equation*}
+\begin{equation*}
+	R = \frac{n\Omega \vpar}{\vper} \dfsdvper + \left(\omega - n\Omega\right) \dfdvpar
+\end{equation*}
+and the arguments of the Bessel functions are $\mu = \frac{\kper\vper}{\Omega}$. We now use the fact the equilibrium distribution function $f_{0s}$ is a Maxwellian
+\begin{equation}
+	f_{0s} = \frac{n_s}{\pi^{\frac{3}{2}}v_{Ts}^3} \exp \left[ - \frac{\vper^2 + \vpar^2}{v_{Ts}^2} \right]
+\end{equation}
+where $v_{Ts} = \sqrt{\frac{2kT_s}{2m_s}}$ is the thermal velocity. 

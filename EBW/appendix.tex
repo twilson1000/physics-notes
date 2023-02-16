@@ -1,0 +1,146 @@
+\section{Appendix}
+\subsection{Complex Exponential Quantities}\label{complex exp time averaging}
+Based on section 7.4 in \cite{bellan2008fundamentals}.
+A useful mathematical notation is to represent an oscillating physical quantity as a phasor, with the understanding the actual physical quantity is the real part, i.e.
+\begin{equation}\label{complex_exp_real_part}
+	\psi (t) = \mathcal{R} \left[ \tilde{\psi} e^{i \bf{k} \cdot \bf{x} -i \omega t} \right] = \frac{1}{2} \left( \psi + \psi^{*} \right)
+\end{equation}
+
+For linear relationships taking the real is done implicitly as it has no effect. However, for non-linear relationships we must do this to get the correct answer. For example, the product of two oscillating quantities $\psi \left( t \right) = \tilde{\psi}e^{i \left(\k \cdot \x - \omega t \right)}$ and $\chi(t)=\tilde{\chi}e^{i \left(\k \cdot \x - \omega t \right)}$ must be written as
+
+\begin{equation}
+	\psi(t) \chi(t) = \mathcal{R}\left[\tilde{\psi}e^{i \left(\k \cdot \x - \omega t \right)}\right] \times \mathcal{R}\left[\tilde{\chi}e^{i \left(\k \cdot \x - \omega t \right)}\right]
+\end{equation}
+
+Expanding this out, assuming $\k = \k_R + i \k_I$ and $\omega = \omega_R + i \omega_I$
+
+\begin{equation*}
+	\psi(t) \chi(t) = \frac{1}{4}\left( \tilde{\psi} e^{i \left(\k \cdot \x - \omega t \right)} + \tilde{\psi}^* e^{i \left(\k^* \cdot \x - \omega^* t \right)} \right)\left( \tilde{\chi} e^{i \left(\k \cdot \x - \omega t \right)} + \tilde{\chi}^* e^{i \left(\k^* \cdot \x - \omega^* t \right)} \right)
+\end{equation*}
+\begin{equation*}
+		= \frac{1}{4} \left( \tilde{\psi} \tilde{\chi} e^{2i \left(\k \cdot \x - \omega t \right)} + \tilde{\psi} \tilde{\chi}^* e^{i \left[\left(\k - \k^* \right) \cdot \x - \left( \omega - \omega^* \right) t \right]} \right.
+\end{equation*}
+\begin{equation}
+		\left. + \tilde{\psi}^* \tilde{\chi} e^{i \left[\left(\k - \k^* \right) \cdot \x - \left( \omega - \omega^* \right) t \right]} + \tilde{\psi}^* \tilde{\chi}^* e^{2i \left(\k \cdot \x - \omega t \right)} \right)
+\end{equation}
+
+As $-i \left(\omega - \omega^* \right) = 2 \omega_I$ and $i \left( \k - \k^* \right) = -2 \k_R$ we can rewrite this as
+
+\begin{equation}
+	\psi(t) \chi(t) = \frac{1}{4} \left[ \tilde{\psi}\tilde{\chi} + \tilde{\psi}^* \tilde{\chi}^* \right] e^{2i \left(\k \cdot \x - \omega t \right)} + \frac{1}{4} \left[ \tilde{\psi}^* \tilde{\chi} + \tilde{\psi} \tilde{\chi}^* \right] e^{2 \left( \omega_I t - \k_I \cdot \x \right)}
+\end{equation}
+
+The first term is oscillatory so if we time average over a period of the oscillation they will vanish, while the second term will remain as it is non-oscillatory. Assuming $\omega_I$ and $\k_R$ are very small and so $e^{2 \left( \omega_I t - \k_I \cdot \x \right)}$ is constant over a single wave period, the time averaged quantity $\left\langle \psi(t) \chi(t) \right\rangle$ is
+
+\begin{equation} \label{Complex Exponential Product Time Averaged}
+	\left\langle \psi(t) \chi(t) \right\rangle = \frac{1}{4} \left( \tilde{\psi} \tilde{\chi}^* + \tilde{\psi}^* \tilde{\chi} \right) e^{2 \left( \omega_I t - \k_I \cdot \x \right)}
+\end{equation}
+
+The term inside the brackets can be rewritten as the real part of a complex number using \eqref{complex_exp_real_part}
+
+\begin{equation}
+	\left\langle \psi(t) \chi(t) \right\rangle = \frac{1}{2} \mathcal{R} \left[ \tilde{\psi} \tilde{\chi}^* \right] e^{2 \left( \omega_I t - \k_I \cdot \x \right)}
+\end{equation}
+
+\subsection{Vector Identities}
+\subsubsection{$\norm{\N \times \e}^2 = \e_k^{*} \cdot \left( N^2 \uu{I} - \N \otimes \N \right) \cdot \e_k$}\label{vector identity 1}
+Start at the end and work backwards
+\begin{equation*}
+	\e_k^{*} \cdot \left( N^2 \uu{I} - \N \otimes \N \right) \cdot \e_k =
+\end{equation*}
+\begin{equation*}
+ \begin{pmatrix}
+		e_x & e_y & e_z
+	\end{pmatrix}
+	\begin{pmatrix}
+		N_y^2 + N_z^2 & -N_x N_y & -N_x N_z \\
+		-N_x N_y & N_x^2 + N_z^2 & -N_y N_z \\
+		-N_x N_z & -N_y N_z & N_y^2 + N_z^2
+	\end{pmatrix}
+	\begin{pmatrix}
+		e_x \\ e_y \\ e_z
+	\end{pmatrix}
+\end{equation*}
+\begin{equation*}
+	= \left( N_y^2 + N_z^2 \right) e_x^2 + \left( N_x^2 + N_z^2 \right) e_y^2 + \left( N_x^2 + N_y^2 \right) e_z^2 - 2 N_x N_y e_x e_y - 2 N_x N_z e_x e_z - 2 N_y N_z e_y e_z
+\end{equation*}
+\begin{equation}
+	= \left( N_y e_z - N_z e_y \right)^2 + \left( N_z e_x - N_x e_z \right)^2 + \left( N_x e_y - N_y e_x \right)^2
+\end{equation}
+
+These terms are the components of a cross product, hence we see this is equal to $\norm{\N \times \e}^2$.
+
+\subsubsection{$\N - \mathcal{R} \left[ \left( \e_k^* \cdot \N \right) \e_k \right] = - \frac{1}{2} \e_k^* \cdot \frac{\partial \left( \N \otimes \N - N^2 \uu{I} \right)}{\partial \N} \cdot \e_k$} \label{vector identity 2}
+
+\subsection{Bessel Functions}
+\subsubsection{Bessel's Differential Equation}
+
+\begin{equation}
+	J_{-n}(x) = (-1)^nJ_n(x))
+\end{equation}
+\begin{equation}
+	J_n(x) = \frac{1}{\pi} \int_0^\pi \cos\left(n\theta - x \sin \theta \right)d\theta = \frac{1}{\pi} \int_0^\pi \cos \left( x \sin \theta - n \theta \right) d\theta
+\end{equation}
+
+\subsubsection{Bessel Function Recursion Relations}
+\begin{equation}
+	J_{n+1}(x) + J_{n-1}(x) = \frac{2n}{x}J_n(x)
+\end{equation}
+\begin{equation}
+	J_n'(x) = \frac{1}{2} \left( J_{n+1}(x) - J_{n-1}(x) \right)
+\end{equation}
+\begin{equation}
+	I_{n+1}(x) - I_{n-1}(x) = -\frac{2n}{x}I_n(x)
+\end{equation}
+\begin{equation}
+	I_n'(x) = \frac{1}{2} \left( I_{n+1}(x) + I_{n-1}(x) \right)
+\end{equation}
+
+\subsubsection{Bessel Function Integrals}
+\begin{equation}
+	\int_0^\infty \frac{J_n (x)}{x} dx = \frac{1}{n}
+\end{equation}
+\begin{equation}\label{bessel_int_jn2}
+	2\int_0^\infty J_n^2 \left( x \sqrt{2b} \right) x e^{-x^2} dx = I_n(b) e^{-b}
+\end{equation}
+\begin{equation}\label{bessel_int_jn_jn_prime}
+	4\int_0^\infty J_n \left( w \sqrt{2b} \right) J_n' \left( x \sqrt{2b} \right) x^2 e^{-x^2} dx = \sqrt{2b} \left(I_n'(b) - I_n(b) \right) e^{-b}
+\end{equation}
+\begin{equation}\label{bessel_int_jn_prime2}
+	4\int_0^\infty \left(J_n' \left( x \sqrt{2b} \right) \right)^2 x^3 e^{-x^2} dx = \left[ \frac{n^2}{b}I_n(b) + 2b \left( I_n(b) - I_n'(b) \right) \right] e^{-b}
+\end{equation}
+
+First integral is from []. \eqref{bessel_int_jn_jn_prime} and \eqref{bessel_int_jn_prime2} are derived from derivatives of \eqref{bessel_int_jn2}. We get \eqref{bessel_int_jn2} from Weber's second integral with $p = \sqrt{2b}$ and $q=1$.
+\begin{equation}
+	\int_0^\infty J_n^2 \left( px \right) x e^{-q^2x^2} dx = \frac{1}{2q^2} e^{-\frac{p^2}{2q^2}} I_n \left( \frac{p^2}{2q^2} \right)
+\end{equation}
+Taking a derivative with respect to $b$
+
+\begin{equation*}
+	\frac{\partial}{\partial b} \left[ 2\int_0^\infty J_n^2 \left( \sqrt{2b} x \right) x e^{-x^2} dx \right] = 2\int_0^\infty 2 J_n \left( \sqrt{2b} x \right) J_n' \left( \sqrt{2b} x \right) \frac{x}{\sqrt{2b}} xe^{-x^2} dx
+\end{equation*}
+\begin{equation*}
+	\implies 4\int_0^\infty J_n \left( w \sqrt{2b} \right) J_n' \left( x \sqrt{2b} \right) x^2 e^{-x^2} dx = \sqrt{2b} \frac{\partial}{\partial b} \left( e^{-b} I_n(b) \right)
+\end{equation*}
+\begin{equation}
+	\sqrt{2b} \left(I_n'(b) - I_n(b) \right) e^{-b}
+\end{equation}
+
+Taking another derivative
+\begin{equation*}
+	\frac{\partial}{\partial b} \left[ 4\int_0^\infty J_n \left( w \sqrt{2b} \right) J_n' \left( x \sqrt{2b} \right) x^2 e^{-x^2} dx \right]
+\end{equation*}
+\begin{equation}
+	J
+\end{equation}
+
+\subsection{Plasma Dispersion Function}
+\begin{equation}
+	Z(\zeta) = \frac{1}{\sqrt{\pi}} \int_{-\infty}^\infty \frac{e^{-x^2}}{x-\zeta} dx
+\end{equation}
+\begin{equation}
+	Z'(\zeta) = 1 + \zeta Z(\zeta) = \frac{1}{\sqrt{\pi}} \int_{-\infty}^\infty \frac{xe^{-x^2}}{x-\zeta} dx
+\end{equation}
+\begin{equation}
+	\zeta Z'(\zeta) = \zeta \left( 1 + \zeta Z(\zeta) \right) = \frac{1}{\sqrt{\pi}} \int_{-\infty}^\infty \frac{x^2 e^{-x^2}}{x-\zeta} dx
+\end{equation}

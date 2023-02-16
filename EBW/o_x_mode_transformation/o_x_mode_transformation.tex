@@ -1,0 +1,160 @@
+\documentclass[12pt, twoside]{article}
+\usepackage{amsmath}
+
+\begin{document}
+	\section{Continuous transformation of O and X mode in cold plasma}
+	Waves in cold plasmas with wave vector at an angle $\theta$ to the magnetic field are solutions to the equation
+	\begin{equation}\label{wave_equation}
+		\begin{pmatrix}
+			S-N^2 \cos^2 \theta & -iD & N^2 \cos \theta \sin \theta \\
+			iD & S-N^2 & 0 \\
+			N^2 \cos \theta \sin \theta & 0 & P - N^2 \sin^2 \theta
+		\end{pmatrix} \cdot
+		\begin{pmatrix}
+			E_x \\ E_y \\ E_z
+		\end{pmatrix} = 0
+	\end{equation}
+	
+	which uses two Stix parameters representing the normalised density and magnetic field
+	\begin{equation}
+		X_s = \left(\frac{\omega_{ps}}{\omega}\right)^2 \propto n_s \quad Y_s =  \frac{\omega_{cs}}{\omega} \propto B
+	\end{equation}
+
+	which are used to define 5 more parameters $P$ (parallel), $R$ (right), $L$ (left), $S$ (sum) and $D$ (difference)
+	\begin{equation*}
+		P = 1 - \sum_s X_s
+	\end{equation*}
+	\begin{equation*}
+		R = 1 - \sum_s \frac{X_s}{1+Y_s}
+	\end{equation*}
+	\begin{equation*}
+		L = 1 - \sum_s \frac{X_s}{1-Y_s}
+	\end{equation*}
+	\begin{equation*}
+		S = 1 - \sum_s \frac{X_s}{1-Y_s^2} = \frac{R + L}{2}
+	\end{equation*}
+	\begin{equation*}
+		D = \sum_s \frac{X_sY_s}{1-Y_s^2} = \frac{R - L}{2}
+	\end{equation*}
+
+	Taking the determinant of the matrix in \eqref{wave_equation} to vanish you get the Booker Quartic
+	\begin{equation}\label{booker_quartic}
+		AN^4 - BN^2 + C = 0
+	\end{equation}
+	with coefficients
+	\begin{equation*}
+		A = S \sin^2 \theta + P \cos^2 \theta
+	\end{equation*}
+	\begin{equation*}
+		B = RL\sin^2 \theta + PS \left( 1+\cos^2 \theta \right)
+	\end{equation*}
+	\begin{equation*}
+		C = PRL
+	\end{equation*}
+	
+	Solving with the quadratic equation you can re-arrange the determinant $F$ to
+	\begin{equation}
+		F^2 = B^2 - 4AC = \left( RL - PS \right)^2 \sin^4 \theta + 4P^2 D^2 \cos^2 \theta
+	\end{equation}
+
+	giving a solution
+	\begin{equation}\label{booker_quartic_solution}
+		N^2 = \frac{B \pm F}{2A}
+	\end{equation}
+
+	There are a couple of different forms, if you divide \eqref{booker_quartic} by $\cos^2 \theta$ and re-arrange you get
+	\begin{equation}\label{booker_quartic_with_tan}
+		\tan^2 \theta = \frac{P \left(N^2 - R\right) \left(N^2 - L\right)}{\left(SN^2 - RL\right)\left(N^2 - P\right)}
+	\end{equation}
+
+	which is nice as it clearly shows the solutions in the cases of parallel and perpendicular propagation.
+	
+	If we only consider electron dynamics (high frequency) all the sums over species in the Stix parameters go away. In this case we drop the species subscript and just write $X$ and $Y$. Looking for solutions of \eqref{booker_quartic} of the form $N^2 = 1 - x$ and using the second form of the quadratic formula
+	
+	\begin{equation}
+		x = \frac{2c}{-b \pm \sqrt{b^2 - 4ac}}
+	\end{equation}
+
+	after some tedious algebra expanding products of Stix parameters in terms of $X$ and $Y$ you get the Appleton-Hartree dispersion relation
+	
+	\begin{equation}\label{appleton_hartree}
+		N^2 = 1 - \frac{2X\left(1-X\right))}{2\left(1-X\right)-Y^2\sin^2\theta \pm \sqrt{Y^4\sin^4 \theta + 4 \left(1-X\right)^2Y^2\cos^2\theta}}
+	\end{equation}
+
+	The Booker quartic \eqref{booker_quartic} and \eqref{booker_quartic_with_tan} are the same equation. The Appleton-Hartree dispersion is also the same equation but where we have restricted ourselves to high frequency.
+	
+	From these equations its clear there is a continuous transformation from $\theta=0$ to $\theta=\frac{\pi}{2}$ as the quadratic is a nice function. The coefficients of the Booker Quartic at $\theta=0$ are
+	\begin{equation}
+		A = P \quad B = 2PS \quad F = 2\left|PD\right|
+	\end{equation}
+
+	If we assume all terms are positive for now, from \eqref{booker_quartic_solution} we get (ignoring $P=0$ solution)
+	\begin{equation}
+		N^2 = \frac{2PS\pm2PD}{2P} = \begin{cases}
+			S + D = R; \quad + \\ S - D = L; \quad -
+		\end{cases}
+	\end{equation}
+	
+	So we get the right handed or left handed circularly polarised wave for the positive and negative sign of the determinant respectively.
+	
+	The coefficients of the Booker Quartic at $\theta=\frac{\pi}{2}$ are
+	\begin{equation}
+		A = S \quad B = RL+PS \quad F = \left|RL-PS\right|
+	\end{equation}
+	
+	Again assuming all terms are positive for now, from \eqref{booker_quartic_solution} we get
+	\begin{equation}
+		N^2 = \frac{RL+PS\pm \left(RL-PS\right)}{2S} = \begin{cases}
+			\frac{RL}{S}; \quad + \\ P; \quad -
+		\end{cases}
+	\end{equation}
+
+	Again we get the X mode or the O mode for the positive and negative sign of the determinant respectively. By fixing the sign we choose and continuously transforming from $\theta = 0$ to $\frac{\pi}{2}$ we get the right hand circularly polarised wave turns into the X mode and the left hand circularly polarised wave turns into the O mode.
+	
+	This mapping is not always true through. If we repeat this procedure but drop the assumption of positive definite we get
+	\begin{equation}
+		N^2 = \frac{2PS \pm 2\left|PD\right|}{2P} = \begin{cases}
+			R; \quad P > 0, + \\ L; \quad P > 0, - \\
+			L; \quad P < 0, + \\ R; \quad P < 0, -
+		\end{cases} \quad \left(\theta=0\right)
+	\end{equation}
+	\begin{equation}
+	N^2 = \frac{RL+PS \pm \left|RL-PS\right|}{2S} = \begin{cases}
+		\frac{RL}{S}; \quad RL-PS > 0, + \\ P; \quad RL-PS > 0, - \\
+		P; \quad RL-PS < 0, + \\ \frac{RL}{S}; \quad RL-PS < 0, -
+	\end{cases} \quad \left(\theta=\frac{\pi}{2}\right)
+	\end{equation}
+
+	It is obvious $P = 1 - X$ changes sign at $X = 1$. $RL - PS$ is less obvious, if we expand it in the high frequency limit we get
+	
+	\begin{equation}
+		RL - PS = \frac{-X Y^2 \left(1 + X\right)}{1 - Y^2}
+	\end{equation}
+
+	As $X > 0$ and $Y > 0$ the numerator is negative definite, meaning the only change in sign occurs at $Y = 1$. Therefore
+	\begin{equation}
+		\text{sign} \left(P\right) = \begin{cases}
+			+1; \quad X < 1 \\ -1; \quad X > 1
+		\end{cases}
+	\end{equation}
+	\begin{equation}
+		\text{sign} \left(RL - PS\right) = \begin{cases}
+			-1; \quad Y < 1 \\ +1; \quad Y > 1
+		\end{cases}
+	\end{equation}
+
+	Combining this all together we get how the eigenmodes continuously transform in the four regions, arranging the table to match the CMA diagram
+	\begin{center}
+		\begin{tabular}{|c||c|c|}
+			\hline $Y > 1$ & O$\rightarrow$L, X $\rightarrow$ R & X $\rightarrow$ L \\
+			\hline $Y < 1$ & O$\rightarrow$R, X $\rightarrow$ L & X $\rightarrow$ R \\
+			\hline \hline & $X < 1$ & $X > 1$ \\
+			\hline
+		\end{tabular}
+	\end{center}
+
+	Some of these transformations which are redundant have been omitted (O mode for $X > 1$).
+	
+	One notable implication of this is the possibility of converting from O to X mode at $X = 1$ and $\theta = 0$ as both waves continuously transform into a right hand circularly wave. The cold plasma approximation lacks the ability to describe mode conversion however so this is more of hand wave-y argument than anything mathematical.
+
+\end{document}

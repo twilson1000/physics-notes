@@ -1,0 +1,12 @@
+ray tracing
+beam tracing
+dispersion relations - fully relativistic, Volpe
+current drive - linear and quasilinear
+turbulence
+WKBeam like statistical scattering
+
+Papers / Books
+Pereverzev 1993 - Paraxial WKB solution of a scalar wave equation
+Kratzov and Orlov - Geometrical Optics
+Budden 1985 - The propogation of radio waves (theory of radio waves of low power in the ionosphere and magnetosphere)
+Hall Chen 2022 - Beam Model of Doppler Backscattering
