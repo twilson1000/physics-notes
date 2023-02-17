@@ -274,7 +274,7 @@ which are all very similar apart from factors of $\vper$ or $\vpar$ and more exp
 	\sum_{m=-\infty}^\infty J_m \exp \left[i\left(n - m\right) \theta \right] \frac{i}{\omega-n\Omega-\kpar \vpar}
 \end{equation}
 
-We can replace $\exp \left[i\left(n - m\right) \theta \right] = 2\pi\delta\left(n-m\right)$ where $\delta$ is the Dirac delta. To get rid of these terms we'll just integrate over gyrophase $\theta$ now which just sets $n=m$ and we pick up a factor of $2pi$. This collapses the double sum to a single sum, allowing us to write an expression which almost fits on a single line!
+We can replace $\exp \left[i\left(n - m\right) \theta \right] = 2\pi\delta\left(n-m\right)$ where $\delta$ is the Dirac delta. To get rid of these terms we'll just integrate over gyrophase $\theta$ now which just sets $n=m$ and we pick up a factor of $2\pi$. This collapses the double sum to a single sum, allowing us to write an expression which almost fits on a single line!
 
 \begin{equation}
 	\int_0^{2\pi} j_x d\theta = \frac{-2\pi ie^2\vper}{m \omega} \sum_{n=-\infty}^\infty \frac{\left(\frac{nJ_n}{\mu}\right)^2 P E_x - i \frac{nJ_n J_n'}{\mu} P E_y + \frac{nJ_n^2}{\mu} R E_z}{\omega-n\Omega-\kpar \vpar}
@@ -287,8 +287,8 @@ We can replace $\exp \left[i\left(n - m\right) \theta \right] = 2\pi\delta\left(
 \end{equation}
 
 We can now use the definition of the dielectric tensor \eqref{dielectric_tensor_def_kinetic_theory} to write
-\begin{equation}
-	\epsilon_{ij} = \delta_{ij} + \sum_s \frac{e_s^2}{\omega^2 \epsilon_0 m_s} \sum_{n=-\infty}^\infty \int_0^\infty \int_0^\infty \frac{2\pi S_{ij}}{\omega-n\Omega-\kpar \vpar} d\vper d\vper
+\begin{equation} \label{hot_plasma_dielectric_generic_f}
+	\epsilon_{ij} = \delta_{ij} + \sum_s \frac{X_s}{n_s} \sum_{n=-\infty}^\infty \int_0^\infty \int_0^\infty \frac{2\pi S_{ij}}{\omega-n\Omega-\kpar \vpar} d\vper d\vper
 \end{equation}
 
 where
@@ -297,7 +297,7 @@ where
 	\begin{bmatrix}
 		\vper \left(\frac{nJ_n}{\mu}\right)^2 P & i\vper \frac{nJ_nJ_n'}{\mu} P & \vper \frac{nJ_n^2}{\mu} R\\
 		- i\vper \frac{nJ_nJ_n'}{\mu} P & \vper \left(J_n'\right)^2 P & -i \vper J_n J_n' R\\
-		\vpar \frac{nJ_n^2}{\mu} P & i \vper J_n J_n' P & \vper J_n^2 R\\
+		\vpar \frac{nJ_n^2}{\mu} P & i \vpar J_n J_n' P & \vpar J_n^2 R\\
 	\end{bmatrix}
 \end{equation}
 \begin{equation*}
@@ -306,8 +306,93 @@ where
 \begin{equation*}
 	R = \frac{n\Omega \vpar}{\vper} \dfsdvper + \left(\omega - n\Omega\right) \dfdvpar
 \end{equation*}
-and the arguments of the Bessel functions are $\mu = \frac{\kper\vper}{\Omega}$. We now use the fact the equilibrium distribution function $f_{0s}$ is a Maxwellian
+and the arguments of the Bessel functions are $\mu = \frac{\kper\vper}{\Omega}$. We have also used the expression
+\begin{equation*}
+	\frac{e_s^2}{\omega^2 \epsilon_0 m_s} = \frac{1}{n_s} \frac{1}{\omega^2} \frac{n_s e_s^2}{\epsilon_0 m_s} = \frac{1}{n_s} \frac{\omega_{ps}^2}{\omega^2} = \frac{X_s}{n_s}
+\end{equation*}
+to simplify the factor in front of the sum over harmonics $n$. We make further progress by assuming the equilibrium distribution function $f_{0s}$ is a Maxwellian
 \begin{equation}
 	f_{0s} = \frac{n_s}{\pi^{\frac{3}{2}}v_{Ts}^3} \exp \left[ - \frac{\vper^2 + \vpar^2}{v_{Ts}^2} \right]
 \end{equation}
-where $v_{Ts} = \sqrt{\frac{2kT_s}{2m_s}}$ is the thermal velocity. 
+where $v_{Ts} = \sqrt{\frac{2kT_s}{2m_s}}$ is the thermal velocity. Hence we can write the derivatives of $f_{0s}$
+\begin{equation}
+	\dfdvper = \frac{-2\vper}{v_{Ts}^2} f_{0s}
+\end{equation}
+\begin{equation}
+	\dfdvpar = \frac{-2\vpar}{v_{Ts}^2} f_{0s}
+\end{equation}
+
+Substituting into the expression for $P$
+\begin{equation*}
+	P = \left( \omega - \kpar \vpar \right) \frac{-2\vper}{v_{Ts}^2} f_{0s} + \kpar \vper \frac{-2\vpar}{v_{Ts}^2} f_{0s}
+\end{equation*}
+\begin{equation}
+	= -\frac{2f_{0s}}{v_{Ts}^2} \left[ \left( \omega - \kpar \vpar \right) \vper + \kpar \vpar \vper \right] = -\frac{2 \omega \vper}{v_{Ts}^2} f_{0s}
+\end{equation}
+
+Substituting into the expression for $R$
+\begin{equation*}
+	R = \frac{n \Omega \vpar}{\vper} \left( - \frac{2 \vper f_{0s}}{v_{Ts}^2} \right) + \left( \omega - n \Omega \right) \left( - \frac{2 \vpar f_{0s}}{v_{Ts}^2} \right)
+\end{equation*}
+\begin{equation}
+	= - \frac{2 f_{0s}}{v_{Ts}^2} \left[ n \Omega \vpar + \left( \omega - n \Omega \right) \vpar \right] = -\frac{2 \omega \vpar}{v_{Ts}^2} f_{0s}
+\end{equation}
+
+Now we can make some progress on the double integral in \eqref{hot_plasma_dielectric_generic_f} which I denote
+\begin{equation}
+	I_{ij} = \int_0^\infty \int_0^\infty \frac{2\pi S_{ij}}{\omega-n\Omega-\kpar \vpar} d\vper d\vper
+\end{equation}
+
+We see the only difference now between $P$ and $R$ is the component of $v$ so we can write
+\begin{equation*}
+	I_{ij} = - \left( 4 \pi \omega \right) \int_0^\infty \int_0^\infty \frac{S_{ij} f_{0s}}{\omega-n\Omega-\kpar \vpar} \frac{d\vper d\vper}{v_{Ts}^2}
+\end{equation*}
+\begin{equation}
+	= - \left( 4 \pi \omega \right) \left( \frac{n_s}{\pi^{\frac{3}{2}}v_{Ts}^3} \right) \int_0^\infty \int_0^\infty \frac{S_{ij}}{\omega-n\Omega-\kpar \vpar} \exp \left[ - \frac{\vper^2 + \vpar^2}{v_{Ts}^2} \right] \frac{d\vper d\vper}{v_{Ts}^2}
+\end{equation}
+
+where
+\begin{equation}
+	S_{ij} =
+	\begin{bmatrix}
+		\vper^2 \left(\frac{nJ_n}{\mu}\right)^2 & i\vper^2 \frac{nJ_nJ_n'}{\mu} & \vper \vpar \frac{nJ_n^2}{\mu}\\
+		- i\vper^2 \frac{nJ_nJ_n'}{\mu} & \vper^2 \left(J_n'\right)^2 & -i \vper \vpar J_n J_n'\\
+		\vper \vpar \frac{nJ_n^2}{\mu}  & i \vper \vpar J_n J_n' & \vpar^2 J_n^2\\
+	\end{bmatrix}
+\end{equation}
+
+Now we change co-ordinates to normalised velocity $\betaper$ and $\betapar$
+\begin{equation*}
+	\betaper = \frac{\vper}{v_{Ts}} \implies d\betaper = \frac{d\vper}{v_{Ts}}
+\end{equation*}
+\begin{equation*}
+	\betapar = \frac{\vpar}{v_{Ts}} \implies d\betapar = \frac{d\vpar}{v_{Ts}}
+\end{equation*}
+
+So now we can write 
+\begin{equation}
+	I_{ij} = -\frac{4 \omega n_s}{\sqrt{\pi}} \frac{1}{v_{Ts}} \int_0^\infty \int_0^\infty \frac{S_{ij}}{\omega-n\Omega-\kpar \vpar} e^{-\left(\betaper^2 + \betapar^2\right)} d\betaper d\betapar
+\end{equation}
+
+where
+\begin{equation}
+	S_{ij} =
+	\begin{bmatrix}
+		\betaper^2 \left(\frac{nJ_n}{\mu}\right)^2 & i\betaper^2 \frac{nJ_nJ_n'}{\mu} & \betaper \betapar \frac{nJ_n^2}{\mu}\\
+		- i\betaper^2 \frac{nJ_nJ_n'}{\mu} & \betaper^2 \left(J_n'\right)^2 & -i \betaper \betapar J_n J_n'\\
+		\betaper \betapar \frac{nJ_n^2}{\mu}  & i \betaper \betapar J_n J_n' & \betapar^2 J_n^2\\
+	\end{bmatrix}
+\end{equation}
+We also need to make this substitution to the arguments of the Bessel functions
+\begin{equation}
+	\mu = \frac{\kper\vper}{\Omega} = \frac{\kper v_{Ts}}{\Omega} \betaper = \sqrt{2 \lambda} \betaper
+\end{equation}
+ 
+ where we have defined another convenient parameter
+ \begin{equation}
+ 	\lambda := \frac{\kper^2 v_{Ts}^2}{2 \Omega^2}
+ \end{equation}
+
+We have cheated and used future knowledge that having these factors of $\sqrt{2 \lambda}$ in the Bessel functions will simplify some standard integrals.
+
+Now we have to evaluate 6 terms $I_{xx} ,I_{xy}, I_{xz}, I_{yy}, I_{yz}$ and $I_{zz}$ to completely define the dielectric tensor, taking advantage of the symmetries $I_{yx} = -I_{xy}$, $I_{zx} = I_{xz}$ and $I_{zy} = -I_{yz}$.
