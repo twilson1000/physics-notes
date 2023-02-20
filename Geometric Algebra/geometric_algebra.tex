@@ -10,6 +10,11 @@
 \def \xhat{\hat{x}}
 \def \yhat{\hat{y}}
 \def \zhat{\hat{z}}
+\def \E{\vec{E}}
+\def \B{\vec{B}}
+\def \J{\vec{J}}
+\def \grad{\vec{\nabla}}
+\newcommand{\norm}[1]{\lVert #1 \rVert}
 
 \title{Geometric Algebra}
 \author{Thomas Wilson}
@@ -126,7 +131,7 @@ This bivector object appears to act like a scalar, as in 2D there is only 2 orie
 \subsection{Exterior Product}
 While the geometrical interpretation of these objects is rather abstract, the algebraic properties are simpler. Lets construct the multiplication for 2 vectors in 2D. To start with we know the inner product or dot product
 \begin{equation}
-	\u \cdot \v = ||\u|| ||\v|| \cos \theta
+	\u \cdot \v = \norm{\u} \norm{\v} \cos \theta
 \end{equation}
 
 The inner product of 2 vectors is a scalar and is commutative, associative and distributive
@@ -143,7 +148,7 @@ One issue with the inner product is we cannot reconstruct the original vectors f
 	\u \wedge \v = \u\v
 \end{equation}
 
-formed from the oriented area of the parallelogram constructed by these 2 vectors. From geometry we therefore get the magnitude $||\u \wedge \v|| = ||\u|| ||\v|| \sin \theta$. The magnitude is also clearly linear and reversing the order of the vectors reverses the handedness of the perimeter so the exterior product is anti-commutative, hence
+formed from the oriented area of the parallelogram constructed by these 2 vectors. From geometry we therefore get the magnitude $\norm{\u \wedge \v} = \norm{\u} \norm{\v} \sin \theta$. The magnitude is also clearly linear and reversing the order of the vectors reverses the handedness of the perimeter so the exterior product is anti-commutative, hence
 
 \begin{equation}
 	\begin{gathered}
@@ -160,10 +165,10 @@ We still have the issue that the exterior product doesn't give enough informatio
 	\u\v = \u \cdot \v + \u \wedge \v
 \end{equation}
 
-Consider the geometric product of $\u$ with itself, giving $\u\u = ||\u||^2$. It is interesting to note this allows definition of a multiplicative inverse as
+Consider the geometric product of $\u$ with itself, giving $\u\u = \norm{\u}^2$. It is interesting to note this allows definition of a multiplicative inverse as
 
 \begin{equation}
-	\u \frac{\u}{||\u||^2} = 1 \implies \u^{-1} = \frac{\u}{||\u||^2}
+	\u \frac{\u}{\norm{\u}^2} = 1 \implies \u^{-1} = \frac{\u}{\norm{\u}^2}
 \end{equation}
 
 As the exterior product anti-commutes we can write the inner and exterior product in terms of the geometric product
@@ -174,6 +179,287 @@ As the exterior product anti-commutes we can write the inner and exterior produc
 	\end{gathered}
 \end{equation}
 
-If we define how the geometric product affects basis vectors we can then write the geometric product of any vector via linearity. As $||e_i||^2 = 1$ then $e_i e_i = 1$. As $e_i \cdot e_j = 0$ for $i \ne j$ then $e_i e_j = e_i \wedge e_j = -e_j \wedge e_i = - e_j e_i$. We can therefore write the basis vectors of the bivectors using geometric products as \{$\xhat\yhat$, $\xhat\zhat$, $\yhat\zhat$\}.
+If we define how the geometric product affects basis vectors we can then write the geometric product of any vector via linearity. As $\norm{e_i}^2 = 1$ then $e_i e_i = 1$. As $e_i \cdot e_j = 0$ for $i \ne j$ then $e_i e_j = e_i \wedge e_j = -e_j \wedge e_i = - e_j e_i$. We can therefore write the basis vectors of the bivectors using geometric products as \{$\xhat\yhat$, $\xhat\zhat$, $\yhat\zhat$\}.
+
+Consider the geometric product of two 3D vectors
+\begin{equation*}
+	\u = a_1 \xhat + b_1 \yhat + c_1 \zhat \quad \v = a_2 \xhat + b_2 \yhat + c_2 \zhat
+\end{equation*}
+\begin{equation*}
+	\u \v = \left( a_1 \xhat + b_1 \yhat + c_1 \zhat \right) \left( a_2 \xhat + b_2 \yhat + c_2 \zhat \right)
+\end{equation*}
+\begin{equation*}
+	= a_1 a_2 \xhat \xhat + a_1 b_2 \xhat \yhat + a_1 c_2 \xhat \zhat + b_1 a_2 \yhat \xhat + b_1 b_2 \yhat \yhat + b_1 c_2 \yhat \zhat + c_1 a_2 \zhat \xhat + c_1 b_2 \zhat \yhat + c_1 c_2 \zhat \zhat
+\end{equation*}
+\begin{equation*}
+	= \left( a_1 a_2 + b_1 b_2 + c_1 c_2 \right) + \left( a_1 c_2 - c_1 a_2 \right) \xhat \yhat + \left( b_1 c_2 - c_1 b_2 \right) \yhat \zhat + \left( a_1 c_2 - c_1 a_2 \right) \xhat \zhat
+\end{equation*}
+so we can clearly see in 3 dimensions
+\begin{equation*}
+	\u \cdot \v = a_1 a_2 + b_1 b_2 + c_1 c_2
+\end{equation*}
+\begin{equation*}
+	\u \wedge \v = \left( a_1 c_2 - c_1 a_2 \right) \xhat \yhat + \left( b_1 c_2 - c_1 b_2 \right) \yhat \zhat + \left( a_1 c_2 - c_1 a_2 \right) \xhat \zhat
+\end{equation*}
+The expression for the exterior product looks similar to the cross product
+\begin{equation}
+	\u \times \v = \left( a_1 c_2 - c_1 a_2 \right) \zhat + \left( b_1 c_2 - c_1 b_2 \right) \xhat - \left( a_1 c_2 - c_1 a_2 \right) \yhat
+\end{equation}
+
+Using the rules for products of bivectors, multiplying by the unit trivector $\xhat \yhat \zhat$
+\begin{equation*}
+	(\xhat \yhat \zhat) \zhat = \xhat \yhat \quad (\xhat \yhat \zhat) \xhat = - \xhat \yhat \xhat \zhat = \yhat \zhat \quad (\xhat \yhat \zhat) \yhat = \xhat \zhat
+\end{equation*}
+which gives
+\begin{equation}
+	(\xhat \yhat \zhat) \u \times \v = \u \wedge \v
+\end{equation}
+Hence we can express the cross product in terms of the geometric product!
+
+\subsection{Multivectors in 2D}
+In geometric algebra we work with multivectors. The general form for a multivector in 2D is
+\begin{equation*}
+	V = a + b\xhat + c\yhat + d\xhat\yhat
+\end{equation*}
+which has 4 components. Geometric algebra is the study of multivectors and the geometric product. In 2D the bivector part can only have 1 component $\xhat \yhat$, so it acts like a scalar. Hence we call them pseudo-scalars, and define the unit pseudo-scalar $i := \xhat \yhat$. We call it $i$ as $i^2 = \xhat \yhat \xhat \yhat = - \xhat \xhat \yhat \yhat = -1$.
+
+Consider the action of multiplying by $i$ on a vector $\v = a\xhat + b\yhat$ on the right and the left
+\begin{equation*}
+	\v i = a \yhat - b \xhat
+\end{equation*}
+\begin{equation*}
+	i \v = - a \yhat + b \xhat
+\end{equation*}
+
+Right multiplication has rotated $v$ 90 degrees anti-clockwise about the origin, while left multiplication has rotated $v$ 90 degrees clockwise about the origin. So we clearly have a link with the complex numbers; we can consider complex numbers as a scalar added to a bivector, and multiplication acts like multiplication by a complex number
+\begin{equation*}
+	\left( a + i b \right) \left( c + id \right) = \left( ac - bd \right) + i \left( ad + bc \right)
+\end{equation*}
+
+This means we can easy perform rotations in 2D. We know a rotation by angle $\theta$ is equivalent to complex multiplication by $e^{i\theta} = \cos \theta + i \sin \theta$. Returning to the geometric product $\u \v = \u \cdot \v + \u \wedge \v$, we see the result is a scalar plus a bivector, so this must represent a rotation. From earlier we saw
+\begin{equation*}
+	\u \cdot \v = \norm{\u} \norm{\v} \cos \theta
+\end{equation*}
+\begin{equation*}
+	\u \wedge \v = \norm{\u} \norm{\v} i \sin \theta
+\end{equation*}
+\begin{equation}
+	\implies \u \v = \u \cdot \v + \u \wedge \v = \norm{\u} \norm{\v} \left( \cos \theta + i \sin \theta \right) = \norm{\u} \norm{\v} e^{i \theta}
+\end{equation}
+Hence the geometric product $\u \v$ is a combination of rotation by the angle between the vectors and scaling by the product of their magnitudes. We also saw earlier
+\begin{equation}
+	\v \u = \u \cdot \v - \u \wedge \v = \left( \u \v \right)^*
+\end{equation}
+
+Hence reversing the order of vectors in the geometric product gives the complex conjugate. Also we know multiplying on the left by $\u \v$ and multiplying on the right by $\left( \u \v \right)^* = \v \u$ are equivalent. Hence the trivectors
+\begin{equation}
+	\w \u \v = \v \u \w
+\end{equation}
+are equivalent, representing rotation by the angle between $\u$ and $\v$ and scaling by $\norm{\u} \norm{\v}$.
+
+\subsection{Multivectors in 3D}
+A general multivector in 3D $a + \u + \vec{V} + W$ consist of a scalar, vector, bivector and trivector component. Writing out the components, there is 1 scalar component, 3 vector components, 3 bivector components and 1 trivector component giving 8 total components
+\begin{equation}
+	a + b \xhat + c \yhat + d \zhat + e \xhat \yhat + f \yhat \zhat + g \xhat \zhat + h \xhat \yhat \zhat
+\end{equation}
+
+The unit pseudo-scalar is now $i = \xhat \yhat \zhat = - \zhat \yhat \xhat$ such that $i^2 = -1$. However, the pseudo-scalars no longer represent rotations. Let's see the effect of $i$ on the unit vectors and bivectors when multplying on the left and right
+\begin{equation*}
+	\begin{gathered}
+		i \xhat = (\xhat \yhat \zhat) \xhat = \yhat \zhat \quad \xhat i = \xhat (\xhat \yhat \zhat) = \yhat \zhat \\
+		i \yhat = (\xhat \yhat \zhat) \yhat = - \xhat \zhat \quad \yhat i = \yhat (\xhat \yhat \zhat) = -\xhat \zhat \\
+		i \zhat = (\xhat \yhat \zhat) \zhat = \xhat \yhat \quad \zhat i = \zhat (\xhat \yhat \zhat) = \xhat \yhat \\
+		i \xhat \yhat = (\xhat \yhat \zhat) \xhat \yhat = - \zhat \quad \xhat \yhat i = \xhat \yhat (\xhat \yhat \zhat) = - \zhat \\
+		i \yhat \zhat = (\xhat \yhat \zhat) \yhat \zhat = - \xhat \quad \yhat \zhat i = \yhat \zhat (\xhat \yhat \zhat) = - \xhat \\
+		i \xhat \zhat = (\xhat \yhat \zhat) \xhat \zhat = \yhat \quad \xhat \zhat i = \xhat \zhat (\xhat \yhat \zhat) = \yhat \\
+	\end{gathered}
+\end{equation*}
+Hence $i$ commutes with every component of a multivector $A$, hence $iA = Ai$. The action of $i$ turns vectors into bivectors and bivectors into vectors. The geometry follows the right hand rule; the bivector $\vec{U} = i \v$ is such that curling the fingers of your right hand following the orientation of $\vec{U}$ means your thumb points in the direction of $\v$. $\vec{U}$ and $\v$ are also perpendicular to each other.
+
+As we can represent any bivector as its normal vector multiplied by $i$ you can also write a general multivector as
+\begin{equation}
+	a + \u + \v i + b i
+\end{equation}
+remembering $\v i$ is a bivector! As bivectors and vectors are similar in 3D, bivectors are also called pseudo-vectors.
+
+Replacing cross products with exterior products in physics equations can result in more meaningful quantities. For example, earlier we derived a relation between the cross product and exterior product
+\begin{equation*}
+	\u \wedge \v = i \u \times \v
+\end{equation*}
+
+Consider the action of a force $\vec{F}$ acting at a position $\vec{r}$. The torque vector $\vec{\tau}$ is usually defined as $\vec{\tau} = \vec{r} \times \vec{F}$, resulting in a vector pointing perpendicular to the plane the forces are acting in!
+
+If instead we write torque using the exterior product $\tau = \vec{r} \wedge \vec{F}$, we get torque is a bivector in the plane of the motion. We know bivectors represent rotations, and the magnitude of the bivector has the same properties as moments i.e. the magnitude of the rotation scales linearly with $\norm{\vec{r}}$ and $\norm{\vec{F}}$!
+
+Now lets think about products of the bivector basis. Using the fact we can freely multiply by $e_i e_i$ and the commutativity of $i$
+\begin{equation*}
+	\begin{gathered}
+		\xhat \yhat = \xhat \yhat \zhat \zhat = i \zhat \\
+		\yhat \zhat = \xhat \xhat \yhat \zhat = \xhat i = i \xhat \\
+		\zhat \xhat = \yhat \yhat \zhat \xhat = \yhat \xhat \yhat \zhat = \yhat i = i \yhat
+	\end{gathered}
+\end{equation*}
+
+Combined with the fact $\xhat^2 = 1$, $\yhat^2 = 1$ and $\zhat^2 = 1$, these are the equations which define the Pauli spin matrices
+\begin{equation*}
+	\sigma_1 = \begin{pmatrix}
+		0 & 1 \\ 1 & 0
+	\end{pmatrix} \quad
+	\sigma_2 = \begin{pmatrix}
+		0 & -i \\ i & 0
+	\end{pmatrix} \quad
+	\sigma_3 = \begin{pmatrix}
+		1 & 0 \\ 0 & -1
+	\end{pmatrix}
+\end{equation*}
+
+Hence the Pauli spin matrices are just the unit vectors in disguise! You now begin to appreciate how geometrical algebra can simplify equations using just vector algebra.
+
+Now lets look at the basis bivectors. We already know $(\xhat \yhat)^2 = (\yhat \zhat)^2 = (\xhat \zhat)^2 = -1$. The product of all 3 gives $\xhat \yhat \yhat \zhat \xhat \zhat = -1$. Hence we get the relation
+
+\begin{equation*}
+	(\xhat \yhat)^2 = (\yhat \zhat)^2 = (\xhat \zhat)^2 = \xhat \yhat \yhat \zhat \xhat \zhat -1
+\end{equation*}
+
+If we substitute $i = \xhat \yhat$, $j = \yhat \zhat$ and $k = \xhat \zhat$ we get $i^2=j^2=k^2=ijk=-1$ which is the defining relation for quaternions! Hence in 3D a scalar plus a bivector is now a quaternion instead of a complex number.
+
+\subsection{Rotations in 3D using multivectors}
+Lets consider multiplying a vector $\v = a\xhat + b\yhat + c\zhat$ 90 degrees about the $z$ axis, which maps it to $\v' = a\yhat - b\xhat + c \zhat$. Only the $\xhat$ and $\yhat$ components change, so this is equivalent to rotating in the $x-y$ plane. We already did that in 2D by multiplying by $\xhat \yhat$, so lets try that
+\begin{equation*}
+	\v \xhat \yhat = (a\xhat + b\yhat + c\zhat) \xhat \yhat = a \yhat - b \xhat + c \xhat \yhat \zhat
+\end{equation*}
+
+This almost worked, but we ended up with a trivector for the z co-ordinate! Before we saw right multiplication is equivalent to left multiplication by the conjugate, so lets see what that does
+
+\begin{equation*}
+	\yhat \xhat \v =  \yhat \xhat (a\xhat + b\yhat + c\zhat) = a \yhat - b \xhat - c \xhat \yhat \zhat
+\end{equation*}
+
+Again we get a trivector but with opposite orientation. The $\zhat$ got transformed opposite ways so lets try doing both
+\begin{equation*}
+	\yhat \xhat \v \xhat \yhat = \yhat \xhat (a\xhat + b\yhat + c\zhat) \xhat \yhat = a (\yhat \xhat \xhat \xhat \yhat) + b (\yhat \xhat \yhat \xhat \yhat) + c (\yhat \xhat \zhat \xhat \yhat)
+\end{equation*}
+\begin{equation*}
+	= -a \xhat -b \yhat + c\zhat
+\end{equation*}
+
+So the $\zhat$ component is correct, but now we've rotated by 180 degrees as we applied two 90 degree rotations. We know we can write $\xhat \yhat$ as an exponential $e^{\xhat \yhat \frac{\pi}{2}}$. So to get our 90 degree rotation, we should apply two 45 degree rotations. Expanding this, remembering to use the conjugate on the left and that $\cos \frac{\pi}{4} = \sin \frac{\pi}{4} = \frac{1}{\sqrt{2}}$ we get
+\begin{equation*}
+	e^{-\xhat\yhat \frac{\pi}{4}} = \cos \frac{\pi}{4} - \xhat \yhat \sin \frac{\pi}{4} = \frac{1}{\sqrt{2}} (1 - \xhat \yhat)
+\end{equation*}
+\begin{equation*}
+	e^{\xhat\yhat \frac{\pi}{4}} = \cos \frac{\pi}{4} + \xhat \yhat \sin \frac{\pi}{4} = \frac{1}{\sqrt{2}} (1 + \xhat \yhat)
+\end{equation*}
+\begin{equation*}
+	\implies e^{-\xhat\yhat \frac{\pi}{4}} \v e^{\xhat\yhat \frac{\pi}{4}} = \frac{1}{\sqrt{2}} (1 - \xhat \yhat) (a \xhat + b \yhat + c \zhat) \frac{1}{\sqrt{2}} (1 + \xhat \yhat)
+\end{equation*}
+\begin{equation*}
+	= \frac{1}{2} (a \xhat + b \yhat + c\zhat - a \xhat \yhat \xhat - b \xhat \yhat \yhat - c \xhat \yhat \zhat) (1 + \xhat \yhat)
+\end{equation*}
+\begin{equation*}
+	= \frac{1}{2} (a \xhat + b \yhat + c\zhat + a \yhat - b \xhat - c \xhat \yhat \zhat) (1 + \xhat \yhat)
+\end{equation*}
+\begin{equation*}
+	= \frac{1}{2} (a \xhat + b \yhat + c\zhat + a \yhat - b \xhat - c \xhat \yhat \zhat + a \xhat \xhat \yhat + b \yhat \xhat \yhat + c \zhat \xhat \yhat + a \yhat \xhat \yhat - b \xhat \xhat \yhat - c \xhat \yhat \zhat \xhat \yhat)
+\end{equation*}
+\begin{equation*}
+	= \frac{1}{2} (a \xhat + b \yhat + c\zhat + a \yhat - b \xhat - c \xhat \yhat \zhat + a \yhat - b \xhat + c \xhat \yhat \zhat - a \xhat - b \yhat + c \zhat)
+\end{equation*}
+\begin{equation*}
+	= \frac{1}{2} (2a \yhat - 2b \xhat + 2c \zhat) = a \yhat - b \xhat + c \zhat
+\end{equation*}
+
+So we get what we wanted! Hence we see to rotate a vector $\v$ by an angle $\theta$ in the plane described by the unit bivector $\hat{I}$ we use the formula
+\begin{equation}
+	e^{-\hat{I} \frac{\theta}{2}} \v e^{\hat{I} \frac{\theta}{2}}
+\end{equation}
+
+When used in this way the value $e^{-\hat{I} \frac{\theta}{2}}$ is called a Rotor. Note if we rotate through 360 degrees the Rotor is only a 180 degree rotation, so we have to go through 720 degrees for the Rotor to return to zero. This is connected to the Spinors of quantum mechanics which also have this property, and it falls out of the fact the most convenient way to represent rotations in 3D uses Rotors.
+
+\subsection{Maxwell's Equations}
+We will briefly cover how geometric algebra simplifies Maxwell's equations here before coming back to it later on. Maxwell's equations are
+\begin{equation*}
+	\begin{gathered}
+		\grad \cdot \E = \frac{\rho}{\epsilon_0} \\
+		\grad \cdot \B = 0 \\
+		\grad \times \E = -\frac{\partial \B}{\partial t} \\
+		\grad \times \B = \mu_0 \J + \epsilon_0 \mu_0 \frac{\partial \E}{\partial t}
+	\end{gathered}
+\end{equation*}
+
+Firstly we will define a new gradient operator, taking Minkowski's ideas of treating time and space the same, as the sum of a scalar and vector
+\begin{equation*}
+	\nabla := \frac{1}{c} \frac{\partial}{\partial t} + \grad = \frac{1}{c} \frac{\partial}{\partial t} + \frac{\partial}{\partial x}\xhat + \frac{\partial}{\partial y}\yhat + \frac{\partial}{\partial z}\zhat
+\end{equation*}
+where we have added a factor of $c$ to fix the units. Next lets consider the source terms $\rho$ and $\J$. Proceeding similarly we just add them (or subtract them)
+\begin{equation*}
+	J = c\rho - \J
+\end{equation*}
+where we have again added a factor of $c$ to fix the units. Now lets try to combine the electric and magnetic fields $\E$ and $\B$. We cannot proceed as before as both $\E$ and $\B$ are vectors. However, $\B$ is defined via the cross product so it should be a bivector. We can multiply by the unit trivector $i$ to turn it into one, hence we get
+\begin{equation}
+	F = \E + i c\B
+\end{equation}
+where we have again added a factor of $c$ to fix the units. Now we can write Maxwell's equation
+\begin{equation*}
+	\nabla F = c \mu_0 J
+\end{equation*}
+
+To prove this is equivalent to Maxwell's equations we expand $\nabla F$, using the definition of the geometric product $\u \v = \u \cdot \v + \u \wedge \v$
+
+\begin{equation*}
+	\nabla F = \frac{1}{c} \frac{\partial \E}{\partial t} + \grad \E + i \frac{\partial \B}{\partial t} + ic \grad \B
+\end{equation*}
+\begin{equation*}
+	= \frac{1}{c} \frac{\partial \E}{\partial t} + \grad \cdot \E + \grad \wedge \E + i \frac{\partial \B}{\partial t} + ic \grad \cdot \B + ic \grad \wedge \B
+\end{equation*}
+
+This has a scalar, vector, multivector and trivector component
+\begin{equation}
+	\nabla F = \underbrace{\grad \cdot \E}_{\text{Scalar}} + \underbrace{\frac{1}{c} \frac{\partial \E}{\partial t} + ic \grad \wedge \B}_{\text{Vector}} + \underbrace{\grad \wedge \E + i \frac{\partial \B}{\partial t}}_{\text{Bivector}} + \underbrace{ic \grad \cdot \B}_{\text{Trivector}}
+\end{equation}
+
+On the right hand side we see $J$ only has a scalar and vector component
+\begin{equation}
+	c \mu_0 J = \mu_0 c^2 \rho - c \mu_0 \J = \underbrace{\frac{\rho}{\epsilon_0}}_{\text{Scalar}} - \underbrace{c \mu_0 \J}_{\text{Vector}}
+\end{equation}
+
+Matching scalar, vector, bivector and trivector components respectively we get the following equations, remembering the expression $\grad \wedge \v = i \grad \times \v$
+\begin{equation*}
+	\begin{gathered}
+		\grad \cdot \E = \frac{\rho}{\epsilon_0} \\
+		\frac{1}{c} \frac{\partial \E}{\partial t} + ic \grad \wedge \B = -c \mu_0 \J \implies -i (i \grad \times \B) = \grad \times \B = \mu_0 \J + \frac{1}{c^2} \frac{\partial \E}{\partial t} \\
+		\grad \wedge \E + i \frac{\partial \B}{\partial t} = 0 \implies \grad \times \E = -\frac{\partial \B}{\partial t} \\
+		ic \grad \cdot \B = 0 \implies \grad \cdot \B = 0
+	\end{gathered}
+\end{equation*}
+Hence we recover the Maxwell equations.
+
+\section{Geometric Algebra More Rigorously}
+In the previous section we played fast and loose with some concepts to make progress as we were only in 2 and 3 dimensions. Now we pay the price and must do things more rigorously if we want to expand this to arbitrary dimensions. For now we stay in Euclidean space.
+
+\subsection{Blades, Grades and Automobiles}
+A multivector that is tha exterior product of k linearly independent vectors is called a blade. The grade of this blade is then k. The grade of a $k$-vector and $k$-blade is $k$. The grade and dimension differ because as we saw in 3D the linear space of multivectors is spanned by 8 components.
+
+\subsection{What is the geometric product?}
+For general multivectors $A$ and $B$ these statements from before are not true in general
+\begin{equation*}
+	\begin{gathered}
+		A \cdot B = B \cdot A \\
+		A \wedge B = - B \wedge A \\
+		\text{All nonzero multivectors are invertible} \\
+		AB = A \cdot B + A \wedge B
+	\end{gathered}
+\end{equation*}
+
+The last equation is surprising as we used that before to define the geometric product. Consider multiplication of bivectors in at least 4 dimensions. There is a basis \{$e_1, e_2, e_3, e_4, \dots$\}. In general multiplication of two bivectors can have 3 components
+\begin{equation*}
+	\begin{gathered}
+		(e_1 e_2) (e_1 e_2) = \text{Scalar} \\
+		(e_1 e_2) (e_2 e_3) = \text{Bivector} \\
+		(e_1 e_2) (e_3 e_4) = \text{4-vector}
+	\end{gathered}
+\end{equation*}
+
+When we defined $AB = A \cdot B + A \wedge B$ we end up with a scalar plus a 4-vector. Hence this expression is not true in general as we have an extra bivector term.
 
 \end{document}

@@ -46,11 +46,11 @@ The Cartesian components of the velocity are
 \begin{equation}
 	\v = \left(\vper\cos\theta, \vper\sin\theta, \vpar\right)
 \end{equation}
-which implies ($\Omega$ is the gyrofrequency)
+which implies ($\Omega_s$ is the gyrofrequency for species $s$)
 \begin{equation}
-	\v = \left(\vper\cos\left[\Omega\left(t-t'\right)+\theta\right], \vper\sin\left[\Omega\left(t-t'\right)+\theta\right], \vpar\right)
+	\v = \left(\vper\cos\left[\Omega_s\left(t-t'\right)+\theta\right], \vper\sin\left[\Omega_s\left(t-t'\right)+\theta\right], \vpar\right)
 \end{equation}
-This expression is a bit long so define $\chi =\Omega\left(t-t'\right)+\theta$ so
+This expression is a bit long so define $\chi =\Omega_s\left(t-t'\right)+\theta$ so
 \begin{equation}
 	\v = \left(\vper\cos\chi, \vper\sin\chi, \vpar\right)
 \end{equation}
@@ -187,25 +187,25 @@ Using these identities we can replace $\cos\chi e^{i\mu\sin\chi}$, $\sin\chi e^{
 	f_1 = \frac{-e}{m \omega} \int_{-\infty}^t \sum_{n=-\infty}^\infty \left(\frac{nJ_n\left(\mu\right)}{\mu} P E_x - i J_n' \left(\mu\right) P E_y + \left[\omega \dfdvpar J_n\left(\mu\right) + \frac{nJ_n\left(\mu\right)}{\mu} Q\right]E_z \right) \times
 \end{equation*}
 \begin{equation}
-	\exp \left[-i\mu \sin\theta \right] \exp \left[in \theta \right] \exp \left[i\left(n\Omega + \kpar \vpar - \omega\right) \left(t' - t\right)\right] dt'
+	\exp \left[-i\mu \sin\theta \right] \exp \left[in \theta \right] \exp \left[i\left(n\Omega_s + \kpar \vpar - \omega\right) \left(t' - t\right)\right] dt'
 \end{equation}
-where we have split $\exp \left[in\chi\right] = \exp \left[in\theta \right] \exp \left[in\Omega \left(t' - t\right)\right]$ and combined some terms. From now on we'll drop the argument of the Bessel functions for brevity. We can rewrite the coefficient for $E_z$ as
+where we have split $\exp \left[in\chi\right] = \exp \left[in\theta \right] \exp \left[in\Omega_s \left(t' - t\right)\right]$ and combined some terms. From now on we'll drop the argument of the Bessel functions for brevity. We can rewrite the coefficient for $E_z$ as
 \begin{equation*}
 	\omega \dfdvpar J_n + \frac{nJ_n}{\mu} \left( \kper\vpar\dfdvper - \kper\vper\dfdvpar \right)
 \end{equation*}
 \begin{equation}
-	 = \left[ \frac{n\Omega \vpar}{\vper} \dfdvper + \left(\omega - n\Omega\right) \dfdvpar \right] J_n
+	 = \left[ \frac{n\Omega_s \vpar}{\vper} \dfdvper + \left(\omega - n\Omega_s\right) \dfdvpar \right] J_n
 \end{equation}
 We can define a new simpler variable $R$ to replace $Q$
 \begin{equation}
-	R = \frac{n\Omega \vpar}{\vper} \dfdvper + \left(\omega - n\Omega\right) \dfdvpar
+	R = \frac{n\Omega \vpar}{\vper} \dfdvper + \left(\omega - n\Omega_s\right) \dfdvpar
 \end{equation}
 allowing us to write
 \begin{equation*}
 	f_1 = \frac{-e}{m \omega} \int_{-\infty}^t \sum_{n=-\infty}^\infty \left(\frac{nJ_n}{\mu} P E_x - i J_n' P E_y + J_n R E_z \right) \times
 \end{equation*}
 \begin{equation}
-	\exp \left[-i\mu \sin\theta \right] \exp \left[in \theta \right] \exp \left[i\left(n\Omega + \kpar \vpar - \omega\right) \left(t' - t\right)\right] dt'
+	\exp \left[-i\mu \sin\theta \right] \exp \left[in \theta \right] \exp \left[i\left(n\Omega_s + \kpar \vpar - \omega\right) \left(t' - t\right)\right] dt'
 \end{equation}
 
 We now the only time dependence in our integrand comes from the final complex exponential term, so we can write
@@ -214,12 +214,12 @@ We now the only time dependence in our integrand comes from the final complex ex
 	f_1 = \frac{-e}{m \omega} \sum_{n=-\infty}^\infty \left(\frac{nJ_n}{\mu} P E_x - i J_n' P E_y + J_n R E_z \right) \times
 \end{equation*}
 \begin{equation}
-	\exp \left[-i\mu \sin\theta \right] \int_{-\infty}^t \exp \left[in \theta \right] \exp \left[i\left(n\Omega + \kpar \vpar - \omega\right) \left(t' - t\right)\right] dt'
+	\exp \left[-i\mu \sin\theta \right] \int_{-\infty}^t \exp \left[in \theta \right] \exp \left[i\left(n\Omega_s + \kpar \vpar - \omega\right) \left(t' - t\right)\right] dt'
 \end{equation}
 
 This is an easy integral
 \begin{equation}
-	\int_{-\infty}^t \exp \left[i\left(n\Omega + \kpar \vpar - \omega\right) \left(t' - t\right)\right] dt' = \frac{i}{\omega-n\Omega-\kpar \vpar}
+	\int_{-\infty}^t \exp \left[i\left(n\Omega + \kpar \vpar - \omega\right) \left(t' - t\right)\right] dt' = \frac{i}{\omega - n\Omega_s - \kpar \vpar}
 \end{equation}
 
 where we make some arguments using delta functions about how the complex exponential evaluates to 0 at $-\infty$. So we get our simplest form for $f_1$
@@ -227,68 +227,68 @@ where we make some arguments using delta functions about how the complex exponen
 	f_1 = \frac{-e}{m \omega} \sum_{n=-\infty}^\infty \left(\frac{nJ_n}{\mu} P E_x - i J_n' P E_y + J_n R E_z \right) \times
 \end{equation*}
 \begin{equation}
-	\exp \left[-i\mu \sin\theta \right] \exp \left[in \theta \right] \frac{i}{\omega-n\Omega-\kpar \vpar}
+	\exp \left[-i\mu \sin\theta \right] \exp \left[in \theta \right] \frac{i}{\omega - n\Omega_s - \kpar \vpar}
 \end{equation}
 
 Now we need to take the first velocity moment $f_1$ to get our currents
 \begin{equation}
-	j_i = e \int v_i f_1 d^3 \v
+	\j_i = e \int \v_i f_1 d^3 \v = e \int_{-\infty}^\infty \int_0^{2 \pi} \int_0^\infty \v_i f_1 2 \pi \vper d\vper d \theta d \vpar
 \end{equation}
-
+where we have expressed the velocity in cylindrical co-ordinates, taking $\vper \in \left[0, \infty \right]$ and $\theta \in \left[0, 2\pi\right]$ for the components of the velocity perpendicular to the magnetic field and $\vpar \in \left[ -\infty, \infty \right]$ for the component of velocity parallel to the magnetic field. Note these integral limits are important!
 We already saw $v_x = \vper \cos\theta$, $v_y = \vpar \sin\theta$ and $v_z = \vpar$ so we get these expressions for the currents
 \begin{equation*}
 	j_x = \frac{-e^2\vper}{m \omega} \sum_{n=-\infty}^\infty \left(\frac{nJ_n}{\mu} P E_x - i J_n' P E_y + J_n R E_z \right) \times
 \end{equation*}
 \begin{equation}
-	\cos\theta \exp \left[-i\mu \sin\theta \right] \exp \left[in \theta \right] \frac{i}{\omega-n\Omega-\kpar \vpar}
+	\cos\theta \exp \left[-i\mu \sin\theta \right] \exp \left[in \theta \right] \frac{i}{\omega - n\Omega_s - \kpar \vpar}
 \end{equation}
 \begin{equation*}
 	j_y = \frac{-e^2\vper}{m \omega} \sum_{n=-\infty}^\infty \left(\frac{nJ_n}{\mu} P E_x - i J_n' P E_y + J_n R E_z \right) \times
 \end{equation*}
 \begin{equation}
-	\sin\theta \exp \left[-i\mu \sin\theta \right] \exp \left[in \theta \right] \frac{i}{\omega-n\Omega-\kpar \vpar}
+	\sin\theta \exp \left[-i\mu \sin\theta \right] \exp \left[in \theta \right] \frac{i}{\omega - n\Omega_s - \kpar \vpar}
 \end{equation}
 \begin{equation*}
 	j_z = \frac{-e^2\vpar}{m \omega} \sum_{n=-\infty}^\infty \left(\frac{nJ_n}{\mu} P E_x - i J_n' P E_y + J_n R E_z \right) \times
 \end{equation*}
 \begin{equation}
-	\exp \left[-i\mu \sin\theta \right] \exp \left[in \theta \right] \frac{i}{\omega-n\Omega-\kpar \vpar}
+	\exp \left[-i\mu \sin\theta \right] \exp \left[in \theta \right] \frac{i}{\omega - n\Omega_s - \kpar \vpar}
 \end{equation}
 which are all very similar apart from factors of $\vper$ or $\vpar$ and more expressions $\propto \exp \left[-i\mu \sin\theta \right]$ we can replace using \eqref{jacobi_anger}, \eqref{jacobi_anger_cos} and \eqref{jacobi_anger_sin} where we use the expression $e^{-i\mu\sin\theta} = e^{i\mu\sin\left(-\theta\right)}$. Doing these replacements we get
 \begin{equation*}
 	j_x = \frac{-e^2\vper}{m \omega} \sum_{n=-\infty}^\infty \left(\frac{nJ_n}{\mu} P E_x - i J_n' P E_y + J_n R E_z \right) \times
 \end{equation*}
 \begin{equation}
-	\sum_{m=-\infty}^\infty \frac{mJ_m}{\mu} \exp \left[i\left(n - m\right) \theta \right] \frac{i}{\omega-n\Omega-\kpar \vpar}
+	\sum_{m=-\infty}^\infty \frac{mJ_m}{\mu} \exp \left[i\left(n - m\right) \theta \right] \frac{i}{\omega - n\Omega_s - \kpar \vpar}
 \end{equation}
 \begin{equation*}
 	j_y = \frac{-e^2\vper}{m \omega} \sum_{n=-\infty}^\infty \left(\frac{nJ_n}{\mu} P E_x - i J_n' P E_y + J_n R E_z \right) \times
 \end{equation*}
 \begin{equation}
-	\sum_{m=-\infty}^\infty -iJ_m' \exp \left[i\left(n - m\right) \theta \right] \frac{i}{\omega-n\Omega-\kpar \vpar}
+	\sum_{m=-\infty}^\infty -iJ_m' \exp \left[i\left(n - m\right) \theta \right] \frac{i}{\omega - n\Omega_s - \kpar \vpar}
 \end{equation}
 \begin{equation*}
 	j_z = \frac{-e^2\vpar}{m \omega} \sum_{n=-\infty}^\infty \left(\frac{nJ_n}{\mu} P E_x - i J_n' P E_y + J_n R E_z \right) \times
 \end{equation*}
 \begin{equation}
-	\sum_{m=-\infty}^\infty J_m \exp \left[i\left(n - m\right) \theta \right] \frac{i}{\omega-n\Omega-\kpar \vpar}
+	\sum_{m=-\infty}^\infty J_m \exp \left[i\left(n - m\right) \theta \right] \frac{i}{\omega - n\Omega_s - \kpar \vpar}
 \end{equation}
 
 We can replace $\exp \left[i\left(n - m\right) \theta \right] = 2\pi\delta\left(n-m\right)$ where $\delta$ is the Dirac delta. To get rid of these terms we'll just integrate over gyrophase $\theta$ now which just sets $n=m$ and we pick up a factor of $2\pi$. This collapses the double sum to a single sum, allowing us to write an expression which almost fits on a single line!
 
 \begin{equation}
-	\int_0^{2\pi} j_x d\theta = \frac{-2\pi ie^2\vper}{m \omega} \sum_{n=-\infty}^\infty \frac{\left(\frac{nJ_n}{\mu}\right)^2 P E_x - i \frac{nJ_n J_n'}{\mu} P E_y + \frac{nJ_n^2}{\mu} R E_z}{\omega-n\Omega-\kpar \vpar}
+	\int_0^{2\pi} j_x d\theta = \frac{-2\pi ie^2\vper}{m \omega} \sum_{n=-\infty}^\infty \frac{\left(\frac{nJ_n}{\mu}\right)^2 P E_x - i \frac{nJ_n J_n'}{\mu} P E_y + \frac{nJ_n^2}{\mu} R E_z}{\omega - n\Omega_s - \kpar \vpar}
 \end{equation}
 \begin{equation}
-	\int_0^{2\pi} j_y d\theta = \frac{2\pi e^2\vper}{m \omega} \sum_{n=-\infty}^\infty \frac{\frac{nJ_nJ_n'}{\mu} P E_x - i \left(J_n'\right)^2 P E_y + J_n J_n' R E_z}{\omega-n\Omega-\kpar \vpar}
+	\int_0^{2\pi} j_y d\theta = \frac{2\pi e^2\vper}{m \omega} \sum_{n=-\infty}^\infty \frac{\frac{nJ_nJ_n'}{\mu} P E_x - i \left(J_n'\right)^2 P E_y + J_n J_n' R E_z}{\omega - n\Omega_s - \kpar \vpar}
 \end{equation}
 \begin{equation}
-	\int_0^{2\pi} j_z d\theta = \frac{-2i\pi e^2\vpar}{m \omega} \sum_{n=-\infty}^\infty \frac{\frac{nJ_n^2}{\mu} P E_x - i J_n J_n' P E_y + J_n^2 R E_z}{\omega-n\Omega-\kpar \vpar}
+	\int_0^{2\pi} j_z d\theta = \frac{-2i\pi e^2\vpar}{m \omega} \sum_{n=-\infty}^\infty \frac{\frac{nJ_n^2}{\mu} P E_x - i J_n J_n' P E_y + J_n^2 R E_z}{\omega - n\Omega_s - \kpar \vpar}
 \end{equation}
 
 We can now use the definition of the dielectric tensor \eqref{dielectric_tensor_def_kinetic_theory} to write
 \begin{equation} \label{hot_plasma_dielectric_generic_f}
-	\epsilon_{ij} = \delta_{ij} + \sum_s \frac{X_s}{n_s} \sum_{n=-\infty}^\infty \int_0^\infty \int_0^\infty \frac{2\pi S_{ij}}{\omega-n\Omega-\kpar \vpar} d\vper d\vper
+	\epsilon_{ij} = \delta_{ij} + \sum_s X_s \sum_{n=-\infty}^\infty \frac{1}{n_s} \int_{-\infty}^\infty \int_0^\infty \frac{S_{ij}}{\omega - n\Omega_s - \kpar \vpar} 2\pi \vper d\vper d\vpar
 \end{equation}
 
 where
@@ -301,12 +301,12 @@ where
 	\end{bmatrix}
 \end{equation}
 \begin{equation*}
-	P = \left(\omega-\kpar\vpar\right)\dfsdvper + \kpar\vper\dfdvpar
+	P = \left(\omega - \kpar\vpar\right)\dfsdvper + \kpar\vper\dfdvpar
 \end{equation*}
 \begin{equation*}
-	R = \frac{n\Omega \vpar}{\vper} \dfsdvper + \left(\omega - n\Omega\right) \dfdvpar
+	R = \frac{n\Omega_s \vpar}{\vper} \dfsdvper + \left(\omega - n\Omega_s \right) \dfdvpar
 \end{equation*}
-and the arguments of the Bessel functions are $\mu = \frac{\kper\vper}{\Omega}$. We have also used the expression
+and the arguments of the Bessel functions are $\mu = \frac{\kper\vper}{\Omega_s}$. We pick up a factor of $2\pi\vper$ from the integration area element in polar co-ordinates. We have also used the expression
 \begin{equation*}
 	\frac{e_s^2}{\omega^2 \epsilon_0 m_s} = \frac{1}{n_s} \frac{1}{\omega^2} \frac{n_s e_s^2}{\epsilon_0 m_s} = \frac{1}{n_s} \frac{\omega_{ps}^2}{\omega^2} = \frac{X_s}{n_s}
 \end{equation*}
@@ -332,23 +332,23 @@ Substituting into the expression for $P$
 
 Substituting into the expression for $R$
 \begin{equation*}
-	R = \frac{n \Omega \vpar}{\vper} \left( - \frac{2 \vper f_{0s}}{v_{Ts}^2} \right) + \left( \omega - n \Omega \right) \left( - \frac{2 \vpar f_{0s}}{v_{Ts}^2} \right)
+	R = \frac{n \Omega_s \vpar}{\vper} \left( - \frac{2 \vper f_{0s}}{v_{Ts}^2} \right) + \left( \omega - n \Omega_s \right) \left( - \frac{2 \vpar f_{0s}}{v_{Ts}^2} \right)
 \end{equation*}
 \begin{equation}
-	= - \frac{2 f_{0s}}{v_{Ts}^2} \left[ n \Omega \vpar + \left( \omega - n \Omega \right) \vpar \right] = -\frac{2 \omega \vpar}{v_{Ts}^2} f_{0s}
+	= - \frac{2 f_{0s}}{v_{Ts}^2} \left[ n \Omega_s \vpar + \left( \omega - n \Omega_s \right) \vpar \right] = -\frac{2 \omega \vpar}{v_{Ts}^2} f_{0s}
 \end{equation}
 
 Now we can make some progress on the double integral in \eqref{hot_plasma_dielectric_generic_f} which I denote
 \begin{equation}
-	I_{ij} = \int_0^\infty \int_0^\infty \frac{2\pi S_{ij}}{\omega-n\Omega-\kpar \vpar} d\vper d\vper
+	I_{ij} = \frac{1}{n_s} \int_{-\infty}^\infty \int_0^\infty \frac{2\pi S_{ij}}{\omega-n\Omega_s-\kpar \vpar} d\vper d\vpar
 \end{equation}
 
 We see the only difference now between $P$ and $R$ is the component of $v$ so we can write
 \begin{equation*}
-	I_{ij} = - \left( 4 \pi \omega \right) \int_0^\infty \int_0^\infty \frac{S_{ij} f_{0s}}{\omega-n\Omega-\kpar \vpar} \frac{d\vper d\vper}{v_{Ts}^2}
+	I_{ij} = - \frac{4 \pi \omega}{n_s} \int_{-\infty}^\infty \int_0^\infty \frac{S_{ij} f_{0s}}{\omega - n\Omega_s - \kpar \vpar} \frac{\vper d\vper d\vpar}{v_{Ts}^2}
 \end{equation*}
 \begin{equation}
-	= - \left( 4 \pi \omega \right) \left( \frac{n_s}{\pi^{\frac{3}{2}}v_{Ts}^3} \right) \int_0^\infty \int_0^\infty \frac{S_{ij}}{\omega-n\Omega-\kpar \vpar} \exp \left[ - \frac{\vper^2 + \vpar^2}{v_{Ts}^2} \right] \frac{d\vper d\vper}{v_{Ts}^2}
+	= \frac{4 \pi \omega}{n_s} \frac{n_s}{\pi^{\frac{3}{2}}v_{Ts}^3} \int_{-\infty}^\infty \int_0^\infty \frac{S_{ij}}{\kpar \vpar + n\Omega_s - \omega} \exp \left[ - \frac{\vper^2 + \vpar^2}{v_{Ts}^2} \right] \frac{\vper d\vper d\vpar}{v_{Ts}^2}
 \end{equation}
 
 where
@@ -361,38 +361,138 @@ where
 	\end{bmatrix}
 \end{equation}
 
-Now we change co-ordinates to normalised velocity $\betaper$ and $\betapar$
+Now we change co-ordinates to normalised velocity $\uper$ and $\upar$
 \begin{equation*}
-	\betaper = \frac{\vper}{v_{Ts}} \implies d\betaper = \frac{d\vper}{v_{Ts}}
+	\uper = \frac{\vper}{v_{Ts}} \implies d\uper = \frac{d\vper}{v_{Ts}}
 \end{equation*}
 \begin{equation*}
-	\betapar = \frac{\vpar}{v_{Ts}} \implies d\betapar = \frac{d\vpar}{v_{Ts}}
+	\upar = \frac{\vpar}{v_{Ts}} \implies d\upar = \frac{d\vpar}{v_{Ts}}
 \end{equation*}
 
 So now we can write 
 \begin{equation}
-	I_{ij} = -\frac{4 \omega n_s}{\sqrt{\pi}} \frac{1}{v_{Ts}} \int_0^\infty \int_0^\infty \frac{S_{ij}}{\omega-n\Omega-\kpar \vpar} e^{-\left(\betaper^2 + \betapar^2\right)} d\betaper d\betapar
+	I_{ij} = \frac{4 \omega}{\sqrt{\pi}} \int_{-\infty}^\infty \int_0^\infty \frac{S_{ij}}{\kpar v_{Ts} \upar + n\Omega_s - \omega} \uper e^{-\left(\uper^2 + \upar^2\right)} d\uper d\upar
 \end{equation}
 
 where
 \begin{equation}
 	S_{ij} =
 	\begin{bmatrix}
-		\betaper^2 \left(\frac{nJ_n}{\mu}\right)^2 & i\betaper^2 \frac{nJ_nJ_n'}{\mu} & \betaper \betapar \frac{nJ_n^2}{\mu}\\
-		- i\betaper^2 \frac{nJ_nJ_n'}{\mu} & \betaper^2 \left(J_n'\right)^2 & -i \betaper \betapar J_n J_n'\\
-		\betaper \betapar \frac{nJ_n^2}{\mu}  & i \betaper \betapar J_n J_n' & \betapar^2 J_n^2\\
+		\uper^2 \left(\frac{nJ_n}{\mu}\right)^2 & i\uper^2 \frac{nJ_nJ_n'}{\mu} & \uper \upar \frac{nJ_n^2}{\mu}\\
+		- i\uper^2 \frac{nJ_nJ_n'}{\mu} & \uper^2 \left(J_n'\right)^2 & -i \uper \upar J_n J_n'\\
+		\uper \upar \frac{nJ_n^2}{\mu}  & i \uper \upar J_n J_n' & \upar^2 J_n^2\\
 	\end{bmatrix}
 \end{equation}
 We also need to make this substitution to the arguments of the Bessel functions
 \begin{equation}
-	\mu = \frac{\kper\vper}{\Omega} = \frac{\kper v_{Ts}}{\Omega} \betaper = \sqrt{2 \lambda} \betaper
+	\mu = \frac{\kper\vper}{\Omega_s} = \frac{\kper v_{Ts}}{\Omega} \uper = \sqrt{2 \lambda_s} \uper
 \end{equation}
  
  where we have defined another convenient parameter
  \begin{equation}
- 	\lambda := \frac{\kper^2 v_{Ts}^2}{2 \Omega^2}
+ 	\lambda_s := \frac{\kper^2 v_{Ts}^2}{2 \Omega_s^2}
  \end{equation}
 
-We have cheated and used future knowledge that having these factors of $\sqrt{2 \lambda}$ in the Bessel functions will simplify some standard integrals.
+We have cheated and used future knowledge that having these factors of $\sqrt{2 \lambda_s}$ in the Bessel functions will simplify some standard integrals.
 
-Now we have to evaluate 6 terms $I_{xx} ,I_{xy}, I_{xz}, I_{yy}, I_{yz}$ and $I_{zz}$ to completely define the dielectric tensor, taking advantage of the symmetries $I_{yx} = -I_{xy}$, $I_{zx} = I_{xz}$ and $I_{zy} = -I_{yz}$.
+Now we have to evaluate 6 terms $I_{xx} ,I_{xy}, I_{xz}, I_{yy}, I_{yz}$ and $I_{zz}$ to completely define the dielectric tensor, taking advantage of the symmetries $I_{yx} = -I_{xy}$, $I_{zx} = I_{xz}$ and $I_{zy} = -I_{yz}$. Starting with $I_{xx}$, using the definition of $\lambda_s$ so $\frac{\uper}{\mu} = \frac{1}{\sqrt{2 \lambda_s}}$
+\begin{equation*}
+	I_{xx} = \frac{4 \omega}{\sqrt{\pi}} \frac{n^2}{2\lambda_s} \int_{-\infty}^\infty \int_0^\infty \frac{e^{-\left(\uper^2 + \upar^2\right)}}{\kpar v_{Ts} \upar + n\Omega_s - \omega} \uper J_n \left( \sqrt{2 \lambda_s} \uper \right)^2 d\uper d\upar
+\end{equation*}
+\begin{equation}
+	= \frac{4 n^2}{2\lambda_s} \left[\frac{\omega}{\sqrt{\pi}} \int_{-\infty}^\infty \frac{e^{-\upar^2}}{\kpar v_{Ts} \upar + n\Omega_s - \omega} d\upar \right] \left[ \int_0^\infty J_n \left( \sqrt{2 \lambda_s} \uper \right)^2 \uper e^{-\uper^2} d\uper \right]
+\end{equation}
+
+We can simplify the first integral by taking out a factor of $\kpar v_{Ts}$ to get
+\begin{equation}
+	\frac{\omega}{\sqrt{\pi}} \int_{-\infty}^\infty \frac{e^{-\upar^2}}{\kpar v_{Ts} \upar + n\Omega_s - \omega} d\upar = \frac{\omega}{\kpar v_{Ts}} \frac{1}{\sqrt{\pi}} \int_{-\infty}^\infty \frac{e^{-\upar^2}}{\upar - \zeta_n} d\upar
+\end{equation}
+
+where we define another useful parameter
+\begin{equation}
+	\zetans := \frac{\omega - n \Omega_s}{\kpar v_{Ts}} = \frac{1 - nY_s}{\Npar \beta_{Ts}}
+\end{equation}
+
+where $\beta_{Ts} = \frac{v_{Ts}}{c}$. $\zetans$ gives a measure of the distance from the cyclotron harmonics accounting for Doppler shift. We also note that $\zeta_{0s} = \frac{\omega}{\kpar v_{Ts}}$ which was the factor we extracted from the first integral. Hence we get
+\begin{equation*}
+	\frac{1}{\kpar v_{Ts}} \frac{1}{\sqrt{\pi}} \int_{-\infty}^\infty \frac{e^{-\upar^2}}{\upar - \zeta_n} d\upar = \zeta_{0s} Z \left( \zetans \right)
+\end{equation*}
+
+where we define the Plasma Dispersion Function $Z$ as
+\begin{equation}
+	Z \left( \zetans \right) := \frac{1}{\sqrt{\pi}} \int_{-\infty}^\infty \frac{e^{-\upar^2}}{\upar - \zetans} d\upar
+\end{equation}
+
+This function has been studied in the famous paper by Fried and Conte [reference?]. Some similar integrals will appear later so it is convenient to state some results derived in the appendix \eqref{plasma_dispersion_x_int}, \eqref{plasma_dispersion_x2_int}
+\begin{equation*}
+	\frac{1}{\sqrt{\pi}} \int_{-\infty}^\infty \frac{\upar e^{-\upar^2}}{\upar - \zetans} d\upar = Z' \left( \zetans \right) = 1 + \zetans Z \left( \zetans \right)
+\end{equation*}
+\begin{equation*}
+	\frac{1}{\sqrt{\pi}} \int_{-\infty}^\infty \frac{\upar^2 e^{-\upar^2}}{\upar - \zetans} d\upar = \zetans Z' \left( \zetans \right) = \zetans \left( 1 + \zetans Z \left( \zetans \right) \right)
+\end{equation*}
+
+Making this substitution, evaluating the second integral using \eqref{bessel_int_jn2}, we get
+\begin{equation*}
+	I_{xx} = \frac{n^2 \zeta_{0s}}{\lambda_s} Z \left( \zetans \right) I_n(\lambda_s) e^{-\lambda_s}
+\end{equation*}
+
+Now let's evaluate $I_{xy}$. Proceeding similarly to before, using \eqref{bessel_int_jn_jn_prime} to evaluate the $\uper$ integral and the definition of $Z$ for the $\upar$ integral, we get
+\begin{equation*}
+	I_{xy} = i n \left[ \frac{\zeta_{0s}}{\sqrt{\pi}} \int_{-\infty}^\infty \frac{e^{-\upar^2}}{\upar - \zetans} d\upar \right] \left[ \frac{4}{\sqrt{2 \lambda_s}} \int_0^\infty J_n \left( \sqrt{2 \lambda_s} \uper \right) J_n' \left( \sqrt{2 \lambda_s} \uper \right) \uper^2 e^{-\uper^2} d \uper \right]
+\end{equation*}
+\begin{equation}
+	= in \zeta_{0s} Z \left( \zetans \right) \left[ I_n' \left( \lambda_s \right) - I_n \left( \lambda_s \right) \right] e^{-\lambda_s}
+\end{equation}
+
+We proceed similarly for $I_{xz}$, using \eqref{bessel_int_jn2} again to evaluate the $\uper$ integral and using \eqref{plasma_dispersion_x_int} to evaluate the $\upar$ integral
+\begin{equation*}
+	I_{xz} = n \sqrt{\frac{2}{\lambda_s}} \left[ \frac{\zeta_{0s}}{\sqrt{\pi}} \int_{-\infty}^\infty \frac{\upar e^{-\upar^2}}{\upar - \zetans} d\upar \right] \left[ 2 \int_0^\infty J_n \left( \sqrt{2 \lambda_s} \uper \right)^2 \uper e^{-\uper^2} d\uper \right]
+\end{equation*}
+\begin{equation}
+	= n \zeta_{0s} \sqrt{\frac{2}{\lambda_s}} \left[ 1 + \zetans Z \left( \zetans \right) \right] I_n \left( \lambda_s \right) e^{-\lambda_s}
+\end{equation}
+
+For $I_{yy}$ we use \eqref{bessel_int_jn_prime2} to evaluate the $\uper$ integral and the definition of $Z$ to evaluate the $\upar$ integral
+\begin{equation*}
+	I_{yy} = \left[ \frac{\zeta_{0s}}{\sqrt{\pi}} \int_{-\infty}^\infty \frac{\upar e^{-\upar^2}}{\upar - \zetans} d\upar \right] \left[ 4 \int_0^\infty J_n' \left( \sqrt{2 \lambda_s} \uper \right)^2 \uper^3 e^{-\uper^2} d\uper \right]
+\end{equation*}
+\begin{equation}
+	= \zeta_{0s} Z \left( \zetans \right) \left[ \frac{n^2 I_n \left( \lambda_s \right)}{\lambda_s} + 2\lambda_s I_n \left( \lambda_s \right) - 2\lambda_s I_n' \left( \lambda_s \right) \right] e^{-\lambda_s}
+\end{equation}
+
+For $I_{yz}$ we use \eqref{bessel_int_jn_jn_prime} to evaluate the $\uper$ integral and \eqref{plasma_dispersion_x_int} to evaluate the $\upar$ integral
+
+\begin{equation*}
+	I_{yz} = -i \left[ \frac{\zeta_{0s}}{\sqrt{\pi}} \int_{-\infty}^\infty \frac{\upar e^{-\upar^2}}{\upar - \zetans} d\upar \right] \left[ 4 \int_0^\infty J_n \left( \sqrt{2 \lambda_s} \uper \right) J_n' \left( \sqrt{2 \lambda_s} \uper \right) \uper^2 e^{-\uper^2} d \uper \right]
+\end{equation*}
+\begin{equation}
+	= -i \zeta_{0s} \left[ 1 + \zetans Z \left( \zetans \right) \right] \sqrt{2 \lambda_s} \left[ I_n' \left( \lambda_s \right) - I_n \left( \lambda_s \right) \right] e^{-\lambda_s}
+\end{equation}
+
+Finally for $I_{zz}$ we use \eqref{bessel_int_jn2} to evaluate the $\uper$ integral and \eqref{plasma_dispersion_x2_int} to evaluate the $\upar$ integral
+\begin{equation*}
+	I_{zz} = 2 \left[ \frac{\zeta_{0s}}{\sqrt{\pi}} \int_{-\infty}^\infty \frac{\upar^2 e^{-\upar^2}}{\upar - \zetans} d\upar \right] \left[ 2 \int_0^\infty J_n \left( \sqrt{2 \lambda_s} \uper \right)^2 \uper e^{-\uper^2} d\uper \right]
+\end{equation*}
+\begin{equation}
+	= 2 \zeta_{0s} \zetans \left[ 1 + \zetans Z \left( \zetans \right) \right] I_n \left( \lambda_s \right) e^{-\lambda_s}
+\end{equation}
+
+Bringing this all together we get our final expression for the warm plasma dielectric tensor
+\begin{equation} \label{hot_plasma_dielectric_generic_f}
+	\epsilon_{ij} = \delta_{ij} + \sum_s X_s \zeta_{0s} e^{-\lambda_s} \sum_{n=-\infty}^\infty T_{ij}
+\end{equation}
+where
+\begin{equation}
+	\begin{gathered}
+		T_{xx} = \frac{n^2}{\lambda_s} I_n \left( \lambda_s \right) Z \left( \zetans \right) \\
+		T_{xy} = in \left[ I_n' \left( \lambda_s \right) - I_n \left( \lambda_s \right) \right] Z \left( \zetans \right) \\
+		T_{xz} = n \sqrt{\frac{2}{\lambda_s}} \left[ 1 + \zetans Z \left( \zetans \right) \right] = \frac{-inZ' \left( \zetans \right)}{\sqrt{2 \lambda_s}} \\
+		T_{yx} = - T_{xy} \\
+		T_{yy} = \left[ \frac{n^2 I_n \left( \lambda_s \right)}{\lambda_s} + 2\lambda_s I_n \left( \lambda_s \right) - 2\lambda_s I_n' \left( \lambda_s \right) \right] Z \left( \zetans \right) \\
+		T_{yz} = -i \sqrt{2 \lambda_s} \left[ I_n' \left( \lambda_s \right) - I_n \left( \lambda_s \right) \right] \left[ 1 + \zetans Z \left( \zetans \right) \right] = i \sqrt{\frac{\lambda_s}{2}} \left[ I_n' \left( \lambda_s \right) - I_n \left( \lambda_s \right) \right] Z' \left( \zetans \right) \\
+		T_{zx} = - T_{xz} \\
+		T_{zy} = - T_{yz} \\
+		T_{zz} = 2 \zetans I_n \left( \lambda_s \right) \left[ 1 + \zetans Z \left( \zetans \right) \right] = - \zetans I_n \left( \lambda_s \right) Z' \left( \zetans \right)
+	\end{gathered}
+\end{equation}
+
