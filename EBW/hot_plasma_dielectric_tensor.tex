@@ -48,19 +48,19 @@ The Cartesian components of the velocity are
 \end{equation}
 which implies ($\Omega_s$ is the gyrofrequency for species $s$)
 \begin{equation}
-	\v = \left(\vper\cos\left[\Omega_s\left(t-t'\right)+\theta\right], \vper\sin\left[\Omega_s\left(t-t'\right)+\theta\right], \vpar\right)
+	\v' = \left(\vper\cos\left[\Omega_s\left(t'-t\right)+\theta\right], \vper\sin\left[\Omega_s\left(t'-t\right)+\theta\right], \vpar\right)
 \end{equation}
-This expression is a bit long so define $\chi =\Omega_s\left(t-t'\right)+\theta$ so
+This expression is a bit long so define $\chi =\Omega_s\left(t'-t\right)+\theta$ so
 \begin{equation}
-	\v = \left(\vper\cos\chi, \vper\sin\chi, \vpar\right)
+	\v' = \left(\vper\cos\chi, \vper\sin\chi, \vpar\right)
 \end{equation}
 
-We can integrate in time to get the electron position
+We can integrate in time $t'$ to get the electron position
 \begin{equation}\label{electron_xposition}
-	x'-x = -\frac{\vper}{\Omega}\left( \sin\chi - \sin\theta\right)
+	x'-x = \frac{\vper}{\Omega}\left( \sin\chi - \sin\theta\right)
 \end{equation}
 \begin{equation}\label{electron_yposition}
-	y'-y = \frac{\vper}{\Omega}\left( \cos\chi - \cos\theta\right)
+	y'-y = -\frac{\vper}{\Omega}\left( \cos\chi - \cos\theta\right)
 \end{equation}
 \begin{equation}\label{electron_zposition}
 	z'-z=\vpar \left(t' - t\right)
@@ -68,10 +68,10 @@ We can integrate in time to get the electron position
 
 Both $\vper$ and $\vpar$ are constants of the motion, implying $f_0\left(\v'\right) = f_0\left(\v\right)$. Using $\vper = \sqrt{v_x^2+v_y^2}$ we get
 \begin{equation}\label{f0_vx_derivative}
-	\frac{\partial f_0}{\partial v_x'}=\frac{\partial \vper}{\partial v_x '}\dfdvper = \frac{v_x'}{\partial \vper}\dfdvper = \cos\chi \dfdvper
+	\frac{\partial f_0}{\partial v_x'}=\frac{\partial \vper}{\partial v_x '}\dfdvper = \frac{v_x'}{\vper}\dfdvper = \cos\chi \dfdvper
 \end{equation}
 \begin{equation}\label{f0_vy_derivative}
-	\frac{\partial f_0}{\partial v_y'}=\frac{\partial \vper}{\partial v_y '}\dfdvper = \frac{v_y'}{\partial \vper}\dfdvper = \sin\chi \dfdvper
+	\frac{\partial f_0}{\partial v_y'}=\frac{\partial \vper}{\partial v_y '}\dfdvper = \frac{v_y'}{\vper}\dfdvper = \sin\chi \dfdvper
 \end{equation}
 \begin{equation}\label{f0_vz_derivative}
 	\frac{\partial f_0}{\partial v_z '} = \dfdvpar
@@ -79,7 +79,7 @@ Both $\vper$ and $\vpar$ are constants of the motion, implying $f_0\left(\v'\rig
 
 If we expand the integrand in \eqref{vlasov_linearised} we get
 \begin{equation*}
-	\left[ \E \left(\r', t'\right) + \v \times \B\left(\r', t'\right) \right] \cdot \frac{\partial f_0 \left(\v'\right)}{\partial \v} = \left(E_x+v_y'B_z-v_z'B_y\right) \frac{\partial f_0}{\partial v_x'}
+	\left[ \E \left(\r', t'\right) + \v \times \B\left(\r', t'\right) \right] \cdot \frac{\partial f_0 \left(\v'\right)}{\partial \v} = \left(E_x+v_y'B_z-v_z'B_y\right) \frac{\partial f_0}{\partial v_z'}
 \end{equation*}
 \begin{equation}
 	+ \left(E_xy+v_z'B_x-v_x'B_z\right) \frac{\partial f_0}{\partial v_y'} + \left(E_z+v_x'B_y-v_y'B_x\right) \frac{\partial f_0}{\partial v_y'}
@@ -96,10 +96,10 @@ Using $v_y'\cos\chi - v_x' \sin\chi = \vper \cos \chi \sin \chi - \vper \cos \ch
 	= \left[\left(E_x-\vpar B_y\right) \cos\chi\frac{\partial f_0}{\partial \vper} + \left(E_y+\vpar B_x\right) \sin\chi\frac{\partial f_0}{\partial \vper} + \right.
 \end{equation*}
 \begin{equation}\label{vlasov_linearised2}
-	\left. + \left(E_z + \vper \cos\chi B_y - \vper \sin\chi B_x\right)\frac{\partial f_0}{\partial \vpar}\right] e^{i\left(\k\cdot\x'-\omega t'\right)} e^{i\left(\k\cdot\x-\omega t\right)}
+	\left. + \left(E_z + \vper \cos\chi B_y - \vper \sin\chi B_x\right)\frac{\partial f_0}{\partial \vpar}\right] e^{i\left(\k\cdot\x'-\omega t'\right)} e^{-i\left(\k\cdot\x-\omega t\right)}
 \end{equation}
 
-where the first complex exponential is from the perturbed electric and magnetic field and the second is from the perturbed $f_1$. We can combine these to get a term like
+where the first complex exponential is from the perturbed electric and magnetic field and the second is from the perturbed $f_1$ which brought over to the left hand side. We can combine these to get a term like
 \begin{equation}
 	\exp \left[i\k\cdot \left(\x' -\x \right)\right] \exp \left[-i\omega \left(t' - t\right)\right]
 \end{equation}
